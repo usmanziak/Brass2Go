@@ -1,0 +1,450 @@
+[p GLOBOPT AUTOSTATIC IEEE_DBL IEEE_FLT PIC14 PIC14E ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F1778 ]
+[d frameptr 6 ]
+"15 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X/error.h
+[e E12100 . `uc
+OPEN_BLOCK 0
+RIFF_HEADER 1
+WAVE_HEADER 2
+FMT_HEADER 3
+CODEC 4
+BIT_DEPTH 5
+DATA_HEADER 6
+CHANNELS 7
+]
+"32 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\main.c
+[e E12000 . `uc
+OPEN 0
+READING 1
+OPENING 2
+CLOSED 3
+]
+"17 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X/error.h
+[v _error error `(v  1 e 1 0 ]
+"10 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"4 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c99\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"30 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\DAC.c
+[v _DAC_Init DAC_Init `(v  1 e 1 0 ]
+"44 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\main.c
+[v _fourCCeq fourCCeq `(a  1 e 1 0 ]
+"51
+[v _init init `(v  1 e 1 0 ]
+"68
+[v _readBytes readBytes `T(v  1 e 1 0 ]
+"82
+[v _openFile openFile `(v  1 e 1 0 ]
+"114
+[v _isr isr `II(v  1 e 1 0 ]
+"127
+[v _main main `(v  1 e 1 0 ]
+"11 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\SD.c
+[v _SD_Init SD_Init `(v  1 e 1 0 ]
+"77
+[v _SD_SendCommand SD_SendCommand `(v  1 e 1 0 ]
+"112
+[v _SD_Read8bitResponse SD_Read8bitResponse `(v  1 e 1 0 ]
+"132
+[v _SD_Check8bitResponse SD_Check8bitResponse `(a  1 e 1 0 ]
+"141
+[v _SD_Read40bitResponse SD_Read40bitResponse `(v  1 e 1 0 ]
+"166
+[v _SD_Check40bitResponse SD_Check40bitResponse `(a  1 e 1 0 ]
+"256
+[v _SD_OpenBlock SD_OpenBlock `(a  1 e 1 0 ]
+"275
+[v _SD_CloseBlock SD_CloseBlock `(a  1 e 1 0 ]
+"7 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\SPI.c
+[v _SPI_Init SPI_Init `(v  1 e 1 0 ]
+"38
+[v _SPI_Write SPI_Write `(v  1 e 1 0 ]
+"46
+[v _SPI_Read SPI_Read `(uc  1 e 1 0 ]
+"8 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\timer.c
+[v _timer_Init timer_Init `(i  1 e 2 0 ]
+"6 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X/CRC.h
+[v _CRCTable CRCTable `DC[256]uc  1 e 256 0 ]
+"15 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X/error.h
+[v _global_error global_error `E12100  1 e 1 0 ]
+"12 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X/SD.h
+[v _GLBL_Resp8 GLBL_Resp8 `uc  1 e 1 0 ]
+"13
+[v _GLBL_Resp40 GLBL_Resp40 `[5]uc  1 e 5 0 ]
+[s S264 . 1 `uc 1 IOCIF 1 0 :1:0 
+`uc 1 INTF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 IOCIE 1 0 :1:3 
+`uc 1 INTE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+"374 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h
+[s S273 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 . 1 0 :2:3 
+`uc 1 T0IE 1 0 :1:5 
+]
+[u S278 . 1 `S264 1 . 1 0 `S273 1 . 1 0 ]
+[v _INTCONbits INTCONbits `VES278  1 e 1 @11 ]
+[s S22 . 1 `uc 1 RC0 1 0 :1:0 
+`uc 1 RC1 1 0 :1:1 
+`uc 1 RC2 1 0 :1:2 
+`uc 1 RC3 1 0 :1:3 
+`uc 1 RC4 1 0 :1:4 
+`uc 1 RC5 1 0 :1:5 
+`uc 1 RC6 1 0 :1:6 
+`uc 1 RC7 1 0 :1:7 
+]
+"570
+[u S31 . 1 `S22 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES31  1 e 1 @14 ]
+[s S208 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 CCP1IF 1 0 :1:2 
+`uc 1 SSP1IF 1 0 :1:3 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+`uc 1 TMR1GIF 1 0 :1:7 
+]
+"657
+[s S217 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 CCPIF 1 0 :1:2 
+]
+[u S220 . 1 `S208 1 . 1 0 `S217 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES220  1 e 1 @17 ]
+"1635
+[v _TRISA TRISA `VEuc  1 e 1 @140 ]
+[s S377 . 1 `uc 1 TRISB0 1 0 :1:0 
+`uc 1 TRISB1 1 0 :1:1 
+`uc 1 TRISB2 1 0 :1:2 
+`uc 1 TRISB3 1 0 :1:3 
+`uc 1 TRISB4 1 0 :1:4 
+`uc 1 TRISB5 1 0 :1:5 
+`uc 1 TRISB6 1 0 :1:6 
+`uc 1 TRISB7 1 0 :1:7 
+]
+"1714
+[u S386 . 1 `S377 1 . 1 0 ]
+[v _TRISBbits TRISBbits `VES386  1 e 1 @141 ]
+[s S415 . 1 `uc 1 TRISC0 1 0 :1:0 
+`uc 1 TRISC1 1 0 :1:1 
+`uc 1 TRISC2 1 0 :1:2 
+`uc 1 TRISC3 1 0 :1:3 
+`uc 1 TRISC4 1 0 :1:4 
+`uc 1 TRISC5 1 0 :1:5 
+`uc 1 TRISC6 1 0 :1:6 
+`uc 1 TRISC7 1 0 :1:7 
+]
+"1776
+[u S424 . 1 `S415 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES424  1 e 1 @142 ]
+[s S236 . 1 `uc 1 TMR1IE 1 0 :1:0 
+`uc 1 TMR2IE 1 0 :1:1 
+`uc 1 CCP1IE 1 0 :1:2 
+`uc 1 SSP1IE 1 0 :1:3 
+`uc 1 TXIE 1 0 :1:4 
+`uc 1 RCIE 1 0 :1:5 
+`uc 1 ADIE 1 0 :1:6 
+`uc 1 TMR1GIE 1 0 :1:7 
+]
+"1863
+[s S245 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 CCPIE 1 0 :1:2 
+]
+[u S248 . 1 `S236 1 . 1 0 `S245 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES248  1 e 1 @145 ]
+"2410
+[v _OSCCON OSCCON `VEuc  1 e 1 @155 ]
+[s S356 . 1 `uc 1 HFIOFS 1 0 :1:0 
+`uc 1 LFIOFR 1 0 :1:1 
+`uc 1 MFIOFR 1 0 :1:2 
+`uc 1 HFIOFL 1 0 :1:3 
+`uc 1 HFIOFR 1 0 :1:4 
+`uc 1 OSTS 1 0 :1:5 
+`uc 1 PLLR 1 0 :1:6 
+`uc 1 SOSCR 1 0 :1:7 
+]
+"2499
+[u S365 . 1 `S356 1 . 1 0 ]
+[v _OSCSTATbits OSCSTATbits `VES365  1 e 1 @156 ]
+[s S398 . 1 `uc 1 ANSB0 1 0 :1:0 
+`uc 1 ANSB1 1 0 :1:1 
+`uc 1 ANSB2 1 0 :1:2 
+`uc 1 ANSB3 1 0 :1:3 
+`uc 1 ANSB4 1 0 :1:4 
+`uc 1 ANSB5 1 0 :1:5 
+]
+"3787
+[u S405 . 1 `S398 1 . 1 0 ]
+[v _ANSELBbits ANSELBbits `VES405  1 e 1 @397 ]
+"5116
+[v _SSP1BUF SSP1BUF `VEuc  1 e 1 @529 ]
+"5370
+[v _SSP1ADD SSP1ADD `VEuc  1 e 1 @530 ]
+"5878
+[v _SSP1STAT SSP1STAT `VEuc  1 e 1 @532 ]
+[s S174 . 1 `uc 1 BF 1 0 :1:0 
+`uc 1 UA 1 0 :1:1 
+`uc 1 R_nW 1 0 :1:2 
+`uc 1 S 1 0 :1:3 
+`uc 1 P 1 0 :1:4 
+`uc 1 D_nA 1 0 :1:5 
+`uc 1 CKE 1 0 :1:6 
+`uc 1 SMP 1 0 :1:7 
+]
+"5900
+[u S183 . 1 `S174 1 . 1 0 ]
+[v _SSP1STATbits SSP1STATbits `VES183  1 e 1 @532 ]
+"6000
+[v _SSP1CON1 SSP1CON1 `VEuc  1 e 1 @533 ]
+[s S43 . 1 `uc 1 SSPM 1 0 :4:0 
+`uc 1 CKP 1 0 :1:4 
+`uc 1 SSPEN 1 0 :1:5 
+`uc 1 SSPOV 1 0 :1:6 
+`uc 1 WCOL 1 0 :1:7 
+]
+"6033
+[s S49 . 1 `uc 1 SSPM0 1 0 :1:0 
+`uc 1 SSPM1 1 0 :1:1 
+`uc 1 SSPM2 1 0 :1:2 
+`uc 1 SSPM3 1 0 :1:3 
+]
+[u S54 . 1 `S43 1 . 1 0 `S49 1 . 1 0 ]
+[v _SSP1CON1bits SSP1CON1bits `VES54  1 e 1 @533 ]
+"11506
+[v _T2PR T2PR `VEuc  1 e 1 @1172 ]
+"11560
+[v _T2CON T2CON `VEuc  1 e 1 @1173 ]
+"11834
+[v _T2CLKCON T2CLKCON `VEuc  1 e 1 @1175 ]
+"13121
+[v _DAC1CON0 DAC1CON0 `VEuc  1 e 1 @1422 ]
+"13346
+[v _DAC1REFL DAC1REFL `VEuc  1 e 1 @1423 ]
+"13768
+[v _DAC1REFH DAC1REFH `VEuc  1 e 1 @1424 ]
+"32668
+[v _SSPCLKPPS SSPCLKPPS `VEuc  1 e 1 @3642 ]
+"32688
+[v _SSPDATPPS SSPDATPPS `VEuc  1 e 1 @3643 ]
+"33128
+[v _RC2PPS RC2PPS `VEuc  1 e 1 @3746 ]
+"33168
+[v _RC4PPS RC4PPS `VEuc  1 e 1 @3748 ]
+"37866
+"37866
+[v _ANSC3 ANSC3 `VEb  1 e 0 @3187 ]
+"38496
+[v _DAC1LD DAC1LD `VEb  1 e 0 @11368 ]
+"44232
+[v _TRISC2 TRISC2 `VEb  1 e 0 @1138 ]
+"44235
+[v _TRISC3 TRISC3 `VEb  1 e 0 @1139 ]
+"44238
+[v _TRISC4 TRISC4 `VEb  1 e 0 @1140 ]
+"44247
+[v _TRISC7 TRISC7 `VEb  1 e 0 @1143 ]
+"17 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\main.c
+[v _channels channels `us  1 e 2 0 ]
+"18
+[v _sampRate sampRate `ul  1 e 4 0 ]
+"21
+[v _sdata sdata `[2]uc  1 e 2 0 ]
+"24
+[v _buffer buffer `[32]s  1 e 64 0 ]
+"25
+[v _buffer_read_index buffer_read_index `us  1 e 2 0 ]
+"26
+[v _buffer_write_index buffer_write_index `us  1 e 2 0 ]
+"28
+[v _blockIndex blockIndex `s  1 e 2 0 ]
+"29
+[v _filesize filesize `ul  1 e 4 0 ]
+"30
+[v _readMessage readMessage `uc  1 e 1 0 ]
+"32
+[v _state state `E12000  1 e 1 0 ]
+"33
+[v _address address `l  1 e 4 0 ]
+"35
+[v _samplePending samplePending `a  1 e 1 0 ]
+"127
+[v _main main `(v  1 e 1 0 ]
+{
+"215
+} 0
+"8 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\timer.c
+[v _timer_Init timer_Init `(i  1 e 2 0 ]
+{
+[v timer_Init@rate rate `l  1 p 4 0 ]
+"46
+} 0
+"82 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\main.c
+[v _openFile openFile `(v  1 e 1 0 ]
+{
+[s S445 . 8 `[4]uc 1 ckID 4 0 `ul 1 ckSize 4 4 ]
+"105
+[v openFile@data data `S445  1 a 8 9 ]
+"94
+[s S448 . 28 `[4]uc 1 WAVEID 4 0 `S445 1 fmtHeader 8 4 `us 1 formatTag 2 12 `us 1 channels 2 14 `ul 1 sampRate 4 16 `ul 1 bytesPerSec 4 20 `us 1 blockAlign 2 24 `us 1 bitsPerSamp 2 26 ]
+[v openFile@fmt fmt `S448  1 a 28 17 ]
+"90
+[v openFile@riff riff `S445  1 a 8 0 ]
+"85
+[v openFile@response response `uc  1 a 1 8 ]
+"82
+[v openFile@a a `l  1 p 4 19 ]
+"112
+} 0
+"68
+[v _readBytes readBytes `T(v  1 e 1 0 ]
+{
+[v readBytes@dest dest `*.4uc  1 a 1 wreg ]
+"69
+[v readBytes@i i `i  1 a 2 5 ]
+"68
+[v readBytes@dest dest `*.4uc  1 a 1 wreg ]
+[v readBytes@len len `i  1 p 2 0 ]
+[v readBytes@dest dest `*.4uc  1 a 1 4 ]
+"80
+} 0
+"275 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\SD.c
+[v _SD_CloseBlock SD_CloseBlock `(a  1 e 1 0 ]
+{
+"282
+} 0
+"44 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\main.c
+[v _fourCCeq fourCCeq `(a  1 e 1 0 ]
+{
+[v fourCCeq@a a `*.4uc  1 a 1 wreg ]
+"45
+[v fourCCeq@i i `uc  1 a 1 5 ]
+"44
+[v fourCCeq@a a `*.4uc  1 a 1 wreg ]
+[v fourCCeq@b b `*.25uc  1 p 2 4 ]
+[v fourCCeq@a a `*.4uc  1 a 1 4 ]
+"49
+} 0
+"17 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X/error.h
+[v _error error `(v  1 e 1 0 ]
+{
+[v error@e e `E12100  1 a 1 wreg ]
+[v error@e e `E12100  1 a 1 wreg ]
+"19
+[v error@e e `E12100  1 a 1 5 ]
+"21
+} 0
+"256 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\SD.c
+[v _SD_OpenBlock SD_OpenBlock `(a  1 e 1 0 ]
+{
+[s S109 . 4 `uc 1 a0 1 0 `uc 1 a1 1 1 `uc 1 a2 1 2 `uc 1 a3 1 3 ]
+"260
+[v SD_OpenBlock@a a `S109  1 a 4 15 ]
+"256
+[v SD_OpenBlock@address address `l  1 p 4 7 ]
+"273
+} 0
+"51 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\main.c
+[v _init init `(v  1 e 1 0 ]
+{
+"66
+} 0
+"7 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\SPI.c
+[v _SPI_Init SPI_Init `(v  1 e 1 0 ]
+{
+"33
+} 0
+"11 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\SD.c
+[v _SD_Init SD_Init `(v  1 e 1 0 ]
+{
+"69
+} 0
+"77
+[v _SD_SendCommand SD_SendCommand `(v  1 e 1 0 ]
+{
+[v SD_SendCommand@CMD_6bit CMD_6bit `uc  1 a 1 wreg ]
+"79
+[v SD_SendCommand@Checksum Checksum `uc  1 a 1 6 ]
+"78
+[v SD_SendCommand@ByteToSend ByteToSend `uc  1 a 1 5 ]
+"77
+[v SD_SendCommand@CMD_6bit CMD_6bit `uc  1 a 1 wreg ]
+[v SD_SendCommand@ARG3 ARG3 `uc  1 p 1 0 ]
+[v SD_SendCommand@ARG2 ARG2 `uc  1 p 1 1 ]
+[v SD_SendCommand@ARG1 ARG1 `uc  1 p 1 2 ]
+[v SD_SendCommand@ARG0 ARG0 `uc  1 p 1 3 ]
+[v SD_SendCommand@CMD_6bit CMD_6bit `uc  1 a 1 4 ]
+"106
+} 0
+"38 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\SPI.c
+[v _SPI_Write SPI_Write `(v  1 e 1 0 ]
+{
+[v SPI_Write@Data_8bit Data_8bit `uc  1 a 1 wreg ]
+[v SPI_Write@Data_8bit Data_8bit `uc  1 a 1 wreg ]
+[v SPI_Write@Data_8bit Data_8bit `uc  1 a 1 4 ]
+"41
+} 0
+"112 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\SD.c
+[v _SD_Read8bitResponse SD_Read8bitResponse `(v  1 e 1 0 ]
+{
+"113
+[v SD_Read8bitResponse@readMessage readMessage `uc  1 a 1 1 ]
+"127
+} 0
+"141
+[v _SD_Read40bitResponse SD_Read40bitResponse `(v  1 e 1 0 ]
+{
+"142
+[v SD_Read40bitResponse@readMessage readMessage `uc  1 a 1 1 ]
+"160
+} 0
+"46 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\SPI.c
+[v _SPI_Read SPI_Read `(uc  1 e 1 0 ]
+{
+"48
+[v SPI_Read@i i `i  1 a 2 4 ]
+"51
+} 0
+"132 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\SD.c
+[v _SD_Check8bitResponse SD_Check8bitResponse `(a  1 e 1 0 ]
+{
+[v SD_Check8bitResponse@Byte Byte `uc  1 a 1 wreg ]
+"133
+[v SD_Check8bitResponse@match match `a  1 a 1 5 ]
+"132
+[v SD_Check8bitResponse@Byte Byte `uc  1 a 1 wreg ]
+[v SD_Check8bitResponse@Byte Byte `uc  1 a 1 4 ]
+"136
+} 0
+"166
+[v _SD_Check40bitResponse SD_Check40bitResponse `(a  1 e 1 0 ]
+{
+[v SD_Check40bitResponse@Byte4 Byte4 `uc  1 a 1 wreg ]
+"167
+[v SD_Check40bitResponse@match match `a  1 a 1 5 ]
+"166
+[v SD_Check40bitResponse@Byte4 Byte4 `uc  1 a 1 wreg ]
+[v SD_Check40bitResponse@Byte3 Byte3 `uc  1 p 1 0 ]
+[v SD_Check40bitResponse@Byte2 Byte2 `uc  1 p 1 1 ]
+[v SD_Check40bitResponse@Byte1 Byte1 `uc  1 p 1 2 ]
+[v SD_Check40bitResponse@Byte0 Byte0 `uc  1 p 1 3 ]
+[v SD_Check40bitResponse@Byte4 Byte4 `uc  1 a 1 4 ]
+"174
+} 0
+"30 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\DAC.c
+[v _DAC_Init DAC_Init `(v  1 e 1 0 ]
+{
+"33
+} 0
+"114 C:\Users\Toshi\Desktop\school\second year\ILS\ENCM 369\PICLab3\Brass2Go.X\main.c
+[v _isr isr `II(v  1 e 1 0 ]
+{
+"118
+[v isr@level level `s  1 a 2 2 ]
+"125
+} 0

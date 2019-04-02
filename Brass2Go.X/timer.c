@@ -5,7 +5,12 @@
 // PROMISES: Set the system clock speed to 32MHz.
 //           Configure Timer2 to trigger with the given period in microseconds.
 //           Start Timer2. It will automatically restart when it finishes.
-int timer_Init(int rate) {
+int timer_Init(long rate) {
+    PIR1bits.TMR2IF = 0;
+    PIE1bits.TMR2IE = 1;
+    INTCONbits.PEIE = 1;
+    INTCONbits.GIE = 1;
+    
     switch (rate) {
         case 16000: 
             T2PR = 100;             // period 100
@@ -15,7 +20,7 @@ int timer_Init(int rate) {
             return 0;
         break;
         case 44100:
-            T2PR = 33;             // period 33
+            T2PR = 32;             // period 33
             T2CLKCON = 0x03;        // HFINTOSC 16MHz
             T2CON = 0x8A;           // prescaler 1:1 postscaler 1:11.
             return 0;
@@ -26,6 +31,15 @@ int timer_Init(int rate) {
             T2CON = 0x82;           // prescaler 1:1 postscaler 1:3.
             return 0;
         break;
+        case 32000:
+            T2PR = 100;
+            T2CLKCON = 0x03;
+            T2CON = 0x84; // prescaler 1:1 postscaler 1:5
+        break;
+        case 22050:
+            T2PR = 65;
+            T2CLKCON = 0x03;
+            T2CON = 0x8A; // prescaler 1:1 postscaler 1:11
         default:
             return 1;
     }

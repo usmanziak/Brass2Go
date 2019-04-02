@@ -1,7 +1,14 @@
-#ifndef DAC_H
-#define DAC_H
+#ifndef B2G_DAC_H
+#define B2G_DAC_H
 
-void DAC_Write_16(short level);
+#include "wave.h"
+
+typedef struct {
+    char b[4];
+}Str;
+
+//void DAC_Write_16(SampleFrame sample, unsigned short chans);
+void DAC_Write_16(SampleFrame *sample, unsigned short chans);
 
 void DAC_Write_8(unsigned char level);
 

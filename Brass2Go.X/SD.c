@@ -253,11 +253,13 @@ bool SD_ReadBlock(char ADDR3, char ADDR2, char ADDR1, char ADDR0) {
     return true;
 }*/
     
-bool SD_OpenBlock(char ADDR3, char ADDR2, char ADDR1, char ADDR0) {
+bool SD_OpenBlock(long address) {
     
     //Send the block read command (CMD17) to the SD card.
     //The 32 bit argument is which 512-byte sector to read.
-    SD_SendCommand(17, ADDR3, ADDR2, ADDR1, ADDR0);
+    BlockAddress a = *((BlockAddress*)(&address));
+    
+    SD_SendCommand(17, a.a3, a.a2, a.a1, a.a0);
     
     //Wait for the SD card to respond to the command.
     SD_Read8bitResponse();

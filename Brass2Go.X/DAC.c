@@ -11,11 +11,14 @@
 #include "DAC.h"
 
 
-void DAC_Write_16(short level) {
-    level -= 0x8000;
+void DAC_Write_16( SampleFrame *sample, unsigned short chans) {
+    short level = sample->mono16;
+    level -= 0x8000; // add offset to make unsigned
     DAC1REFH = (level & 0xff00) >> 8;
     DAC1REFL = (level & 0x00C0) << 8;
     DAC1LD = 1;
+    
+    // right channel
 }
 
 void DAC_Write_8(unsigned char level) {

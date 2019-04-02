@@ -1,5 +1,5 @@
-#ifndef CONFIGURATION_H
-#define	CONFIGURATION_H
+#ifndef B2G_CONFIG_H
+#define	B2G_CONFIG_H
 
 #define _XTAL_FREQ 32000000
 #pragma config FOSC = INTOSC    // Oscillator Selection Bits->INTOSC oscillator: I/O function on CLKIN pin

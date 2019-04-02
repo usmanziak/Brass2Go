@@ -14,6 +14,20 @@ char GLBL_Resp40[5] = {0xFF,0xFF,0xFF,0xFF,0xFF};
 //char GLBL_WriteBuffer[512];
 //char GLBL_ReadBuffer[512];
 
+typedef struct {
+    unsigned char a0;
+    unsigned char a1;
+    unsigned char a2;
+    unsigned char a3;
+} BlockAddress;
+
+typedef enum {
+    OPEN,
+    READING,
+    OPENING,
+    CLOSED
+} BlockState;
+
 /* -------------------------- Function Prototypes --------------------------- */
 
 
@@ -78,7 +92,7 @@ bool SD_ReadBlock(char ADDR3, char ADDR2, char ADDR1, char ADDR0);
 
 bool SD_CloseBlock(void);
 
-bool SD_OpenBlock(char ADDR3, char ADDR2, char ADDR1, char ADDR0);
+bool SD_OpenBlock(long address);
     
 
 /* ------------------ #define based Function Declarations ------------------- */
