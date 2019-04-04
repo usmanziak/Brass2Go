@@ -8,14 +8,18 @@
 #include "wave.h"
 #include "error.h"
 
-#define BUFFER_SIZE 32
+#define BUFFER_SIZE 128
 #define READINTO(s) readBytes((char*)&s, sizeof(s));
 
-#define ON     PORTCbits.RC0 = 1;
-#define OFF    PORTCbits.RC0 = 0;
+#define ON0     PORTCbits.RC0 = 1;
+#define OFF0    PORTCbits.RC0 = 0;
+#define ON1     PORTCbits.RC1 = 1;
+#define OFF1    PORTCbits.RC1 = 0;
+#define ON6     PORTBbits.RB0 = 1;
+#define OFF6    PORTBbits.RB0 = 0;
 
 unsigned short channels;
-unsigned long sampRate;
+unsigned long  sampRate;
 unsigned short bitsPerSamp;
 
 char sdata[2];
@@ -46,23 +50,6 @@ bool fourCCeq(FourCC a, FourCC b) {
         if (a[i] != b[i]) return false;
     }
     return true;
-}
-
-void init() {
-    // Set the system clock speed to 32MHz and wait for the ready flag.
-    OSCCON = 0xF4;
-    while(OSCSTATbits.HFIOFR == 0); // wait for clock to settle
-    
-    TRISBbits.TRISB1 = 1;
-    ANSELBbits.ANSB1 = 0;
-    
-    TRISCbits.TRISC0 = 0;
-    TRISCbits.TRISC1 = 0;
-    
-    //Initialize all required peripherals.
-    SPI_Init();
-    SD_Init();
-    DAC_Init();
 }
 
 inline void readBytes(char* dest, int len) {
@@ -111,44 +98,64 @@ void openFile(long a) {
     
 }
 
+void init() {
+    // Set the system clock speed to 32MHz and wait for the ready flag.
+    OSCCON = 0xF4;
+    while(OSCSTATbits.HFIOFR == 0); // wait for clock to settle
+    
+    TRISB1 = 1;
+    ANSB1 = 0;
+    
+    TRISC0 = 0;
+    TRISC1 = 0;
+    TRISB0 = 0;
+    
+    //Initialize all required peripherals.
+    SPI_Init();
+    SD_Init();
+    DAC_Init();
+}
+
 void __interrupt() isr(void) {          // modifies buffer_read_index
     PIR1bits.TMR2IF = 0;
-//    ON
+    ON0
     
-    short level = buffer[buffer_read_index++] - 0x8000;  // add offset to make unsigned
+    short level = buffer[buffer_read_index++];  // add offset to make unsigned
     DAC1REFH = (level & 0xff00) >> 8;
     DAC1REFL = (level & 0x00C0) << 8;
     DAC1LD = 1;
 //    pulse();
     if (buffer_read_index >= BUFFER_SIZE) buffer_read_index = 0;
-//    OFF
+    OFF0
 }
 
-void main(void) {
+////////////////////////////////////////////////////////////////////////////////
 
+void main(void) {
     init();
+    
     while(1) { // play the whole song again
         
         address = 0;
         
         openFile(address);
-        __nop();
         if(channels != 2) samplePending = false;
         timer_Init(sampRate);
         
         while(1) {
             
             if (state == CLOSED && isPlaying) {
-                
+                ON6
                 SD_OpenBlock(address);
                 state = OPENING;
-
                 readMessage = 0xFF;
+                OFF6
             }
 
                 //We don't know when the SD card will start sending data, but the first byte
             //is always 0xFE. Read bytes until the response contains at least one zero.
             if (state == OPENING) {
+                ON6
                 readMessage = SPI_Read();
                 if (readMessage != 0xFF) {
                     if (readMessage == 0xFE){
@@ -157,6 +164,7 @@ void main(void) {
                         state = CLOSED;
                         error(OPEN_BLOCK);
                     }
+                    OFF6
                 }
             }
 
@@ -166,44 +174,45 @@ void main(void) {
                     ++address;
                     blockIndex = 0;
                     state = CLOSED;
-                } else if (buffer_write_index != buffer_read_index) { // read into the buffer if there's space
-                    
-//                    switch (channels) {
-//                        case 1:
-//                            sdata.bytes[0] = SPI_Read();
-//                            sdata.bytes[1] = SPI_Read();
-//                            buffer[ buffer_write_index++ ].mono16 = sdata.mono16;
-//                            __nop();
-//                        break;
-//                        case 2:
-//                            if (samplePending) {
-//                                sdata.bytes[2] = SPI_Read();
-//                                sdata.bytes[3] = SPI_Read();
-//                                buffer[ buffer_write_index++ ].stereo16 = sdata.stereo16;
-//                                samplePending = false;
-//                            } else {
-//                                sdata.bytes[0] = SPI_Read();
-//                                sdata.bytes[1] = SPI_Read();
-//                                samplePending = true;
-//                            }
-//                        break;
-//                        default:
-//                            error(CHANNELS);
-//                    }
-                    ON
-                    sdata[0] = SPI_Read();
-                    sdata[1] = SPI_Read();
-                    
-                    buffer[ buffer_write_index++ ] = *((short*)sdata);
-                    OFF
-//                      sdata[0] = SPI_Read();
-//                      sdata[1] = SPI_Read();
-                    
-//                      buffer[ buffer_write_index++ ] = *((short*)sdata);
-                    
-                    if (buffer_write_index >= BUFFER_SIZE) buffer_write_index = 0;
-                    blockIndex += 2;
+                    ON6
+                } else {
+                    PIE1bits.TMR2IE = 0;        // disable timer interrupts while accessing buffer_read_index
+                    if (buffer_write_index != buffer_read_index) { // read into the buffer if there's space
+                        PIE1bits.TMR2IE = 1;
+    //                    switch (channels) {
+    //                        case 1:
+    //                            sdata.bytes[0] = SPI_Read();
+    //                            sdata.bytes[1] = SPI_Read();
+    //                            buffer[ buffer_write_index++ ].mono16 = sdata.mono16;
+    //                            __nop();
+    //                        break;
+    //                        case 2:
+    //                            if (samplePending) {
+    //                                sdata.bytes[2] = SPI_Read();
+    //                                sdata.bytes[3] = SPI_Read();
+    //                                buffer[ buffer_write_index++ ].stereo16 = sdata.stereo16;
+    //                                samplePending = false;
+    //                            } else {
+    //                                sdata.bytes[0] = SPI_Read();
+    //                                sdata.bytes[1] = SPI_Read();
+    //                                samplePending = true;
+    //                            }
+    //                        break;
+    //                        default:
+    //                            error(CHANNELS);
+    //                    }
 
+                        ON1
+                        sdata[0] = SPI_Read();
+                        sdata[1] = SPI_Read();
+
+                        buffer[ buffer_write_index++ ] = *((short*)sdata)- 0x8000;
+                        OFF1
+
+                        if (buffer_write_index >= BUFFER_SIZE) buffer_write_index = 0;
+                        blockIndex += 2;
+
+                    } else PIE1bits.TMR2IE = 1;
                 }
             }
             

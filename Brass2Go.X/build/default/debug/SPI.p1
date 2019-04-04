@@ -1811,15 +1811,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "47
 [; ;SPI.c: 47:     SSP1BUF = 0xFF;
 [e = _SSP1BUF -> -> 255 `i `uc ]
-"48
-[; ;SPI.c: 48:     int i=0;
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
 "49
-[; ;SPI.c: 49:     while(SSP1STATbits.BF == 0) ++i;
+[; ;SPI.c: 49:     while(SSP1STATbits.BF == 0);
 [e $U 1737  ]
 [e :U 1738 ]
-[e =+ _i -> 1 `i ]
 [e :U 1737 ]
 [e $ == -> . . _SSP1STATbits 0 0 `i -> 0 `i 1738  ]
 [e :U 1739 ]

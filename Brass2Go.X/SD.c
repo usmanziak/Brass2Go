@@ -280,3 +280,37 @@ bool SD_CloseBlock() {
     SPI_Read();
     return true;
 }
+
+bool SD_OpenStream(long address) {
+    
+    //Send the block read command (CMD17) to the SD card.
+    //The 32 bit argument is which 512-byte sector to read.
+    BlockAddress a = *((BlockAddress*)(&address));
+    
+    SD_SendCommand(18, a.a3, a.a2, a.a1, a.a0);
+    
+    //Wait for the SD card to respond to the command.
+    SD_Read8bitResponse();
+    
+    //If the response is anything but 0x00, we cannot read.
+    if(SD_Check8bitResponse(0x00) == false) return false;
+    
+    
+    //Setup was a success, so return true.
+    return true;
+}
+
+bool SD_CloseStream() {
+    
+    SD_SendCommand(12, 0x00, 0x00, 0x00, 0x00); // STOP_TRANSMISSION
+    
+        //Wait for the SD card to respond to the command.
+    SD_Read8bitResponse();
+    
+    //If the response is anything but 0x00, we cannot read.
+    if(SD_Check8bitResponse(0x00) == false) return false;
+    
+    while (SPI_Read() == 0x00); // wait for a nonzero response to indicate ready
+    
+    return true;
+}

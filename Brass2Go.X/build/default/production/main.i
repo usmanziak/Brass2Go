@@ -19660,14 +19660,7 @@ void error(Error e) {
     __nop();
 }
 # 9 "main.c" 2
-
-
-
-
-
-
-
-
+# 21 "main.c"
 unsigned short channels;
 unsigned long sampRate;
 unsigned short bitsPerSamp;
@@ -19675,7 +19668,7 @@ unsigned short bitsPerSamp;
 char sdata[2];
 
 
-short buffer[32];
+short buffer[128];
 unsigned short buffer_read_index = 0;
 unsigned short buffer_write_index = 1;
 
@@ -19700,23 +19693,6 @@ _Bool fourCCeq(FourCC a, FourCC b) {
         if (a[i] != b[i]) return 0;
     }
     return 1;
-}
-
-void init() {
-
-    OSCCON = 0xF4;
-    while(OSCSTATbits.HFIOFR == 0);
-
-    TRISBbits.TRISB1 = 1;
-    ANSELBbits.ANSB1 = 0;
-
-    TRISCbits.TRISC0 = 0;
-    TRISCbits.TRISC1 = 0;
-
-
-    SPI_Init();
-    SD_Init();
-    DAC_Init();
 }
 
 __attribute__((inline)) void readBytes(char* dest, int len) {
@@ -19765,44 +19741,64 @@ void openFile(long a) {
 
 }
 
+void init() {
+
+    OSCCON = 0xF4;
+    while(OSCSTATbits.HFIOFR == 0);
+
+    TRISB1 = 1;
+    ANSB1 = 0;
+
+    TRISC0 = 0;
+    TRISC1 = 0;
+    TRISB0 = 0;
+
+
+    SPI_Init();
+    SD_Init();
+    DAC_Init();
+}
+
 void __attribute__((picinterrupt(("")))) isr(void) {
     PIR1bits.TMR2IF = 0;
     PORTCbits.RC0 = 1;
 
-    short level = buffer[buffer_read_index++] - 0x8000;
+    short level = buffer[buffer_read_index++];
     DAC1REFH = (level & 0xff00) >> 8;
     DAC1REFL = (level & 0x00C0) << 8;
     DAC1LD = 1;
-    pulse();
-    if (buffer_read_index >= 32) buffer_read_index = 0;
+
+    if (buffer_read_index >= 128) buffer_read_index = 0;
     PORTCbits.RC0 = 0;
 }
 
-void main(void) {
 
+
+void main(void) {
     init();
+
     while(1) {
 
         address = 0;
 
         openFile(address);
-        __nop();
         if(channels != 2) samplePending = 0;
         timer_Init(sampRate);
 
         while(1) {
 
             if (state == CLOSED && isPlaying) {
-                PORTCbits.RC0 = 1;
+                PORTBbits.RB0 = 1;
                 SD_OpenBlock(address);
                 state = OPENING;
-                PORTCbits.RC0 = 0;
                 readMessage = 0xFF;
+                PORTBbits.RB0 = 0;
             }
 
 
 
             if (state == OPENING) {
+                PORTBbits.RB0 = 1;
                 readMessage = SPI_Read();
                 if (readMessage != 0xFF) {
                     if (readMessage == 0xFE){
@@ -19811,6 +19807,7 @@ void main(void) {
                         state = CLOSED;
                         error(OPEN_BLOCK);
                     }
+                    PORTBbits.RB0 = 0;
                 }
             }
 
@@ -19820,21 +19817,23 @@ void main(void) {
                     ++address;
                     blockIndex = 0;
                     state = CLOSED;
-                } else if (buffer_write_index != buffer_read_index) {
-# 194 "main.c"
-                    sdata[0] = SPI_Read();
-                    sdata[1] = SPI_Read();
+                    PORTBbits.RB0 = 1;
+                } else {
+                    PIE1bits.TMR2IE = 0;
+                    if (buffer_write_index != buffer_read_index) {
+                        PIE1bits.TMR2IE = 1;
+# 205 "main.c"
+                        PORTCbits.RC1 = 1;
+                        sdata[0] = SPI_Read();
+                        sdata[1] = SPI_Read();
 
-                    buffer[ buffer_write_index++ ] = *((short*)sdata);
+                        buffer[ buffer_write_index++ ] = *((short*)sdata)- 0x8000;
+                        PORTCbits.RC1 = 0;
 
+                        if (buffer_write_index >= 128) buffer_write_index = 0;
+                        blockIndex += 2;
 
-
-
-
-
-                    if (buffer_write_index >= 32) buffer_write_index = 0;
-                    blockIndex += 2;
-
+                    } else PIE1bits.TMR2IE = 1;
                 }
             }
 

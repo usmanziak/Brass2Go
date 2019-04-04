@@ -19660,14 +19660,7 @@ void error(Error e) {
     __nop();
 }
 # 9 "main.c" 2
-
-
-
-
-
-
-
-
+# 21 "main.c"
 unsigned short channels;
 unsigned long sampRate;
 unsigned short bitsPerSamp;
@@ -19675,7 +19668,7 @@ unsigned short bitsPerSamp;
 char sdata[2];
 
 
-short buffer[32];
+short buffer[128];
 unsigned short buffer_read_index = 0;
 unsigned short buffer_write_index = 1;
 
@@ -19712,6 +19705,7 @@ void init() {
 
     TRISCbits.TRISC0 = 0;
     TRISCbits.TRISC1 = 0;
+    TRISBbits.TRISB0 = 0;
 
 
     SPI_Init();
@@ -19767,15 +19761,15 @@ void openFile(long a) {
 
 void __attribute__((picinterrupt(("")))) isr(void) {
     PIR1bits.TMR2IF = 0;
-
+    PORTCbits.RC0 = 1;
 
     short level = buffer[buffer_read_index++] - 0x8000;
     DAC1REFH = (level & 0xff00) >> 8;
     DAC1REFL = (level & 0x00C0) << 8;
     DAC1LD = 1;
 
-    if (buffer_read_index >= 32) buffer_read_index = 0;
-
+    if (buffer_read_index >= 128) buffer_read_index = 0;
+    PORTCbits.RC0 = 0;
 }
 
 void main(void) {
@@ -19793,16 +19787,17 @@ void main(void) {
         while(1) {
 
             if (state == CLOSED && isPlaying) {
-
+                PORTBbits.RB0 = 1;
                 SD_OpenBlock(address);
                 state = OPENING;
-
                 readMessage = 0xFF;
+                PORTBbits.RB0 = 0;
             }
 
 
 
             if (state == OPENING) {
+                PORTBbits.RB0 = 1;
                 readMessage = SPI_Read();
                 if (readMessage != 0xFF) {
                     if (readMessage == 0xFE){
@@ -19811,6 +19806,7 @@ void main(void) {
                         state = CLOSED;
                         error(OPEN_BLOCK);
                     }
+                    PORTBbits.RB0 = 0;
                 }
             }
 
@@ -19820,20 +19816,17 @@ void main(void) {
                     ++address;
                     blockIndex = 0;
                     state = CLOSED;
+                    PORTBbits.RB0 = 1;
                 } else if (buffer_write_index != buffer_read_index) {
-# 193 "main.c"
-                    PORTCbits.RC0 = 1;
+# 202 "main.c"
+                    PORTCbits.RC1 = 1;
                     sdata[0] = SPI_Read();
                     sdata[1] = SPI_Read();
 
                     buffer[ buffer_write_index++ ] = *((short*)sdata);
-                    PORTCbits.RC0 = 0;
+                    PORTCbits.RC1 = 0;
 
-
-
-
-
-                    if (buffer_write_index >= 32) buffer_write_index = 0;
+                    if (buffer_write_index >= 128) buffer_write_index = 0;
                     blockIndex += 2;
 
                 }

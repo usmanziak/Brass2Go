@@ -2435,3 +2435,67 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;SD.c: 282: }
 [e :UE 1764 ]
 }
+"284
+[; ;SD.c: 284: _Bool SD_OpenStream(long address) {
+[v _SD_OpenStream `(a ~T0 @X0 1 ef1`l ]
+{
+[e :U _SD_OpenStream ]
+[v _address `l ~T0 @X0 1 r1 ]
+[f ]
+"288
+[; ;SD.c: 288:     BlockAddress a = *((BlockAddress*)(&address));
+[v _a `S1731 ~T0 @X0 1 a ]
+[e = _a *U -> &U _address `*S1731 ]
+"290
+[; ;SD.c: 290:     SD_SendCommand(18, a.a3, a.a2, a.a1, a.a0);
+[e ( _SD_SendCommand (4 , , , , -> -> 18 `i `uc -> . _a 3 `uc -> . _a 2 `uc -> . _a 1 `uc -> . _a 0 `uc ]
+"293
+[; ;SD.c: 293:     SD_Read8bitResponse();
+[e ( _SD_Read8bitResponse ..  ]
+"296
+[; ;SD.c: 296:     if(SD_Check8bitResponse(0x00) == 0) return 0;
+[e $ ! == -> ( _SD_Check8bitResponse (1 -> -> 0 `i `uc `i -> 0 `i 1766  ]
+[e ) -> -> 0 `i `a ]
+[e $UE 1765  ]
+[e :U 1766 ]
+"300
+[; ;SD.c: 300:     return 1;
+[e ) -> -> 1 `i `a ]
+[e $UE 1765  ]
+"301
+[; ;SD.c: 301: }
+[e :UE 1765 ]
+}
+"303
+[; ;SD.c: 303: _Bool SD_CloseStream() {
+[v _SD_CloseStream `(a ~T0 @X0 1 ef ]
+{
+[e :U _SD_CloseStream ]
+[f ]
+"305
+[; ;SD.c: 305:     SD_SendCommand(12, 0x00, 0x00, 0x00, 0x00);
+[e ( _SD_SendCommand (4 , , , , -> -> 12 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc ]
+"308
+[; ;SD.c: 308:     SD_Read8bitResponse();
+[e ( _SD_Read8bitResponse ..  ]
+"311
+[; ;SD.c: 311:     if(SD_Check8bitResponse(0x00) == 0) return 0;
+[e $ ! == -> ( _SD_Check8bitResponse (1 -> -> 0 `i `uc `i -> 0 `i 1768  ]
+[e ) -> -> 0 `i `a ]
+[e $UE 1767  ]
+[e :U 1768 ]
+"313
+[; ;SD.c: 313:     while (SPI_Read() == 0x00);
+[e $U 1769  ]
+[e :U 1770 ]
+[e :U 1769 ]
+[e $ == -> ( _SPI_Read ..  `i -> 0 `i 1770  ]
+[e :U 1771 ]
+"315
+[; ;SD.c: 315:     return 1;
+[e ) -> -> 1 `i `a ]
+[e $UE 1767  ]
+"316
+[; ;SD.c: 316: }
+[e :UE 1767 ]
+}

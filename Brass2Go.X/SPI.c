@@ -45,7 +45,6 @@ void SPI_Write(char Data_8bit) {
 //           Returns one byte of data recieved on the MISO line.
 char SPI_Read(void) {
     SSP1BUF = 0xFF;
-    int i=0;
-    while(SSP1STATbits.BF == 0) ++i;
+    while(SSP1STATbits.BF == 0);
     return SSP1BUF;
 }

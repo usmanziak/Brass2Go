@@ -19433,7 +19433,7 @@ int timer_Init(long rate) {
             return 0;
         break;
         case 44100:
-            T2PR = 33;
+            T2PR = 32;
             T2CLKCON = 0x03;
             T2CON = 0x8A;
             return 0;
@@ -19448,6 +19448,11 @@ int timer_Init(long rate) {
             T2PR = 100;
             T2CLKCON = 0x03;
             T2CON = 0x84;
+        break;
+        case 22050:
+            T2PR = 65;
+            T2CLKCON = 0x03;
+            T2CON = 0x8A;
         default:
             return 1;
     }

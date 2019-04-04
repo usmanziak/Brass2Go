@@ -93,7 +93,7 @@ bool SD_ReadBlock(char ADDR3, char ADDR2, char ADDR1, char ADDR0);
 bool SD_CloseBlock(void);
 
 bool SD_OpenBlock(long address);
-    
+
 
 /* ------------------ #define based Function Declarations ------------------- */
 

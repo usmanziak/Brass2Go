@@ -1794,8 +1794,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;timer.c: 22:         case 44100:
 [e :U 1735 ]
 "23
-[; ;timer.c: 23:             T2PR = 33;
-[e = _T2PR -> -> 33 `i `uc ]
+[; ;timer.c: 23:             T2PR = 32;
+[e = _T2PR -> -> 32 `i `uc ]
 "24
 [; ;timer.c: 24:             T2CLKCON = 0x03;
 [e = _T2CLKCON -> -> 3 `i `uc ]
@@ -1841,14 +1841,29 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;timer.c: 37:             T2CON = 0x84;
 [e = _T2CON -> -> 132 `i `uc ]
 "38
-[; ;timer.c: 38:         default:
-[e :U 1738 ]
+[; ;timer.c: 38:         break;
+[e $U 1732  ]
 "39
-[; ;timer.c: 39:             return 1;
+[; ;timer.c: 39:         case 22050:
+[e :U 1738 ]
+"40
+[; ;timer.c: 40:             T2PR = 65;
+[e = _T2PR -> -> 65 `i `uc ]
+"41
+[; ;timer.c: 41:             T2CLKCON = 0x03;
+[e = _T2CLKCON -> -> 3 `i `uc ]
+"42
+[; ;timer.c: 42:             T2CON = 0x8A;
+[e = _T2CON -> -> 138 `i `uc ]
+"43
+[; ;timer.c: 43:         default:
+[e :U 1739 ]
+"44
+[; ;timer.c: 44:             return 1;
 [e ) -> 1 `i ]
 [e $UE 1731  ]
-"40
-[; ;timer.c: 40:     }
+"45
+[; ;timer.c: 45:     }
 }
 [e $U 1732  ]
 [e :U 1733 ]
@@ -1856,9 +1871,10 @@ Version 4.0 HI-TECH Software Intermediate Code
  , $ -> 44100 `l 1735
  , $ -> 48000 `l 1736
  , $ -> -> 32000 `i `l 1737
- 1738 ]
+ , $ -> -> 22050 `i `l 1738
+ 1739 ]
 [e :U 1732 ]
-"41
-[; ;timer.c: 41: }
+"46
+[; ;timer.c: 46: }
 [e :UE 1731 ]
 }
