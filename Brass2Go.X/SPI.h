@@ -22,7 +22,7 @@ void SPI_Write(char Data_8bit);
 // REQUIRES: SPI interface initialized using SPI_Init.
 // PROMISES: Transmits the byte 0xFF on the MOSI line.
 //           Returns one byte of data recieved on the MISO line.
-char SPI_Read(void);
+inline char SPI_Read(void);
 
 /* ------------------ #define based Function Declarations ------------------- */
 

@@ -19669,10 +19669,10 @@ unsigned short channels;
 unsigned long sampRate;
 unsigned short bitsPerSamp;
 
-char sdata[2];
 
+SampleFrame sdata;
 
-short buffer[16];
+SampleFrame buffer[16];
 unsigned short buffer_read_index = 0;
 unsigned short buffer_write_index = 1;
 
@@ -19770,7 +19770,7 @@ void __attribute__((picinterrupt(("")))) isr(void) {
     PIR1bits.TMR2IF = 0;
     PORTCbits.RC0 = 1;
 
-    short level = buffer[buffer_read_index++];
+    short level = buffer[buffer_read_index++].stereo16.left;
     DAC1REFH = (level & 0xff00) >> 8;
     DAC1REFL = (level & 0x00C0) << 8;
     DAC1LD = 1;
@@ -19809,16 +19809,31 @@ void main(void) {
                     PIE1bits.TMR2IE = 0;
                     if (buffer_write_index != buffer_read_index) {
                         PIE1bits.TMR2IE = 1;
-# 212 "main.c"
-                        PORTCbits.RC1 = 1;
-                        sdata[0] = SPI_Read();
-                        sdata[1] = SPI_Read();
-
-                        buffer[ buffer_write_index++ ] = *((short*)sdata)- 0x8000;
-                        PORTCbits.RC1 = 0;
-
-
-
+                        switch (channels) {
+                            case 1:
+                                sdata.bytes[0] = SPI_Read();
+                                sdata.bytes[1] = SPI_Read();
+                                buffer[ buffer_write_index++ ].mono16 = sdata.mono16 - 0x8000;
+                                __nop();
+                            break;
+                            case 2:
+                                if (samplePending) {
+                                    sdata.bytes[2] = SPI_Read();
+                                    sdata.bytes[3] = SPI_Read();
+                                    sdata.stereo16.right -= 0x8000;
+                                    buffer[ buffer_write_index++ ] = sdata;
+                                    samplePending = 0;
+                                } else {
+                                    sdata.bytes[0] = SPI_Read();
+                                    sdata.bytes[1] = SPI_Read();
+                                    sdata.stereo16.left -= 0x8000;
+                                    samplePending = 1;
+                                }
+                            break;
+                            default:
+                                error(CHANNELS);
+                        }
+# 223 "main.c"
                         if (buffer_write_index >= 16) buffer_write_index = 0;
                         blockIndex += 2;
 

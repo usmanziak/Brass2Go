@@ -19426,7 +19426,7 @@ void SPI_Write(char Data_8bit);
 
 
 
-char SPI_Read(void);
+__attribute__((inline)) char SPI_Read(void);
 # 5 "main.c" 2
 
 # 1 "./SD.h" 1
@@ -19664,7 +19664,7 @@ void error(Error e) {
     __nop();
 }
 # 9 "main.c" 2
-# 21 "main.c"
+# 24 "main.c"
 unsigned short channels;
 unsigned long sampRate;
 unsigned short bitsPerSamp;
@@ -19672,7 +19672,9 @@ unsigned short bitsPerSamp;
 char sdata[2];
 
 
-short buffer[16];
+
+short lbuffer[32];
+short rbuffer[32];
 unsigned short buffer_read_index = 0;
 unsigned short buffer_write_index = 1;
 
@@ -19768,15 +19770,13 @@ void init() {
 
 void __attribute__((picinterrupt(("")))) isr(void) {
     PIR1bits.TMR2IF = 0;
-    PORTCbits.RC0 = 1;
 
-    short level = buffer[buffer_read_index++];
+    short level = lbuffer[buffer_read_index++];
     DAC1REFH = (level & 0xff00) >> 8;
     DAC1REFL = (level & 0x00C0) << 8;
     DAC1LD = 1;
+    if (buffer_read_index >= 32) buffer_read_index = 0;
 
-    if (buffer_read_index >= 16) buffer_read_index = 0;
-    PORTCbits.RC0 = 0;
 }
 
 
@@ -19792,12 +19792,12 @@ void main(void) {
         if(channels != 2) samplePending = 0;
         timer_Init(sampRate);
 
-        while(state == OPEN) {
-# 174 "main.c"
+        while(1) {
+# 177 "main.c"
             if (state == OPEN) {
                 if (blockIndex >= 512) {
 
-
+                    ++address;
                     blockIndex = 0;
                     SPI_Read();
                     SPI_Read();
@@ -19809,17 +19809,34 @@ void main(void) {
                     PIE1bits.TMR2IE = 0;
                     if (buffer_write_index != buffer_read_index) {
                         PIE1bits.TMR2IE = 1;
-# 212 "main.c"
-                        PORTCbits.RC1 = 1;
-                        sdata[0] = SPI_Read();
-                        sdata[1] = SPI_Read();
 
-                        buffer[ buffer_write_index++ ] = *((short*)sdata)- 0x8000;
-                        PORTCbits.RC1 = 0;
+                        switch (channels) {
+                            case 1:
+                                sdata[0] = SPI_Read();
+                                sdata[1] = SPI_Read();
+                                lbuffer[ buffer_write_index ] = *((short*)sdata) - 0x8000;
+                                ++buffer_write_index;
+                            break;
+                            case 2:
+                                if (samplePending) {
+                                    samplePending = 0;
+                                    sdata[0] = SPI_Read();
+                                    sdata[1] = SPI_Read();
+                                    rbuffer[ buffer_write_index++ ] = *((short*)sdata) - 0x8000;
+                                    __nop();
+                                } else {
+                                    samplePending = 1;
+                                    sdata[0] = SPI_Read();
+                                    sdata[1] = SPI_Read();
+                                    lbuffer[ buffer_write_index ] = *((short*)sdata) - 0x8000;
+                                }
+                            break;
+                            default:
+                                error(CHANNELS);
+                        }
 
 
-
-                        if (buffer_write_index >= 16) buffer_write_index = 0;
+                        buffer_write_index %= 32;
                         blockIndex += 2;
 
                     } else PIE1bits.TMR2IE = 1;

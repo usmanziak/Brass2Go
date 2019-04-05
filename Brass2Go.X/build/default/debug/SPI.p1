@@ -1802,27 +1802,28 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;SPI.c: 41: }
 [e :UE 1732 ]
 }
-"46
-[; ;SPI.c: 46: char SPI_Read(void) {
-[v _SPI_Read `(uc ~T0 @X0 1 ef ]
+[v F11994 `(uc ~T0 @X0 1 tf ]
+"48
+[; ;SPI.c: 48: __attribute__((inline)) char SPI_Read(void) {
+[v _SPI_Read `TF11994 ~T0 @X0 1 e ]
 {
 [e :U _SPI_Read ]
 [f ]
-"47
-[; ;SPI.c: 47:     SSP1BUF = 0xFF;
-[e = _SSP1BUF -> -> 255 `i `uc ]
 "49
-[; ;SPI.c: 49:     while(SSP1STATbits.BF == 0);
+[; ;SPI.c: 49:     SSP1BUF = 0xFF;
+[e = _SSP1BUF -> -> 255 `i `uc ]
+"50
+[; ;SPI.c: 50:     while(SSP1STATbits.BF == 0);
 [e $U 1737  ]
 [e :U 1738 ]
 [e :U 1737 ]
 [e $ == -> . . _SSP1STATbits 0 0 `i -> 0 `i 1738  ]
 [e :U 1739 ]
-"50
-[; ;SPI.c: 50:     return SSP1BUF;
+"51
+[; ;SPI.c: 51:     return SSP1BUF;
 [e ) -> _SSP1BUF `uc ]
 [e $UE 1736  ]
-"51
-[; ;SPI.c: 51: }
+"52
+[; ;SPI.c: 52: }
 [e :UE 1736 ]
 }

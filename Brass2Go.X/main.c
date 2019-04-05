@@ -8,7 +8,10 @@
 #include "wave.h"
 #include "error.h"
 
-#define BUFFER_SIZE 16
+//#pragma config FOSC = ECH
+//#pragma config CLKOUTEN = ON
+
+#define BUFFER_SIZE 32
 #define READINTO(s) readBytes((char*)&s, sizeof(s));
 
 #define ON0     PORTCbits.RC0 = 1;
@@ -23,9 +26,11 @@ unsigned long  sampRate;
 unsigned short bitsPerSamp;
 
 char sdata[2];
+
 //SampleFrame sdata;
 
-short buffer[BUFFER_SIZE];
+short lbuffer[BUFFER_SIZE];
+short rbuffer[BUFFER_SIZE];
 unsigned short buffer_read_index = 0;
 unsigned short buffer_write_index = 1;
 
@@ -121,15 +126,13 @@ void init() {
 
 void __interrupt() isr(void) {          // modifies buffer_read_index
     PIR1bits.TMR2IF = 0;
-    ON0
-    
-    short level = buffer[buffer_read_index++];  // add offset to make unsigned
+//    ON0
+    short level = lbuffer[buffer_read_index++];
     DAC1REFH = (level & 0xff00) >> 8;
     DAC1REFL = (level & 0x00C0) << 8;
     DAC1LD = 1;
-//    pulse();
     if (buffer_read_index >= BUFFER_SIZE) buffer_read_index = 0;
-    OFF0
+//    OFF0
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -145,7 +148,7 @@ void main(void) {
         if(channels != 2) samplePending = false;
         timer_Init(sampRate);
         
-        while(state == OPEN) {
+        while(1) {
             
 //            if (state == CLOSED && isPlaying) {
 //                ON6
@@ -174,7 +177,7 @@ void main(void) {
             if (state == OPEN) {
                 if (blockIndex >= 512) { // end of block condition // format specific
 //                    SD_CloseBlock();
-//                    ++address;
+                    ++address;
                     blockIndex = 0;
                     SPI_Read();
                     SPI_Read();
@@ -186,39 +189,34 @@ void main(void) {
                     PIE1bits.TMR2IE = 0;        // disable timer interrupts while accessing buffer_read_index
                     if (buffer_write_index != buffer_read_index) { // read into the buffer if there's space
                         PIE1bits.TMR2IE = 1;
-    //                    switch (channels) {
-    //                        case 1:
-    //                            sdata.bytes[0] = SPI_Read();
-    //                            sdata.bytes[1] = SPI_Read();
-    //                            buffer[ buffer_write_index++ ].mono16 = sdata.mono16;
-    //                            __nop();
-    //                        break;
-    //                        case 2:
-    //                            if (samplePending) {
-    //                                sdata.bytes[2] = SPI_Read();
-    //                                sdata.bytes[3] = SPI_Read();
-    //                                buffer[ buffer_write_index++ ].stereo16 = sdata.stereo16;
-    //                                samplePending = false;
-    //                            } else {
-    //                                sdata.bytes[0] = SPI_Read();
-    //                                sdata.bytes[1] = SPI_Read();
-    //                                samplePending = true;
-    //                            }
-    //                        break;
-    //                        default:
-    //                            error(CHANNELS);
-    //                    }
+//                        ON1
+                        switch (channels) {
+                            case 1:
+                                sdata[0] = SPI_Read();
+                                sdata[1] = SPI_Read();
+                                lbuffer[ buffer_write_index ] = /*rbuffer[ buffer_write_index ] =*/ *((short*)sdata) - 0x8000;
+                                ++buffer_write_index;
+                            break;
+                            case 2:
+                                if (samplePending) {
+                                    samplePending = false;
+                                    sdata[0] = SPI_Read();
+                                    sdata[1] = SPI_Read();
+                                    rbuffer[ buffer_write_index++ ] = *((short*)sdata) - 0x8000;
+                                    __nop();
+                                } else {
+                                    samplePending = true;
+                                    sdata[0] = SPI_Read();
+                                    sdata[1] = SPI_Read();
+                                    lbuffer[ buffer_write_index ] = *((short*)sdata) - 0x8000;
+                                }
+                            break;
+                            default:
+                                error(CHANNELS);
+                        }
+//                        OFF1
 
-                        ON1
-                        sdata[0] = SPI_Read();
-                        sdata[1] = SPI_Read();
-
-                        buffer[ buffer_write_index++ ] = *((short*)sdata)- 0x8000;
-                        OFF1
-                                
-//                        if (buffer[buffer_write_index] - )
-
-                        if (buffer_write_index >= BUFFER_SIZE) buffer_write_index = 0;
+                        buffer_write_index %= BUFFER_SIZE;
                         blockIndex += 2;
 
                     } else PIE1bits.TMR2IE = 1;

@@ -42,8 +42,9 @@ void SPI_Write(char Data_8bit) {
 
 // REQUIRES: SPI interface initialized using SPI_Init.
 // PROMISES: Transmits the byte 0xFF on the MOSI line.
-//           Returns one byte of data recieved on the MISO line.
-char SPI_Read(void) {
+//           Returns one byte of data received on the MISO line.
+
+inline char SPI_Read(void) {
     SSP1BUF = 0xFF;
     while(SSP1STATbits.BF == 0);
     return SSP1BUF;

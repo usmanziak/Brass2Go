@@ -43,9 +43,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "74
 [; ;./SD.h: 74: _Bool SD_Check40bitResponse(char Byte4, char Byte3, char Byte2, char Byte1, char Byte0);
 [v _SD_Check40bitResponse `(a ~T0 @X0 0 ef5`uc`uc`uc`uc`uc ]
+[v F11990 `(uc ~T0 @X0 1 tf ]
 "25 ./SPI.h
-[; ;./SPI.h: 25: char SPI_Read(void);
-[v _SPI_Read `(uc ~T0 @X0 0 ef ]
+[; ;./SPI.h: 25: __attribute__((inline)) char SPI_Read(void);
+[v _SPI_Read `TF11990 ~T0 @X0 0 e ]
 "17 ./SD.h
 [; ;./SD.h: 17: typedef struct {
 [s S1731 `uc 1 `uc 1 `uc 1 `uc 1 ]

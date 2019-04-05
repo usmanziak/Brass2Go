@@ -52,7 +52,7 @@ void SD_SendCommand(char CMD_6bit, char ARG3, char ARG2, char ARG1, char ARG0);
 
 //REQUIRES: SPI interface initialized using SPI_Init.
 //PROMISES: For the SD card, 0xFF is 'no data'. Sends 0xFF to the device 
-//          repeatedly until a response other than 0xFF is recieved. Then stores
+//          repeatedly until a response other than 0xFF is received. Then stores
 //          the one-byte response in the global variable GLBL_Resp8.
 void SD_Read8bitResponse(void);
 
@@ -63,7 +63,7 @@ bool SD_Check8bitResponse(char Byte);
 
 //REQUIRES: SPI interface initialized using SPI_Init.
 //PROMISES: For the SD card, 0xFF is 'no data'. Sends 0xFF to the device 
-//          repeatedly until a response other than 0xFF is recieved. Then stores
+//          repeatedly until a response other than 0xFF is received. Then stores
 //          the five-byte response in the global array GLBL_Resp40.
 void SD_Read40bitResponse(void);
 
