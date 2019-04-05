@@ -19520,6 +19520,10 @@ _Bool SD_ReadBlock(char ADDR3, char ADDR2, char ADDR1, char ADDR0);
 _Bool SD_CloseBlock(void);
 
 _Bool SD_OpenBlock(long address);
+
+_Bool SD_OpenStream(long address);
+
+_Bool SD_CloseStream();
 # 1 "SD.c" 2
 # 11 "SD.c"
 void SD_Init(void) {

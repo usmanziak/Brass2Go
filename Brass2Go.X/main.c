@@ -8,7 +8,7 @@
 #include "wave.h"
 #include "error.h"
 
-#define BUFFER_SIZE 128
+#define BUFFER_SIZE 16
 #define READINTO(s) readBytes((char*)&s, sizeof(s));
 
 #define ON0     PORTCbits.RC0 = 1;
@@ -67,7 +67,7 @@ inline void readBytes(char* dest, int len) {
 }
 
 void openFile(long a) {
-    SD_OpenBlock(a);
+    SD_OpenStream(a);
     state = OPEN;
     char response = 0xFF;
     while (response == 0xFF) response = SPI_Read();
@@ -109,6 +109,9 @@ void init() {
     TRISC0 = 0;
     TRISC1 = 0;
     TRISB0 = 0;
+    TRISC6 = 0;
+    
+    PORTCbits.RC6 = 1;
     
     //Initialize all required peripherals.
     SPI_Init();
@@ -142,39 +145,43 @@ void main(void) {
         if(channels != 2) samplePending = false;
         timer_Init(sampRate);
         
-        while(1) {
+        while(state == OPEN) {
             
-            if (state == CLOSED && isPlaying) {
-                ON6
-                SD_OpenBlock(address);
-                state = OPENING;
-                readMessage = 0xFF;
-                OFF6
-            }
-
-                //We don't know when the SD card will start sending data, but the first byte
-            //is always 0xFE. Read bytes until the response contains at least one zero.
-            if (state == OPENING) {
-                ON6
-                readMessage = SPI_Read();
-                if (readMessage != 0xFF) {
-                    if (readMessage == 0xFE){
-                        state = OPEN;
-                    } else {
-                        state = CLOSED;
-                        error(OPEN_BLOCK);
-                    }
-                    OFF6
-                }
-            }
+//            if (state == CLOSED && isPlaying) {
+//                ON6
+//                SD_OpenBlock(address);
+//                state = OPENING;
+//                readMessage = 0xFF;
+//                OFF6
+//            }
+//
+//                //We don't know when the SD card will start sending data, but the first byte
+//            //is always 0xFE. Read bytes until the response contains at least one zero.
+//            if (state == OPENING) {
+//                ON6
+//                readMessage = SPI_Read();
+//                if (readMessage != 0xFF) {
+//                    if (readMessage == 0xFE){
+//                        state = OPEN;
+//                    } else {
+//                        state = CLOSED;
+//                        error(OPEN_BLOCK);
+//                    }
+//                    OFF6
+//                }
+//            }
 
             if (state == OPEN) {
                 if (blockIndex >= 512) { // end of block condition // format specific
-                    SD_CloseBlock();
-                    ++address;
+//                    SD_CloseBlock();
+//                    ++address;
                     blockIndex = 0;
-                    state = CLOSED;
-                    ON6
+                    SPI_Read();
+                    SPI_Read();
+                    SPI_Read();
+                    SPI_Read();
+//                    state = CLOSED;
+//                    ON6
                 } else {
                     PIE1bits.TMR2IE = 0;        // disable timer interrupts while accessing buffer_read_index
                     if (buffer_write_index != buffer_read_index) { // read into the buffer if there's space
@@ -208,6 +215,8 @@ void main(void) {
 
                         buffer[ buffer_write_index++ ] = *((short*)sdata)- 0x8000;
                         OFF1
+                                
+//                        if (buffer[buffer_write_index] - )
 
                         if (buffer_write_index >= BUFFER_SIZE) buffer_write_index = 0;
                         blockIndex += 2;

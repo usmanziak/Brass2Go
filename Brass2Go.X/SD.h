@@ -94,6 +94,10 @@ bool SD_CloseBlock(void);
 
 bool SD_OpenBlock(long address);
 
+bool SD_OpenStream(long address);
+
+bool SD_CloseStream();
+
 
 /* ------------------ #define based Function Declarations ------------------- */
 

@@ -19520,6 +19520,10 @@ _Bool SD_ReadBlock(char ADDR3, char ADDR2, char ADDR1, char ADDR0);
 _Bool SD_CloseBlock(void);
 
 _Bool SD_OpenBlock(long address);
+
+_Bool SD_OpenStream(long address);
+
+_Bool SD_CloseStream();
 # 1 "SD.c" 2
 # 11 "SD.c"
 void SD_Init(void) {
@@ -19712,5 +19716,39 @@ _Bool SD_CloseBlock() {
     SPI_Read();
 
     SPI_Read();
+    return 1;
+}
+
+_Bool SD_OpenStream(long address) {
+
+
+
+    BlockAddress a = *((BlockAddress*)(&address));
+
+    SD_SendCommand(18, a.a3, a.a2, a.a1, a.a0);
+
+
+    SD_Read8bitResponse();
+
+
+    if(SD_Check8bitResponse(0x00) == 0) return 0;
+
+
+
+    return 1;
+}
+
+_Bool SD_CloseStream() {
+
+    SD_SendCommand(12, 0x00, 0x00, 0x00, 0x00);
+
+
+    SD_Read8bitResponse();
+
+
+    if(SD_Check8bitResponse(0x00) == 0) return 0;
+
+    while (SPI_Read() == 0x00);
+
     return 1;
 }
