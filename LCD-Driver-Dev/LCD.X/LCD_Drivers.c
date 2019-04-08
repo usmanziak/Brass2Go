@@ -6,23 +6,7 @@
 void LCD_Init(void)
 {
     
-    PORTCbits.RC7 = 1;    // SD Chip-Select NOT-Enabled
-    PORTCbits.RC6 = 1;    // LCD Chip-Select High
-    SSP1CON1bits.WCOL = 0; 
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    
-    PORTCbits.RC6 = 0;    // LCD Chip-Select Low
-    SSP1CON1bits.WCOL = 0;   
-    
+    LCD_Select();
     
     
     
@@ -52,14 +36,12 @@ void SD_Select(void)
 {
     PORTCbits.RC7 = 0;    // SD Chip-Select Enabled
     PORTCbits.RC6 = 1;    // LCD Chip-Select NOT-Enabled
-        SSP1CON1bits.WCOL = 0; 
 }
 void LCD_Select(void)
 {
    
     PORTCbits.RC7 = 1;    // SD Chip-Select NOT-Enabled
     PORTCbits.RC6 = 0;    // LCD Chip-Select Enabled
-    SSP1CON1bits.WCOL = 0; 
     
 }
 void LCD_ClearScreen(void)

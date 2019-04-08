@@ -7,6 +7,7 @@
 #include "DAC.h"
 #include "wave.h"
 #include "error.h"
+#include "buttons.h"
 
 //#pragma config FOSC = ECH
 //#pragma config CLKOUTEN = ON
@@ -136,10 +137,13 @@ void __interrupt() isr(void) {          // modifies buffer_read_index
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-
+    char check_buttons = 0;
+    unsigned char first_byte = 0;
+    char number_of_errors = 0;
+    char total_presses = 0;
 void main(void) {
-    init();
-    
+        init();
+    BrassButtons_Init();
     while(1) { // play the whole song again
         
         address = 0;
@@ -183,6 +187,7 @@ void main(void) {
                     SPI_Read();
                     SPI_Read();
                     SPI_Read();
+                    check_buttons = 1;
 //                    state = CLOSED;
 //                    ON6
                 } else {
@@ -196,6 +201,21 @@ void main(void) {
                                 sdata[1] = SPI_Read();
                                 lbuffer[ buffer_write_index ] = /*rbuffer[ buffer_write_index ] =*/ *((short*)sdata) - 0x8000;
                                 ++buffer_write_index;
+                                //CHECK IF THE CORRECT BUTTONS ARE PRESSED AND 
+                                //ADD TO THE NUMBER OF ERRORS IF IT IS WRONG
+                                /*
+                                if(check_buttons)
+                                {
+                                    check_buttons = 0;
+                                    first_byte = sdata[0];
+                                    if(first_byte % 2 == 1){
+                                        total_presses++;
+
+                                        if(Check_Buttons(first_byte) == 0)
+                                            number_of_errors++;
+                                        
+                                    }
+                                 */
                             break;
                             case 2:
                                 if (samplePending) {
@@ -214,6 +234,7 @@ void main(void) {
                             default:
                                 error(CHANNELS);
                         }
+                        
 //                        OFF1
 
                         buffer_write_index %= BUFFER_SIZE;

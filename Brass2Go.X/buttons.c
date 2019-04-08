@@ -33,6 +33,14 @@ unsigned char BrassButtons_Pressed(void)
  */
 {
     return PORTB >> 1;
-    
+}
 
+unsigned char Check_Buttons(unsigned char encoded_byte)
+//Returns 1 if the buttons that are currently pressed are the buttons that should be
+//Pressed (encoded byte)
+{
+    unsigned char correct_buttons =  (0b00001110 & encoded_byte) >> 1;
+    if(BrassButtons_Pressed() == correct_buttons)
+        return 1;
+    else return 0;
 }
