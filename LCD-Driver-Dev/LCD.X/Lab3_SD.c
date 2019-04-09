@@ -12,6 +12,7 @@ void SD_Init(void)
 {
     //Step 1:
     //Set Chip Select high, and write 0xFF for at least 74 cycles.
+    
     SD_SET_CS_HIGH();
     
     SPI_Write(0xFF);

@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=SD.c SPI.c timer.c main.c DAC.c
+SOURCEFILES_QUOTED_IF_SPACED=SD.c SPI.c timer.c main.c DAC.c buttons.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/SD.p1 ${OBJECTDIR}/SPI.p1 ${OBJECTDIR}/timer.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/DAC.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/SD.p1.d ${OBJECTDIR}/SPI.p1.d ${OBJECTDIR}/timer.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/DAC.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/SD.p1 ${OBJECTDIR}/SPI.p1 ${OBJECTDIR}/timer.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/DAC.p1 ${OBJECTDIR}/buttons.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/SD.p1.d ${OBJECTDIR}/SPI.p1.d ${OBJECTDIR}/timer.p1.d ${OBJECTDIR}/main.p1.d ${OBJECTDIR}/DAC.p1.d ${OBJECTDIR}/buttons.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/SD.p1 ${OBJECTDIR}/SPI.p1 ${OBJECTDIR}/timer.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/DAC.p1
+OBJECTFILES=${OBJECTDIR}/SD.p1 ${OBJECTDIR}/SPI.p1 ${OBJECTDIR}/timer.p1 ${OBJECTDIR}/main.p1 ${OBJECTDIR}/DAC.p1 ${OBJECTDIR}/buttons.p1
 
 # Source Files
-SOURCEFILES=SD.c SPI.c timer.c main.c DAC.c
+SOURCEFILES=SD.c SPI.c timer.c main.c DAC.c buttons.c
 
 
 CFLAGS=
@@ -133,6 +133,14 @@ ${OBJECTDIR}/DAC.p1: DAC.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/DAC.d ${OBJECTDIR}/DAC.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/DAC.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/buttons.p1: buttons.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/buttons.p1.d 
+	@${RM} ${OBJECTDIR}/buttons.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/buttons.p1 buttons.c 
+	@-${MV} ${OBJECTDIR}/buttons.d ${OBJECTDIR}/buttons.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/buttons.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 else
 ${OBJECTDIR}/SD.p1: SD.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -173,6 +181,14 @@ ${OBJECTDIR}/DAC.p1: DAC.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/DAC.p1 DAC.c 
 	@-${MV} ${OBJECTDIR}/DAC.d ${OBJECTDIR}/DAC.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/DAC.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/buttons.p1: buttons.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/buttons.p1.d 
+	@${RM} ${OBJECTDIR}/buttons.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -fno-short-double -fno-short-float -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx032 -Wl,--data-init -mno-keep-startup -mno-osccal -mno-resetbits -mno-save-resetbits -mno-download -mno-stackcall $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto     -o ${OBJECTDIR}/buttons.p1 buttons.c 
+	@-${MV} ${OBJECTDIR}/buttons.d ${OBJECTDIR}/buttons.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/buttons.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

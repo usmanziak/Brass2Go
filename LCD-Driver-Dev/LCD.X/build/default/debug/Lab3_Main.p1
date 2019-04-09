@@ -1,6 +1,17 @@
 Version 4.0 HI-TECH Software Intermediate Code
 [p mainexit ]
-"2410 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h
+"1765 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 1765:     struct {
+[s S89 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S89 . TRISC0 TRISC1 TRISC2 TRISC3 TRISC4 TRISC5 TRISC6 TRISC7 ]
+"1764
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 1764: typedef union {
+[u S88 `S89 1 ]
+[n S88 . . ]
+"1776
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 1776: extern volatile TRISCbits_t TRISCbits __attribute__((address(0x08E)));
+[v _TRISCbits `VS88 ~T0 @X0 0 e@142 ]
+"2410
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 2410: extern volatile unsigned char OSCCON __attribute__((address(0x09B)));
 [v _OSCCON `Vuc ~T0 @X0 0 e@155 ]
 "2488
@@ -17,9 +28,6 @@ Version 4.0 HI-TECH Software Intermediate Code
 "15 ./Lab3_SPI.h
 [; ;./Lab3_SPI.h: 15: void SPI_Init(void);
 [v _SPI_Init `(v ~T0 @X0 0 ef ]
-"28 ./Lab3_SD.h
-[; ;./Lab3_SD.h: 28: void SD_Init(void);
-[v _SD_Init `(v ~T0 @X0 0 ef ]
 "12 ./LCD_Drivers.h
 [; ;./LCD_Drivers.h: 12: void LCD_Init(void);
 [v _LCD_Init `(v ~T0 @X0 0 ef ]
@@ -2009,41 +2017,44 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 [e :U _main ]
 [f ]
-"10
-[; ;Lab3_Main.c: 10:     OSCCON = 0xF4;
+"8
+[; ;Lab3_Main.c: 8:     TRISCbits.TRISC6 = 0;
+[e = . . _TRISCbits 0 6 -> -> 0 `i `uc ]
+"9
+[; ;Lab3_Main.c: 9:     TRISCbits.TRISC7 = 0;
+[e = . . _TRISCbits 0 7 -> -> 0 `i `uc ]
+"12
+[; ;Lab3_Main.c: 12:     OSCCON = 0xF4;
 [e = _OSCCON -> -> 244 `i `uc ]
-"11
-[; ;Lab3_Main.c: 11:     while(OSCSTATbits.HFIOFR == 0);
+"13
+[; ;Lab3_Main.c: 13:     while(OSCSTATbits.HFIOFR == 0);
 [e $U 1732  ]
 [e :U 1733 ]
 [e :U 1732 ]
 [e $ == -> . . _OSCSTATbits 0 4 `i -> 0 `i 1733  ]
 [e :U 1734 ]
-"14
-[; ;Lab3_Main.c: 14:     SPI_Init();
-[e ( _SPI_Init ..  ]
-"15
-[; ;Lab3_Main.c: 15:     SD_Init();
-[e ( _SD_Init ..  ]
 "16
-[; ;Lab3_Main.c: 16:     LCD_Init();
-[e ( _LCD_Init ..  ]
+[; ;Lab3_Main.c: 16:     SPI_Init();
+[e ( _SPI_Init ..  ]
 "18
-[; ;Lab3_Main.c: 18:     while(1)
+[; ;Lab3_Main.c: 18:     LCD_Init();
+[e ( _LCD_Init ..  ]
+"20
+[; ;Lab3_Main.c: 20:     while(1)
 [e :U 1736 ]
-"19
-[; ;Lab3_Main.c: 19:     {
+"21
+[; ;Lab3_Main.c: 21:     {
 {
-"25
-[; ;Lab3_Main.c: 25:     }
+"27
+[; ;Lab3_Main.c: 27:     }
 }
 [e :U 1735 ]
 [e $U 1736  ]
 [e :U 1737 ]
-"27
-[; ;Lab3_Main.c: 27:     return;
+"29
+[; ;Lab3_Main.c: 29:     return;
 [e $UE 1731  ]
-"28
-[; ;Lab3_Main.c: 28: }
+"30
+[; ;Lab3_Main.c: 30: }
 [e :UE 1731 ]
 }

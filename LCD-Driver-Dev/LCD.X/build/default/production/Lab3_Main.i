@@ -19520,19 +19520,19 @@ _Bool SD_ReadBlock(char ADDR3, char ADDR2, char ADDR1, char ADDR0);
 # 4 "Lab3_Main.c" 2
 
 # 1 "./LCD_Drivers.h" 1
-# 12 "./LCD_Drivers.h"
+# 21 "./LCD_Drivers.h"
 void LCD_Init(void);
 void SD_Select(void);
 
 void LCD_Select(void);
-void LCD_ClearScreen(void);
-void LCD_ReturnHome(void);
-void LCD_ShiftCursorLeft(void);
-void LCD_ShiftCursorRight(void);
+void LCD_Write(char c);
+void LCD_Print(char* str);
 # 5 "Lab3_Main.c" 2
 
 
 void main(void) {
+    TRISCbits.TRISC6 = 0;
+    TRISCbits.TRISC7 = 0;
 
 
     OSCCON = 0xF4;
@@ -19543,14 +19543,14 @@ void main(void) {
     SD_Init();
     LCD_Init();
 
-    while(1)
-    {
 
 
 
+    PORTCbits.RC5 = 1;
+    LCD_Print("Hello World!");
 
 
-    }
 
+    while(1);
     return;
 }

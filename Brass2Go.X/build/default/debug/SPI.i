@@ -19453,7 +19453,6 @@ void SPI_Write(char Data_8bit) {
 
 
 
-
 __attribute__((inline)) char SPI_Read(void) {
     SSP1BUF = 0xFF;
     while(SSP1STATbits.BF == 0);

@@ -125,6 +125,20 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1863
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 1863: extern volatile PIE1bits_t PIE1bits __attribute__((address(0x091)));
 [v _PIE1bits `VS92 ~T0 @X0 0 e@145 ]
+"5116
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 5116: extern volatile unsigned char SSP1BUF __attribute__((address(0x211)));
+[v _SSP1BUF `Vuc ~T0 @X0 0 e@529 ]
+"5889
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 5889:     struct {
+[s S287 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S287 . BF UA R_nW S P D_nA CKE SMP ]
+"5888
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 5888: typedef union {
+[u S286 `S287 1 ]
+[n S286 . . ]
+"5900
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 5900: extern volatile SSP1STATbits_t SSP1STATbits __attribute__((address(0x214)));
+[v _SSP1STATbits `VS286 ~T0 @X0 0 e@532 ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 54: __asm("INDF0 equ 00h");
 [; <" INDF0 equ 00h ;# ">
@@ -2569,120 +2583,163 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;main.c: 194:                             case 1:
 [e :U 1786 ]
 "195
-[; ;main.c: 195:                                 sdata[0] = SPI_Read();
-[e = *U + &U _sdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _sdata `ui `ux ( _SPI_Read ..  ]
+[; ;main.c: 195:                                 PORTCbits.RC1 = 1;
+[e = . . _PORTCbits 0 1 -> -> 1 `i `uc ]
 "196
-[; ;main.c: 196:                                 sdata[1] = SPI_Read();
-[e = *U + &U _sdata * -> -> -> 1 `i `ui `ux -> -> # *U &U _sdata `ui `ux ( _SPI_Read ..  ]
+[; ;main.c: 196:                                 SSP1BUF = 0xFF;
+[e = _SSP1BUF -> -> 255 `i `uc ]
 "197
-[; ;main.c: 197:                                 lbuffer[ buffer_write_index ] = *((short*)sdata) - 0x8000;
-[e = *U + &U _lbuffer * -> _buffer_write_index `ux -> -> # *U &U _lbuffer `ui `ux -> - -> *U -> &U _sdata `*s `ui -> 32768 `ui `s ]
-"198
-[; ;main.c: 198:                                 ++buffer_write_index;
-[e =+ _buffer_write_index -> -> 1 `i `us ]
-"199
-[; ;main.c: 199:                             break;
-[e $U 1784  ]
-"200
-[; ;main.c: 200:                             case 2:
-[e :U 1787 ]
-"201
-[; ;main.c: 201:                                 if (samplePending) {
-[e $ ! != -> _samplePending `i -> 0 `i 1788  ]
-{
-"202
-[; ;main.c: 202:                                     samplePending = 0;
-[e = _samplePending -> -> 0 `i `a ]
-"203
-[; ;main.c: 203:                                     sdata[0] = SPI_Read();
-[e = *U + &U _sdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _sdata `ui `ux ( _SPI_Read ..  ]
-"204
-[; ;main.c: 204:                                     sdata[1] = SPI_Read();
-[e = *U + &U _sdata * -> -> -> 1 `i `ui `ux -> -> # *U &U _sdata `ui `ux ( _SPI_Read ..  ]
-"205
-[; ;main.c: 205:                                     rbuffer[ buffer_write_index++ ] = *((short*)sdata) - 0x8000;
-[e = *U + &U _rbuffer * -> ++ _buffer_write_index -> -> 1 `i `us `ux -> -> # *U &U _rbuffer `ui `ux -> - -> *U -> &U _sdata `*s `ui -> 32768 `ui `s ]
-"206
-[; ;main.c: 206:                                     __nop();
-[e ( ___nop ..  ]
-"207
-[; ;main.c: 207:                                 } else {
-}
-[e $U 1789  ]
+[; ;main.c: 197:                                 while(SSP1STATbits.BF == 0);
+[e $U 1787  ]
 [e :U 1788 ]
-{
-"208
-[; ;main.c: 208:                                     samplePending = 1;
-[e = _samplePending -> -> 1 `i `a ]
-"209
-[; ;main.c: 209:                                     sdata[0] = SPI_Read();
-[e = *U + &U _sdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _sdata `ui `ux ( _SPI_Read ..  ]
-"210
-[; ;main.c: 210:                                     sdata[1] = SPI_Read();
-[e = *U + &U _sdata * -> -> -> 1 `i `ui `ux -> -> # *U &U _sdata `ui `ux ( _SPI_Read ..  ]
-"211
-[; ;main.c: 211:                                     lbuffer[ buffer_write_index ] = *((short*)sdata) - 0x8000;
-[e = *U + &U _lbuffer * -> _buffer_write_index `ux -> -> # *U &U _lbuffer `ui `ux -> - -> *U -> &U _sdata `*s `ui -> 32768 `ui `s ]
-"212
-[; ;main.c: 212:                                 }
-}
+[e :U 1787 ]
+[e $ == -> . . _SSP1STATbits 0 0 `i -> 0 `i 1788  ]
 [e :U 1789 ]
-"213
-[; ;main.c: 213:                             break;
-[e $U 1784  ]
-"214
-[; ;main.c: 214:                             default:
+"198
+[; ;main.c: 198:                                 sdata[0] = SSP1BUF;
+[e = *U + &U _sdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _sdata `ui `ux -> _SSP1BUF `uc ]
+"199
+[; ;main.c: 199:                                 SSP1BUF = 0xFF;
+[e = _SSP1BUF -> -> 255 `i `uc ]
+"200
+[; ;main.c: 200:                                 while(SSP1STATbits.BF == 0);
+[e $U 1790  ]
+[e :U 1791 ]
 [e :U 1790 ]
-"215
-[; ;main.c: 215:                                 error(CHANNELS);
+[e $ == -> . . _SSP1STATbits 0 0 `i -> 0 `i 1791  ]
+[e :U 1792 ]
+"201
+[; ;main.c: 201:                                 sdata[1] = SSP1BUF;
+[e = *U + &U _sdata * -> -> -> 1 `i `ui `ux -> -> # *U &U _sdata `ui `ux -> _SSP1BUF `uc ]
+"202
+[; ;main.c: 202:                                 PORTCbits.RC1 = 0;
+[e = . . _PORTCbits 0 1 -> -> 0 `i `uc ]
+"204
+[; ;main.c: 204:                                 lbuffer[ buffer_write_index ] = *((short*)sdata) - 0x8000;
+[e = *U + &U _lbuffer * -> _buffer_write_index `ux -> -> # *U &U _lbuffer `ui `ux -> - -> *U -> &U _sdata `*s `ui -> 32768 `ui `s ]
+"205
+[; ;main.c: 205:                                 ++buffer_write_index;
+[e =+ _buffer_write_index -> -> 1 `i `us ]
+"206
+[; ;main.c: 206:                             break;
+[e $U 1784  ]
+"207
+[; ;main.c: 207:                             case 2:
+[e :U 1793 ]
+"222
+[; ;main.c: 222:                                 SSP1BUF = 0xFF;
+[e = _SSP1BUF -> -> 255 `i `uc ]
+"223
+[; ;main.c: 223:                                 while(SSP1STATbits.BF == 0);
+[e $U 1794  ]
+[e :U 1795 ]
+[e :U 1794 ]
+[e $ == -> . . _SSP1STATbits 0 0 `i -> 0 `i 1795  ]
+[e :U 1796 ]
+"224
+[; ;main.c: 224:                                 sdata[0] = SSP1BUF;
+[e = *U + &U _sdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _sdata `ui `ux -> _SSP1BUF `uc ]
+"225
+[; ;main.c: 225:                                 SSP1BUF = 0xFF;
+[e = _SSP1BUF -> -> 255 `i `uc ]
+"226
+[; ;main.c: 226:                                 while(SSP1STATbits.BF == 0);
+[e $U 1797  ]
+[e :U 1798 ]
+[e :U 1797 ]
+[e $ == -> . . _SSP1STATbits 0 0 `i -> 0 `i 1798  ]
+[e :U 1799 ]
+"227
+[; ;main.c: 227:                                 sdata[1] = SSP1BUF;
+[e = *U + &U _sdata * -> -> -> 1 `i `ui `ux -> -> # *U &U _sdata `ui `ux -> _SSP1BUF `uc ]
+"228
+[; ;main.c: 228:                                 lbuffer[ buffer_write_index ] = *((short*)sdata) - 0x8000;
+[e = *U + &U _lbuffer * -> _buffer_write_index `ux -> -> # *U &U _lbuffer `ui `ux -> - -> *U -> &U _sdata `*s `ui -> 32768 `ui `s ]
+"230
+[; ;main.c: 230:                                 SSP1BUF = 0xFF;
+[e = _SSP1BUF -> -> 255 `i `uc ]
+"231
+[; ;main.c: 231:                                 while(SSP1STATbits.BF == 0);
+[e $U 1800  ]
+[e :U 1801 ]
+[e :U 1800 ]
+[e $ == -> . . _SSP1STATbits 0 0 `i -> 0 `i 1801  ]
+[e :U 1802 ]
+"232
+[; ;main.c: 232:                                 sdata[0] = SSP1BUF;
+[e = *U + &U _sdata * -> -> -> 0 `i `ui `ux -> -> # *U &U _sdata `ui `ux -> _SSP1BUF `uc ]
+"233
+[; ;main.c: 233:                                 SSP1BUF = 0xFF;
+[e = _SSP1BUF -> -> 255 `i `uc ]
+"234
+[; ;main.c: 234:                                 while(SSP1STATbits.BF == 0);
+[e $U 1803  ]
+[e :U 1804 ]
+[e :U 1803 ]
+[e $ == -> . . _SSP1STATbits 0 0 `i -> 0 `i 1804  ]
+[e :U 1805 ]
+"235
+[; ;main.c: 235:                                 sdata[1] = SSP1BUF;
+[e = *U + &U _sdata * -> -> -> 1 `i `ui `ux -> -> # *U &U _sdata `ui `ux -> _SSP1BUF `uc ]
+"236
+[; ;main.c: 236:                                 rbuffer[ buffer_write_index++ ] = *((short*)sdata) - 0x8000;
+[e = *U + &U _rbuffer * -> ++ _buffer_write_index -> -> 1 `i `us `ux -> -> # *U &U _rbuffer `ui `ux -> - -> *U -> &U _sdata `*s `ui -> 32768 `ui `s ]
+"237
+[; ;main.c: 237:                             break;
+[e $U 1784  ]
+"238
+[; ;main.c: 238:                             default:
+[e :U 1806 ]
+"239
+[; ;main.c: 239:                                 error(CHANNELS);
 [e ( _error (1 . `E12104 7 ]
-"216
-[; ;main.c: 216:                         }
+"240
+[; ;main.c: 240:                         }
 }
 [e $U 1784  ]
 [e :U 1785 ]
 [e [\ -> _channels `ui , $ -> -> 1 `i `ui 1786
- , $ -> -> 2 `i `ui 1787
- 1790 ]
+ , $ -> -> 2 `i `ui 1793
+ 1806 ]
 [e :U 1784 ]
-"219
-[; ;main.c: 219:                         buffer_write_index %= 32;
+"243
+[; ;main.c: 243:                         buffer_write_index %= 32;
 [e =% _buffer_write_index -> -> 32 `i `ui ]
-"220
-[; ;main.c: 220:                         blockIndex += 2;
+"244
+[; ;main.c: 244:                         blockIndex += 2;
 [e =+ _blockIndex -> -> 2 `i `s ]
-"222
-[; ;main.c: 222:                     } else PIE1bits.TMR2IE = 1;
+"246
+[; ;main.c: 246:                     } else PIE1bits.TMR2IE = 1;
 }
-[e $U 1791  ]
+[e $U 1807  ]
 [e :U 1783 ]
 [e = . . _PIE1bits 0 1 -> -> 1 `i `uc ]
-[e :U 1791 ]
-"223
-[; ;main.c: 223:                 }
+[e :U 1807 ]
+"247
+[; ;main.c: 247:                 }
 }
 [e :U 1782 ]
-"224
-[; ;main.c: 224:             }
+"248
+[; ;main.c: 248:             }
 }
 [e :U 1780 ]
-"226
-[; ;main.c: 226:         }
+"250
+[; ;main.c: 250:         }
 }
 [e :U 1777 ]
 [e $U 1778  ]
 [e :U 1779 ]
-"228
-[; ;main.c: 228:     }
+"252
+[; ;main.c: 252:     }
 }
 [e :U 1773 ]
 [e $U 1774  ]
 [e :U 1775 ]
-"230
-[; ;main.c: 230:     return;
+"254
+[; ;main.c: 254:     return;
 [e $UE 1772  ]
-"231
-[; ;main.c: 231: }
+"255
+[; ;main.c: 255: }
 [e :UE 1772 ]
 }
 [a 7C 100 97 116 97 0 ]

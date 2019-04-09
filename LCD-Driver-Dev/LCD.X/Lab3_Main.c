@@ -5,7 +5,9 @@
 #include "LCD_Drivers.h"
 
 void main(void) {
-
+    TRISCbits.TRISC6 = 0;
+    TRISCbits.TRISC7 = 0;
+    
     // Set the system clock speed to 32MHz and wait for the ready flag.
     OSCCON = 0xF4;
     while(OSCSTATbits.HFIOFR == 0);
@@ -15,15 +17,14 @@ void main(void) {
     SD_Init();
     LCD_Init();
     
-    while(1)
-    {
-       
-      
-        
-        
-        
-    }
-        
+//    RS_PIN = 0;
+//    LCD_Write(0x80 | 0x00); // set DDRAM address
+    
+    LCD_DATA_MODE();
+    LCD_Print("Hello World!");
+    
+    
+    while(1);
     return;
 }
 

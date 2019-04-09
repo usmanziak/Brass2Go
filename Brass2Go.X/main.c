@@ -197,8 +197,14 @@ void main(void) {
 //                        ON1
                         switch (channels) {
                             case 1:
-                                sdata[0] = SPI_Read();
-                                sdata[1] = SPI_Read();
+                                SSP1BUF = 0xFF;
+                                while(SSP1STATbits.BF == 0);
+                                sdata[0] = SSP1BUF;
+                                
+                                SSP1BUF = 0xFF;
+                                while(SSP1STATbits.BF == 0);
+                                sdata[1] = SSP1BUF;
+                                
                                 lbuffer[ buffer_write_index ] = /*rbuffer[ buffer_write_index ] =*/ *((short*)sdata) - 0x8000;
                                 ++buffer_write_index;
                                 //CHECK IF THE CORRECT BUTTONS ARE PRESSED AND 

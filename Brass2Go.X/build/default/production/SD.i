@@ -19446,7 +19446,7 @@ void SPI_Write(char Data_8bit);
 
 
 
-char SPI_Read(void);
+__attribute__((inline)) char SPI_Read(void);
 # 7 "./SD.h" 2
 
 # 1 "./SD.h" 1

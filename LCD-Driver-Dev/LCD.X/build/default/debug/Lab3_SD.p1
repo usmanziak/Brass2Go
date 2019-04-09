@@ -2027,15 +2027,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 [e :U _SD_Init ]
 [f ]
-"15
-[; ;Lab3_SD.c: 15:     { PORTCbits.RC7 = 1; SSP1CON1bits.WCOL = 0; };
+"16
+[; ;Lab3_SD.c: 16:     { PORTCbits.RC7 = 1; SSP1CON1bits.WCOL = 0; };
 {
 [e = . . _PORTCbits 0 7 -> -> 1 `i `uc ]
 [e = . . _SSP1CON1bits 0 4 -> -> 0 `i `uc ]
 }
-"17
-[; ;Lab3_SD.c: 17:     SPI_Write(0xFF);
-[e ( _SPI_Write (1 -> -> 255 `i `uc ]
 "18
 [; ;Lab3_SD.c: 18:     SPI_Write(0xFF);
 [e ( _SPI_Write (1 -> -> 255 `i `uc ]
@@ -2063,506 +2060,509 @@ Version 4.0 HI-TECH Software Intermediate Code
 "26
 [; ;Lab3_SD.c: 26:     SPI_Write(0xFF);
 [e ( _SPI_Write (1 -> -> 255 `i `uc ]
-"28
-[; ;Lab3_SD.c: 28:     { PORTCbits.RC7 = 0; SSP1CON1bits.WCOL = 0; };
+"27
+[; ;Lab3_SD.c: 27:     SPI_Write(0xFF);
+[e ( _SPI_Write (1 -> -> 255 `i `uc ]
+"29
+[; ;Lab3_SD.c: 29:     { PORTCbits.RC7 = 0; SSP1CON1bits.WCOL = 0; };
 {
 [e = . . _PORTCbits 0 7 -> -> 0 `i `uc ]
 [e = . . _SSP1CON1bits 0 4 -> -> 0 `i `uc ]
 }
-"34
-[; ;Lab3_SD.c: 34:     do {
+"35
+[; ;Lab3_SD.c: 35:     do {
 [e :U 1734 ]
 {
-"35
-[; ;Lab3_SD.c: 35:         SD_SendCommand(0, 0x00, 0x00, 0x00, 0x00);
-[e ( _SD_SendCommand (4 , , , , -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc ]
 "36
-[; ;Lab3_SD.c: 36:         SD_Read8bitResponse();
-[e ( _SD_Read8bitResponse ..  ]
+[; ;Lab3_SD.c: 36:         SD_SendCommand(0, 0x00, 0x00, 0x00, 0x00);
+[e ( _SD_SendCommand (4 , , , , -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc ]
 "37
-[; ;Lab3_SD.c: 37:         __asm("NOP");
-[; <" NOP ;# ">
+[; ;Lab3_SD.c: 37:         SD_Read8bitResponse();
+[e ( _SD_Read8bitResponse ..  ]
 "38
-[; ;Lab3_SD.c: 38:     } while (SD_Check8bitResponse(0x01) == 0);
+[; ;Lab3_SD.c: 38:         __asm("NOP");
+[; <" NOP ;# ">
+"39
+[; ;Lab3_SD.c: 39:     } while (SD_Check8bitResponse(0x01) == 0);
 }
 [e $ == -> ( _SD_Check8bitResponse (1 -> -> 1 `i `uc `i -> 0 `i 1734  ]
 [e :U 1733 ]
-"44
-[; ;Lab3_SD.c: 44:     do {
+"45
+[; ;Lab3_SD.c: 45:     do {
 [e :U 1737 ]
 {
-"45
-[; ;Lab3_SD.c: 45:         SD_SendCommand(8, 0x00, 0x00, 0x01, 0xAA);
-[e ( _SD_SendCommand (4 , , , , -> -> 8 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 1 `i `uc -> -> 170 `i `uc ]
 "46
-[; ;Lab3_SD.c: 46:         SD_Read40bitResponse();
-[e ( _SD_Read40bitResponse ..  ]
+[; ;Lab3_SD.c: 46:         SD_SendCommand(8, 0x00, 0x00, 0x01, 0xAA);
+[e ( _SD_SendCommand (4 , , , , -> -> 8 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 1 `i `uc -> -> 170 `i `uc ]
 "47
-[; ;Lab3_SD.c: 47:         __asm("NOP");
-[; <" NOP ;# ">
+[; ;Lab3_SD.c: 47:         SD_Read40bitResponse();
+[e ( _SD_Read40bitResponse ..  ]
 "48
-[; ;Lab3_SD.c: 48:     } while (SD_Check40bitResponse(0x01, 0x00, 0x00, 0x01, 0xAA) == 0);
+[; ;Lab3_SD.c: 48:         __asm("NOP");
+[; <" NOP ;# ">
+"49
+[; ;Lab3_SD.c: 49:     } while (SD_Check40bitResponse(0x01, 0x00, 0x00, 0x01, 0xAA) == 0);
 }
 [e $ == -> ( _SD_Check40bitResponse (4 , , , , -> -> 1 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 1 `i `uc -> -> 170 `i `uc `i -> 0 `i 1737  ]
 [e :U 1736 ]
-"54
-[; ;Lab3_SD.c: 54:     do {
+"55
+[; ;Lab3_SD.c: 55:     do {
 [e :U 1740 ]
 {
-"55
-[; ;Lab3_SD.c: 55:         do {
+"56
+[; ;Lab3_SD.c: 56:         do {
 [e :U 1743 ]
 {
-"56
-[; ;Lab3_SD.c: 56:             SD_SendCommand(55, 0x00, 0x00, 0x00, 0x00);
-[e ( _SD_SendCommand (4 , , , , -> -> 55 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc ]
 "57
-[; ;Lab3_SD.c: 57:             SD_Read8bitResponse();
-[e ( _SD_Read8bitResponse ..  ]
+[; ;Lab3_SD.c: 57:             SD_SendCommand(55, 0x00, 0x00, 0x00, 0x00);
+[e ( _SD_SendCommand (4 , , , , -> -> 55 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc ]
 "58
-[; ;Lab3_SD.c: 58:             __asm("NOP");
-[; <" NOP ;# ">
+[; ;Lab3_SD.c: 58:             SD_Read8bitResponse();
+[e ( _SD_Read8bitResponse ..  ]
 "59
-[; ;Lab3_SD.c: 59:         } while (SD_Check8bitResponse(0x01) == 0);
+[; ;Lab3_SD.c: 59:             __asm("NOP");
+[; <" NOP ;# ">
+"60
+[; ;Lab3_SD.c: 60:         } while (SD_Check8bitResponse(0x01) == 0);
 }
 [e $ == -> ( _SD_Check8bitResponse (1 -> -> 1 `i `uc `i -> 0 `i 1743  ]
 [e :U 1742 ]
-"66
-[; ;Lab3_SD.c: 66:         SD_SendCommand(41, 0x40, 0x00, 0x00, 0x00);
-[e ( _SD_SendCommand (4 , , , , -> -> 41 `i `uc -> -> 64 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc ]
 "67
-[; ;Lab3_SD.c: 67:         SD_Read8bitResponse();
-[e ( _SD_Read8bitResponse ..  ]
+[; ;Lab3_SD.c: 67:         SD_SendCommand(41, 0x40, 0x00, 0x00, 0x00);
+[e ( _SD_SendCommand (4 , , , , -> -> 41 `i `uc -> -> 64 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc -> -> 0 `i `uc ]
 "68
-[; ;Lab3_SD.c: 68:         __asm("NOP");
-[; <" NOP ;# ">
+[; ;Lab3_SD.c: 68:         SD_Read8bitResponse();
+[e ( _SD_Read8bitResponse ..  ]
 "69
-[; ;Lab3_SD.c: 69:     } while (SD_Check8bitResponse(0x00) == 0);
+[; ;Lab3_SD.c: 69:         __asm("NOP");
+[; <" NOP ;# ">
+"70
+[; ;Lab3_SD.c: 70:     } while (SD_Check8bitResponse(0x00) == 0);
 }
 [e $ == -> ( _SD_Check8bitResponse (1 -> -> 0 `i `uc `i -> 0 `i 1740  ]
 [e :U 1739 ]
-"70
-[; ;Lab3_SD.c: 70: }
+"71
+[; ;Lab3_SD.c: 71: }
 [e :UE 1731 ]
 }
-"78
-[; ;Lab3_SD.c: 78: void SD_SendCommand(char CMD_6bit, char ARG3, char ARG2, char ARG1, char ARG0)
-[v _SD_SendCommand `(v ~T0 @X0 1 ef5`uc`uc`uc`uc`uc ]
 "79
-[; ;Lab3_SD.c: 79: {
+[; ;Lab3_SD.c: 79: void SD_SendCommand(char CMD_6bit, char ARG3, char ARG2, char ARG1, char ARG0)
+[v _SD_SendCommand `(v ~T0 @X0 1 ef5`uc`uc`uc`uc`uc ]
+"80
+[; ;Lab3_SD.c: 80: {
 {
 [e :U _SD_SendCommand ]
-"78
-[; ;Lab3_SD.c: 78: void SD_SendCommand(char CMD_6bit, char ARG3, char ARG2, char ARG1, char ARG0)
+"79
+[; ;Lab3_SD.c: 79: void SD_SendCommand(char CMD_6bit, char ARG3, char ARG2, char ARG1, char ARG0)
 [v _CMD_6bit `uc ~T0 @X0 1 r1 ]
 [v _ARG3 `uc ~T0 @X0 1 r2 ]
 [v _ARG2 `uc ~T0 @X0 1 r3 ]
 [v _ARG1 `uc ~T0 @X0 1 r4 ]
 [v _ARG0 `uc ~T0 @X0 1 r5 ]
-"79
-[; ;Lab3_SD.c: 79: {
-[f ]
 "80
-[; ;Lab3_SD.c: 80:     char ByteToSend = 0xFF;
+[; ;Lab3_SD.c: 80: {
+[f ]
+"81
+[; ;Lab3_SD.c: 81:     char ByteToSend = 0xFF;
 [v _ByteToSend `uc ~T0 @X0 1 a ]
 [e = _ByteToSend -> -> 255 `i `uc ]
-"81
-[; ;Lab3_SD.c: 81:     char Checksum = 0x00;
+"82
+[; ;Lab3_SD.c: 82:     char Checksum = 0x00;
 [v _Checksum `uc ~T0 @X0 1 a ]
 [e = _Checksum -> -> 0 `i `uc ]
-"84
-[; ;Lab3_SD.c: 84:     ByteToSend = (CMD_6bit & 0x3F) | 0x40;
-[e = _ByteToSend -> | & -> _CMD_6bit `i -> 63 `i -> 64 `i `uc ]
 "85
-[; ;Lab3_SD.c: 85:     SPI_Write(ByteToSend);
-[e ( _SPI_Write (1 _ByteToSend ]
+[; ;Lab3_SD.c: 85:     ByteToSend = (CMD_6bit & 0x3F) | 0x40;
+[e = _ByteToSend -> | & -> _CMD_6bit `i -> 63 `i -> 64 `i `uc ]
 "86
-[; ;Lab3_SD.c: 86:     { Checksum = Checksum << 1; Checksum = Checksum ^ ByteToSend; Checksum = CRCTable[Checksum]; };
+[; ;Lab3_SD.c: 86:     SPI_Write(ByteToSend);
+[e ( _SPI_Write (1 _ByteToSend ]
+"87
+[; ;Lab3_SD.c: 87:     { Checksum = Checksum << 1; Checksum = Checksum ^ ByteToSend; Checksum = CRCTable[Checksum]; };
 {
 [e = _Checksum -> << -> _Checksum `i -> 1 `i `uc ]
 [e = _Checksum -> ^ -> _Checksum `i -> _ByteToSend `i `uc ]
 [e = _Checksum *U + &U _CRCTable * -> _Checksum `ux -> -> # *U &U _CRCTable `ui `ux ]
 }
-"89
-[; ;Lab3_SD.c: 89:     ByteToSend = ARG3;
-[e = _ByteToSend _ARG3 ]
 "90
-[; ;Lab3_SD.c: 90:     SPI_Write(ByteToSend);
-[e ( _SPI_Write (1 _ByteToSend ]
+[; ;Lab3_SD.c: 90:     ByteToSend = ARG3;
+[e = _ByteToSend _ARG3 ]
 "91
-[; ;Lab3_SD.c: 91:     { Checksum = Checksum << 1; Checksum = Checksum ^ ByteToSend; Checksum = CRCTable[Checksum]; };
+[; ;Lab3_SD.c: 91:     SPI_Write(ByteToSend);
+[e ( _SPI_Write (1 _ByteToSend ]
+"92
+[; ;Lab3_SD.c: 92:     { Checksum = Checksum << 1; Checksum = Checksum ^ ByteToSend; Checksum = CRCTable[Checksum]; };
 {
 [e = _Checksum -> << -> _Checksum `i -> 1 `i `uc ]
 [e = _Checksum -> ^ -> _Checksum `i -> _ByteToSend `i `uc ]
 [e = _Checksum *U + &U _CRCTable * -> _Checksum `ux -> -> # *U &U _CRCTable `ui `ux ]
 }
-"93
-[; ;Lab3_SD.c: 93:     ByteToSend = ARG2;
-[e = _ByteToSend _ARG2 ]
 "94
-[; ;Lab3_SD.c: 94:     SPI_Write(ByteToSend);
-[e ( _SPI_Write (1 _ByteToSend ]
+[; ;Lab3_SD.c: 94:     ByteToSend = ARG2;
+[e = _ByteToSend _ARG2 ]
 "95
-[; ;Lab3_SD.c: 95:     { Checksum = Checksum << 1; Checksum = Checksum ^ ByteToSend; Checksum = CRCTable[Checksum]; };
+[; ;Lab3_SD.c: 95:     SPI_Write(ByteToSend);
+[e ( _SPI_Write (1 _ByteToSend ]
+"96
+[; ;Lab3_SD.c: 96:     { Checksum = Checksum << 1; Checksum = Checksum ^ ByteToSend; Checksum = CRCTable[Checksum]; };
 {
 [e = _Checksum -> << -> _Checksum `i -> 1 `i `uc ]
 [e = _Checksum -> ^ -> _Checksum `i -> _ByteToSend `i `uc ]
 [e = _Checksum *U + &U _CRCTable * -> _Checksum `ux -> -> # *U &U _CRCTable `ui `ux ]
 }
-"97
-[; ;Lab3_SD.c: 97:     ByteToSend = ARG1;
-[e = _ByteToSend _ARG1 ]
 "98
-[; ;Lab3_SD.c: 98:     SPI_Write(ByteToSend);
-[e ( _SPI_Write (1 _ByteToSend ]
+[; ;Lab3_SD.c: 98:     ByteToSend = ARG1;
+[e = _ByteToSend _ARG1 ]
 "99
-[; ;Lab3_SD.c: 99:     { Checksum = Checksum << 1; Checksum = Checksum ^ ByteToSend; Checksum = CRCTable[Checksum]; };
+[; ;Lab3_SD.c: 99:     SPI_Write(ByteToSend);
+[e ( _SPI_Write (1 _ByteToSend ]
+"100
+[; ;Lab3_SD.c: 100:     { Checksum = Checksum << 1; Checksum = Checksum ^ ByteToSend; Checksum = CRCTable[Checksum]; };
 {
 [e = _Checksum -> << -> _Checksum `i -> 1 `i `uc ]
 [e = _Checksum -> ^ -> _Checksum `i -> _ByteToSend `i `uc ]
 [e = _Checksum *U + &U _CRCTable * -> _Checksum `ux -> -> # *U &U _CRCTable `ui `ux ]
 }
-"101
-[; ;Lab3_SD.c: 101:     ByteToSend = ARG0;
-[e = _ByteToSend _ARG0 ]
 "102
-[; ;Lab3_SD.c: 102:     SPI_Write(ByteToSend);
-[e ( _SPI_Write (1 _ByteToSend ]
+[; ;Lab3_SD.c: 102:     ByteToSend = ARG0;
+[e = _ByteToSend _ARG0 ]
 "103
-[; ;Lab3_SD.c: 103:     { Checksum = Checksum << 1; Checksum = Checksum ^ ByteToSend; Checksum = CRCTable[Checksum]; };
+[; ;Lab3_SD.c: 103:     SPI_Write(ByteToSend);
+[e ( _SPI_Write (1 _ByteToSend ]
+"104
+[; ;Lab3_SD.c: 104:     { Checksum = Checksum << 1; Checksum = Checksum ^ ByteToSend; Checksum = CRCTable[Checksum]; };
 {
 [e = _Checksum -> << -> _Checksum `i -> 1 `i `uc ]
 [e = _Checksum -> ^ -> _Checksum `i -> _ByteToSend `i `uc ]
 [e = _Checksum *U + &U _CRCTable * -> _Checksum `ux -> -> # *U &U _CRCTable `ui `ux ]
 }
-"106
-[; ;Lab3_SD.c: 106:     ByteToSend = (Checksum << 1) | 0x01;
-[e = _ByteToSend -> | << -> _Checksum `i -> 1 `i -> 1 `i `uc ]
 "107
-[; ;Lab3_SD.c: 107:     SPI_Write(ByteToSend);
-[e ( _SPI_Write (1 _ByteToSend ]
+[; ;Lab3_SD.c: 107:     ByteToSend = (Checksum << 1) | 0x01;
+[e = _ByteToSend -> | << -> _Checksum `i -> 1 `i -> 1 `i `uc ]
 "108
-[; ;Lab3_SD.c: 108: }
+[; ;Lab3_SD.c: 108:     SPI_Write(ByteToSend);
+[e ( _SPI_Write (1 _ByteToSend ]
+"109
+[; ;Lab3_SD.c: 109: }
 [e :UE 1744 ]
 }
-"114
-[; ;Lab3_SD.c: 114: void SD_Read8bitResponse(void)
-[v _SD_Read8bitResponse `(v ~T0 @X0 1 ef ]
 "115
-[; ;Lab3_SD.c: 115: {
+[; ;Lab3_SD.c: 115: void SD_Read8bitResponse(void)
+[v _SD_Read8bitResponse `(v ~T0 @X0 1 ef ]
+"116
+[; ;Lab3_SD.c: 116: {
 {
 [e :U _SD_Read8bitResponse ]
 [f ]
-"116
-[; ;Lab3_SD.c: 116:     char readMessage = 0xFF;
+"117
+[; ;Lab3_SD.c: 117:     char readMessage = 0xFF;
 [v _readMessage `uc ~T0 @X0 1 a ]
 [e = _readMessage -> -> 255 `i `uc ]
-"120
-[; ;Lab3_SD.c: 120:     do {readMessage = SPI_Read();}
+"121
+[; ;Lab3_SD.c: 121:     do {readMessage = SPI_Read();}
 [e :U 1748 ]
 {
 [e = _readMessage ( _SPI_Read ..  ]
 }
 [e $ == -> _readMessage `i -> 255 `i 1748  ]
 [e :U 1747 ]
-"124
-[; ;Lab3_SD.c: 124:     GLBL_Resp8 = readMessage;
+"125
+[; ;Lab3_SD.c: 125:     GLBL_Resp8 = readMessage;
 [e = _GLBL_Resp8 _readMessage ]
-"127
-[; ;Lab3_SD.c: 127:     SPI_Read();
+"128
+[; ;Lab3_SD.c: 128:     SPI_Read();
 [e ( _SPI_Read ..  ]
-"129
-[; ;Lab3_SD.c: 129:     return;
-[e $UE 1745  ]
 "130
-[; ;Lab3_SD.c: 130: }
+[; ;Lab3_SD.c: 130:     return;
+[e $UE 1745  ]
+"131
+[; ;Lab3_SD.c: 131: }
 [e :UE 1745 ]
 }
-"135
-[; ;Lab3_SD.c: 135: _Bool SD_Check8bitResponse(char Byte)
-[v _SD_Check8bitResponse `(a ~T0 @X0 1 ef1`uc ]
 "136
-[; ;Lab3_SD.c: 136: {
+[; ;Lab3_SD.c: 136: _Bool SD_Check8bitResponse(char Byte)
+[v _SD_Check8bitResponse `(a ~T0 @X0 1 ef1`uc ]
+"137
+[; ;Lab3_SD.c: 137: {
 {
 [e :U _SD_Check8bitResponse ]
-"135
-[; ;Lab3_SD.c: 135: _Bool SD_Check8bitResponse(char Byte)
-[v _Byte `uc ~T0 @X0 1 r1 ]
 "136
-[; ;Lab3_SD.c: 136: {
-[f ]
+[; ;Lab3_SD.c: 136: _Bool SD_Check8bitResponse(char Byte)
+[v _Byte `uc ~T0 @X0 1 r1 ]
 "137
-[; ;Lab3_SD.c: 137:     _Bool match = 1;
+[; ;Lab3_SD.c: 137: {
+[f ]
+"138
+[; ;Lab3_SD.c: 138:     _Bool match = 1;
 [v _match `a ~T0 @X0 1 a ]
 [e = _match -> -> 1 `i `a ]
-"138
-[; ;Lab3_SD.c: 138:     if (Byte != GLBL_Resp8) match = 0;
+"139
+[; ;Lab3_SD.c: 139:     if (Byte != GLBL_Resp8) match = 0;
 [e $ ! != -> _Byte `i -> _GLBL_Resp8 `i 1750  ]
 [e = _match -> -> 0 `i `a ]
 [e :U 1750 ]
-"139
-[; ;Lab3_SD.c: 139:     return match;
+"140
+[; ;Lab3_SD.c: 140:     return match;
 [e ) _match ]
 [e $UE 1749  ]
-"140
-[; ;Lab3_SD.c: 140: }
+"141
+[; ;Lab3_SD.c: 141: }
 [e :UE 1749 ]
 }
-"145
-[; ;Lab3_SD.c: 145: void SD_Read40bitResponse(void)
-[v _SD_Read40bitResponse `(v ~T0 @X0 1 ef ]
 "146
-[; ;Lab3_SD.c: 146: {
+[; ;Lab3_SD.c: 146: void SD_Read40bitResponse(void)
+[v _SD_Read40bitResponse `(v ~T0 @X0 1 ef ]
+"147
+[; ;Lab3_SD.c: 147: {
 {
 [e :U _SD_Read40bitResponse ]
 [f ]
-"147
-[; ;Lab3_SD.c: 147:     char readMessage = 0xFF;
+"148
+[; ;Lab3_SD.c: 148:     char readMessage = 0xFF;
 [v _readMessage `uc ~T0 @X0 1 a ]
 [e = _readMessage -> -> 255 `i `uc ]
-"151
-[; ;Lab3_SD.c: 151:     do {readMessage = SPI_Read();}
+"152
+[; ;Lab3_SD.c: 152:     do {readMessage = SPI_Read();}
 [e :U 1754 ]
 {
 [e = _readMessage ( _SPI_Read ..  ]
 }
 [e $ == -> _readMessage `i -> 255 `i 1754  ]
 [e :U 1753 ]
-"155
-[; ;Lab3_SD.c: 155:     GLBL_Resp40[0] = readMessage;
-[e = *U + &U _GLBL_Resp40 * -> -> -> 0 `i `ui `ux -> -> # *U &U _GLBL_Resp40 `ui `ux _readMessage ]
 "156
-[; ;Lab3_SD.c: 156:     GLBL_Resp40[1] = SPI_Read();
-[e = *U + &U _GLBL_Resp40 * -> -> -> 1 `i `ui `ux -> -> # *U &U _GLBL_Resp40 `ui `ux ( _SPI_Read ..  ]
+[; ;Lab3_SD.c: 156:     GLBL_Resp40[0] = readMessage;
+[e = *U + &U _GLBL_Resp40 * -> -> -> 0 `i `ui `ux -> -> # *U &U _GLBL_Resp40 `ui `ux _readMessage ]
 "157
-[; ;Lab3_SD.c: 157:     GLBL_Resp40[2] = SPI_Read();
-[e = *U + &U _GLBL_Resp40 * -> -> -> 2 `i `ui `ux -> -> # *U &U _GLBL_Resp40 `ui `ux ( _SPI_Read ..  ]
+[; ;Lab3_SD.c: 157:     GLBL_Resp40[1] = SPI_Read();
+[e = *U + &U _GLBL_Resp40 * -> -> -> 1 `i `ui `ux -> -> # *U &U _GLBL_Resp40 `ui `ux ( _SPI_Read ..  ]
 "158
-[; ;Lab3_SD.c: 158:     GLBL_Resp40[3] = SPI_Read();
-[e = *U + &U _GLBL_Resp40 * -> -> -> 3 `i `ui `ux -> -> # *U &U _GLBL_Resp40 `ui `ux ( _SPI_Read ..  ]
+[; ;Lab3_SD.c: 158:     GLBL_Resp40[2] = SPI_Read();
+[e = *U + &U _GLBL_Resp40 * -> -> -> 2 `i `ui `ux -> -> # *U &U _GLBL_Resp40 `ui `ux ( _SPI_Read ..  ]
 "159
-[; ;Lab3_SD.c: 159:     GLBL_Resp40[4] = SPI_Read();
+[; ;Lab3_SD.c: 159:     GLBL_Resp40[3] = SPI_Read();
+[e = *U + &U _GLBL_Resp40 * -> -> -> 3 `i `ui `ux -> -> # *U &U _GLBL_Resp40 `ui `ux ( _SPI_Read ..  ]
+"160
+[; ;Lab3_SD.c: 160:     GLBL_Resp40[4] = SPI_Read();
 [e = *U + &U _GLBL_Resp40 * -> -> -> 4 `i `ui `ux -> -> # *U &U _GLBL_Resp40 `ui `ux ( _SPI_Read ..  ]
-"162
-[; ;Lab3_SD.c: 162:     SPI_Read();
+"163
+[; ;Lab3_SD.c: 163:     SPI_Read();
 [e ( _SPI_Read ..  ]
-"164
-[; ;Lab3_SD.c: 164:     return;
-[e $UE 1751  ]
 "165
-[; ;Lab3_SD.c: 165: }
+[; ;Lab3_SD.c: 165:     return;
+[e $UE 1751  ]
+"166
+[; ;Lab3_SD.c: 166: }
 [e :UE 1751 ]
 }
-"171
-[; ;Lab3_SD.c: 171: _Bool SD_Check40bitResponse(char Byte4, char Byte3, char Byte2, char Byte1, char Byte0)
-[v _SD_Check40bitResponse `(a ~T0 @X0 1 ef5`uc`uc`uc`uc`uc ]
 "172
-[; ;Lab3_SD.c: 172: {
+[; ;Lab3_SD.c: 172: _Bool SD_Check40bitResponse(char Byte4, char Byte3, char Byte2, char Byte1, char Byte0)
+[v _SD_Check40bitResponse `(a ~T0 @X0 1 ef5`uc`uc`uc`uc`uc ]
+"173
+[; ;Lab3_SD.c: 173: {
 {
 [e :U _SD_Check40bitResponse ]
-"171
-[; ;Lab3_SD.c: 171: _Bool SD_Check40bitResponse(char Byte4, char Byte3, char Byte2, char Byte1, char Byte0)
+"172
+[; ;Lab3_SD.c: 172: _Bool SD_Check40bitResponse(char Byte4, char Byte3, char Byte2, char Byte1, char Byte0)
 [v _Byte4 `uc ~T0 @X0 1 r1 ]
 [v _Byte3 `uc ~T0 @X0 1 r2 ]
 [v _Byte2 `uc ~T0 @X0 1 r3 ]
 [v _Byte1 `uc ~T0 @X0 1 r4 ]
 [v _Byte0 `uc ~T0 @X0 1 r5 ]
-"172
-[; ;Lab3_SD.c: 172: {
-[f ]
 "173
-[; ;Lab3_SD.c: 173:     _Bool match = 1;
+[; ;Lab3_SD.c: 173: {
+[f ]
+"174
+[; ;Lab3_SD.c: 174:     _Bool match = 1;
 [v _match `a ~T0 @X0 1 a ]
 [e = _match -> -> 1 `i `a ]
-"174
-[; ;Lab3_SD.c: 174:     if (Byte4 != GLBL_Resp40[0]) match = 0;
+"175
+[; ;Lab3_SD.c: 175:     if (Byte4 != GLBL_Resp40[0]) match = 0;
 [e $ ! != -> _Byte4 `i -> *U + &U _GLBL_Resp40 * -> -> -> 0 `i `ui `ux -> -> # *U &U _GLBL_Resp40 `ui `ux `i 1756  ]
 [e = _match -> -> 0 `i `a ]
 [e :U 1756 ]
-"175
-[; ;Lab3_SD.c: 175:     if (Byte3 != GLBL_Resp40[1]) match = 0;
+"176
+[; ;Lab3_SD.c: 176:     if (Byte3 != GLBL_Resp40[1]) match = 0;
 [e $ ! != -> _Byte3 `i -> *U + &U _GLBL_Resp40 * -> -> -> 1 `i `ui `ux -> -> # *U &U _GLBL_Resp40 `ui `ux `i 1757  ]
 [e = _match -> -> 0 `i `a ]
 [e :U 1757 ]
-"176
-[; ;Lab3_SD.c: 176:     if (Byte2 != GLBL_Resp40[2]) match = 0;
+"177
+[; ;Lab3_SD.c: 177:     if (Byte2 != GLBL_Resp40[2]) match = 0;
 [e $ ! != -> _Byte2 `i -> *U + &U _GLBL_Resp40 * -> -> -> 2 `i `ui `ux -> -> # *U &U _GLBL_Resp40 `ui `ux `i 1758  ]
 [e = _match -> -> 0 `i `a ]
 [e :U 1758 ]
-"177
-[; ;Lab3_SD.c: 177:     if (Byte1 != GLBL_Resp40[3]) match = 0;
+"178
+[; ;Lab3_SD.c: 178:     if (Byte1 != GLBL_Resp40[3]) match = 0;
 [e $ ! != -> _Byte1 `i -> *U + &U _GLBL_Resp40 * -> -> -> 3 `i `ui `ux -> -> # *U &U _GLBL_Resp40 `ui `ux `i 1759  ]
 [e = _match -> -> 0 `i `a ]
 [e :U 1759 ]
-"178
-[; ;Lab3_SD.c: 178:     if (Byte0 != GLBL_Resp40[4]) match = 0;
+"179
+[; ;Lab3_SD.c: 179:     if (Byte0 != GLBL_Resp40[4]) match = 0;
 [e $ ! != -> _Byte0 `i -> *U + &U _GLBL_Resp40 * -> -> -> 4 `i `ui `ux -> -> # *U &U _GLBL_Resp40 `ui `ux `i 1760  ]
 [e = _match -> -> 0 `i `a ]
 [e :U 1760 ]
-"179
-[; ;Lab3_SD.c: 179:     return match;
+"180
+[; ;Lab3_SD.c: 180:     return match;
 [e ) _match ]
 [e $UE 1755  ]
-"180
-[; ;Lab3_SD.c: 180: }
+"181
+[; ;Lab3_SD.c: 181: }
 [e :UE 1755 ]
 }
-"188
-[; ;Lab3_SD.c: 188: _Bool SD_WriteBlock(char ADDR3, char ADDR2, char ADDR1, char ADDR0)
-[v _SD_WriteBlock `(a ~T0 @X0 1 ef4`uc`uc`uc`uc ]
 "189
-[; ;Lab3_SD.c: 189: {
+[; ;Lab3_SD.c: 189: _Bool SD_WriteBlock(char ADDR3, char ADDR2, char ADDR1, char ADDR0)
+[v _SD_WriteBlock `(a ~T0 @X0 1 ef4`uc`uc`uc`uc ]
+"190
+[; ;Lab3_SD.c: 190: {
 {
 [e :U _SD_WriteBlock ]
-"188
-[; ;Lab3_SD.c: 188: _Bool SD_WriteBlock(char ADDR3, char ADDR2, char ADDR1, char ADDR0)
+"189
+[; ;Lab3_SD.c: 189: _Bool SD_WriteBlock(char ADDR3, char ADDR2, char ADDR1, char ADDR0)
 [v _ADDR3 `uc ~T0 @X0 1 r1 ]
 [v _ADDR2 `uc ~T0 @X0 1 r2 ]
 [v _ADDR1 `uc ~T0 @X0 1 r3 ]
 [v _ADDR0 `uc ~T0 @X0 1 r4 ]
-"189
-[; ;Lab3_SD.c: 189: {
+"190
+[; ;Lab3_SD.c: 190: {
 [f ]
-"191
-[; ;Lab3_SD.c: 191:     SD_SendCommand(24, ADDR3, ADDR2, ADDR1, ADDR0);
+"192
+[; ;Lab3_SD.c: 192:     SD_SendCommand(24, ADDR3, ADDR2, ADDR1, ADDR0);
 [e ( _SD_SendCommand (4 , , , , -> -> 24 `i `uc _ADDR3 _ADDR2 _ADDR1 _ADDR0 ]
-"194
-[; ;Lab3_SD.c: 194:     SD_Read8bitResponse();
-[e ( _SD_Read8bitResponse ..  ]
 "195
-[; ;Lab3_SD.c: 195:     if(SD_Check8bitResponse(0x00) == 0) return 0;
+[; ;Lab3_SD.c: 195:     SD_Read8bitResponse();
+[e ( _SD_Read8bitResponse ..  ]
+"196
+[; ;Lab3_SD.c: 196:     if(SD_Check8bitResponse(0x00) == 0) return 0;
 [e $ ! == -> ( _SD_Check8bitResponse (1 -> -> 0 `i `uc `i -> 0 `i 1762  ]
 [e ) -> -> 0 `i `a ]
 [e $UE 1761  ]
 [e :U 1762 ]
-"198
-[; ;Lab3_SD.c: 198:     SPI_Write(0xFF);
-[e ( _SPI_Write (1 -> -> 255 `i `uc ]
 "199
 [; ;Lab3_SD.c: 199:     SPI_Write(0xFF);
 [e ( _SPI_Write (1 -> -> 255 `i `uc ]
-"202
-[; ;Lab3_SD.c: 202:     SPI_Write(0xFE);
+"200
+[; ;Lab3_SD.c: 200:     SPI_Write(0xFF);
+[e ( _SPI_Write (1 -> -> 255 `i `uc ]
+"203
+[; ;Lab3_SD.c: 203:     SPI_Write(0xFE);
 [e ( _SPI_Write (1 -> -> 254 `i `uc ]
-"205
-[; ;Lab3_SD.c: 205:     for(int i = 0; i < 512; i++)
+"206
+[; ;Lab3_SD.c: 206:     for(int i = 0; i < 512; i++)
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
 [e $ < _i -> 512 `i 1763  ]
 [e $U 1764  ]
 [e :U 1763 ]
-"206
-[; ;Lab3_SD.c: 206:     {
-{
 "207
-[; ;Lab3_SD.c: 207:         SPI_Write(GLBL_WriteBuffer[i]);
-[e ( _SPI_Write (1 *U + &U _GLBL_WriteBuffer * -> -> _i `ui `ux -> -> # *U &U _GLBL_WriteBuffer `ui `ux ]
+[; ;Lab3_SD.c: 207:     {
+{
 "208
-[; ;Lab3_SD.c: 208:     }
+[; ;Lab3_SD.c: 208:         SPI_Write(GLBL_WriteBuffer[i]);
+[e ( _SPI_Write (1 *U + &U _GLBL_WriteBuffer * -> -> _i `ui `ux -> -> # *U &U _GLBL_WriteBuffer `ui `ux ]
+"209
+[; ;Lab3_SD.c: 209:     }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 512 `i 1763  ]
 [e :U 1764 ]
 }
-"211
-[; ;Lab3_SD.c: 211:     SD_Read8bitResponse();
+"212
+[; ;Lab3_SD.c: 212:     SD_Read8bitResponse();
 [e ( _SD_Read8bitResponse ..  ]
-"214
-[; ;Lab3_SD.c: 214:     if(SD_Check8bitResponse(0xE5) == 0) return 0;
+"215
+[; ;Lab3_SD.c: 215:     if(SD_Check8bitResponse(0xE5) == 0) return 0;
 [e $ ! == -> ( _SD_Check8bitResponse (1 -> -> 229 `i `uc `i -> 0 `i 1766  ]
 [e ) -> -> 0 `i `a ]
 [e $UE 1761  ]
 [e :U 1766 ]
-"217
-[; ;Lab3_SD.c: 217:     return 1;
+"218
+[; ;Lab3_SD.c: 218:     return 1;
 [e ) -> -> 1 `i `a ]
 [e $UE 1761  ]
-"218
-[; ;Lab3_SD.c: 218: }
+"219
+[; ;Lab3_SD.c: 219: }
 [e :UE 1761 ]
 }
-"227
-[; ;Lab3_SD.c: 227: _Bool SD_ReadBlock(char ADDR3, char ADDR2, char ADDR1, char ADDR0)
-[v _SD_ReadBlock `(a ~T0 @X0 1 ef4`uc`uc`uc`uc ]
 "228
-[; ;Lab3_SD.c: 228: {
+[; ;Lab3_SD.c: 228: _Bool SD_ReadBlock(char ADDR3, char ADDR2, char ADDR1, char ADDR0)
+[v _SD_ReadBlock `(a ~T0 @X0 1 ef4`uc`uc`uc`uc ]
+"229
+[; ;Lab3_SD.c: 229: {
 {
 [e :U _SD_ReadBlock ]
-"227
-[; ;Lab3_SD.c: 227: _Bool SD_ReadBlock(char ADDR3, char ADDR2, char ADDR1, char ADDR0)
+"228
+[; ;Lab3_SD.c: 228: _Bool SD_ReadBlock(char ADDR3, char ADDR2, char ADDR1, char ADDR0)
 [v _ADDR3 `uc ~T0 @X0 1 r1 ]
 [v _ADDR2 `uc ~T0 @X0 1 r2 ]
 [v _ADDR1 `uc ~T0 @X0 1 r3 ]
 [v _ADDR0 `uc ~T0 @X0 1 r4 ]
-"228
-[; ;Lab3_SD.c: 228: {
-[f ]
 "229
-[; ;Lab3_SD.c: 229:     char readMessage = 0xFF;
+[; ;Lab3_SD.c: 229: {
+[f ]
+"230
+[; ;Lab3_SD.c: 230:     char readMessage = 0xFF;
 [v _readMessage `uc ~T0 @X0 1 a ]
 [e = _readMessage -> -> 255 `i `uc ]
-"233
-[; ;Lab3_SD.c: 233:     SD_SendCommand(17, ADDR3, ADDR2, ADDR1, ADDR0);
+"234
+[; ;Lab3_SD.c: 234:     SD_SendCommand(17, ADDR3, ADDR2, ADDR1, ADDR0);
 [e ( _SD_SendCommand (4 , , , , -> -> 17 `i `uc _ADDR3 _ADDR2 _ADDR1 _ADDR0 ]
-"236
-[; ;Lab3_SD.c: 236:     SD_Read8bitResponse();
+"237
+[; ;Lab3_SD.c: 237:     SD_Read8bitResponse();
 [e ( _SD_Read8bitResponse ..  ]
-"239
-[; ;Lab3_SD.c: 239:     if(SD_Check8bitResponse(0x00) == 0) return 0;
+"240
+[; ;Lab3_SD.c: 240:     if(SD_Check8bitResponse(0x00) == 0) return 0;
 [e $ ! == -> ( _SD_Check8bitResponse (1 -> -> 0 `i `uc `i -> 0 `i 1768  ]
 [e ) -> -> 0 `i `a ]
 [e $UE 1767  ]
 [e :U 1768 ]
-"243
-[; ;Lab3_SD.c: 243:     do {readMessage = SPI_Read();}
+"244
+[; ;Lab3_SD.c: 244:     do {readMessage = SPI_Read();}
 [e :U 1771 ]
 {
 [e = _readMessage ( _SPI_Read ..  ]
 }
 [e $ == -> _readMessage `i -> 255 `i 1771  ]
 [e :U 1770 ]
-"247
-[; ;Lab3_SD.c: 247:     if (readMessage != 0xFE) return 0;
+"248
+[; ;Lab3_SD.c: 248:     if (readMessage != 0xFE) return 0;
 [e $ ! != -> _readMessage `i -> 254 `i 1772  ]
 [e ) -> -> 0 `i `a ]
 [e $UE 1767  ]
 [e :U 1772 ]
-"250
-[; ;Lab3_SD.c: 250:     for(int i = 0; i < 512; i++)
+"251
+[; ;Lab3_SD.c: 251:     for(int i = 0; i < 512; i++)
 {
 [v _i `i ~T0 @X0 1 a ]
 [e = _i -> 0 `i ]
 [e $ < _i -> 512 `i 1773  ]
 [e $U 1774  ]
 [e :U 1773 ]
-"251
-[; ;Lab3_SD.c: 251:     {
-{
 "252
-[; ;Lab3_SD.c: 252:         GLBL_ReadBuffer[i] = SPI_Read();
-[e = *U + &U _GLBL_ReadBuffer * -> -> _i `ui `ux -> -> # *U &U _GLBL_ReadBuffer `ui `ux ( _SPI_Read ..  ]
+[; ;Lab3_SD.c: 252:     {
+{
 "253
-[; ;Lab3_SD.c: 253:     }
+[; ;Lab3_SD.c: 253:         GLBL_ReadBuffer[i] = SPI_Read();
+[e = *U + &U _GLBL_ReadBuffer * -> -> _i `ui `ux -> -> # *U &U _GLBL_ReadBuffer `ui `ux ( _SPI_Read ..  ]
+"254
+[; ;Lab3_SD.c: 254:     }
 }
 [e ++ _i -> 1 `i ]
 [e $ < _i -> 512 `i 1773  ]
 [e :U 1774 ]
 }
-"256
-[; ;Lab3_SD.c: 256:     SPI_Read();
-[e ( _SPI_Read ..  ]
 "257
 [; ;Lab3_SD.c: 257:     SPI_Read();
 [e ( _SPI_Read ..  ]
-"259
-[; ;Lab3_SD.c: 259:     SPI_Read();
+"258
+[; ;Lab3_SD.c: 258:     SPI_Read();
 [e ( _SPI_Read ..  ]
-"262
-[; ;Lab3_SD.c: 262:     return 1;
+"260
+[; ;Lab3_SD.c: 260:     SPI_Read();
+[e ( _SPI_Read ..  ]
+"263
+[; ;Lab3_SD.c: 263:     return 1;
 [e ) -> -> 1 `i `a ]
 [e $UE 1767  ]
-"263
-[; ;Lab3_SD.c: 263: }
+"264
+[; ;Lab3_SD.c: 264: }
 [e :UE 1767 ]
 }

@@ -19225,21 +19225,25 @@ extern volatile __bit nTO __attribute__((address(0x1C)));
 
 
 extern volatile __bit nWPUEN __attribute__((address(0x4BF)));
-# 1 "LCD_Drivers.c" 2
-
+# 2 "LCD_Drivers.c" 2
 # 1 "./LCD_Drivers.h" 1
-# 12 "./LCD_Drivers.h"
+# 21 "./LCD_Drivers.h"
 void LCD_Init(void);
 void SD_Select(void);
 
 void LCD_Select(void);
-void LCD_ClearScreen(void);
-void LCD_ReturnHome(void);
-void LCD_ShiftCursorLeft(void);
-void LCD_ShiftCursorRight(void);
-# 2 "LCD_Drivers.c" 2
+void LCD_Write(char c);
+void LCD_Print(char* str);
+# 3 "LCD_Drivers.c" 2
+# 1 "./Lab3_Config.h" 1
 
 
+
+
+#pragma config FOSC = INTOSC
+#pragma config WDTE = OFF
+#pragma config PLLEN = ON
+# 4 "LCD_Drivers.c" 2
 # 1 "./Lab3_SPI.h" 1
 
 
@@ -19419,91 +19423,44 @@ void SPI_Write(char Data_8bit);
 
 
 char SPI_Read(void);
-# 4 "LCD_Drivers.c" 2
-
-
-void LCD_Init(void)
-{
-
-    PORTCbits.RC7 = 1;
-    PORTCbits.RC6 = 1;
-    SSP1CON1bits.WCOL = 0;
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-
-    PORTCbits.RC6 = 0;
-    SSP1CON1bits.WCOL = 0;
+# 5 "LCD_Drivers.c" 2
 
 
 
+void LCD_Init(void) {
 
-
-    for(int i=0; i<10000; i++);
-
+    LCD_Select();
     TRISC5 = 0;
+    _delay((unsigned long)((50)*(32000000/4000.0)));
+
     PORTCbits.RC5 = 0;
-    SPI_Write(0b00111000);
-    for(int i=0; i<10000; i++);
+    LCD_Write(0b00111000);
 
+    LCD_Write(0b00001111);
 
-    SPI_Write(0b00001111);
-    for(int i=0; i<10000; i++);
+    LCD_Write(0b00000001);
+    _delay((unsigned long)((15)*(32000000/4000.0)));
 
-    SPI_Write(0b1);
-    for(int i =0; i<10000; i++);
-    SPI_Write(0b00000110);
-    for(int i =0; i<10000; i++);
-    PORTCbits.RC5 = 1;
-    for(int i =0; i<10000; i++);
-
-    SPI_Write('A');
+    LCD_Write(0b00000110);
+# 77 "LCD_Drivers.c"
 }
 
-void SD_Select(void)
-{
+void SD_Select(void) {
     PORTCbits.RC7 = 0;
     PORTCbits.RC6 = 1;
-        SSP1CON1bits.WCOL = 0;
 }
-void LCD_Select(void)
-{
+void LCD_Select(void) {
 
     PORTCbits.RC7 = 1;
     PORTCbits.RC6 = 0;
-    SSP1CON1bits.WCOL = 0;
 
 }
-void LCD_ClearScreen(void)
-{
-    LCD_Select();
-    SPI_Write(1);
 
+void LCD_Write(char c) {
+    SSP1BUF = c;
+    _delay((unsigned long)((1)*(32000000/4000.0)));
 }
-void LCD_ReturnHome(void)
-{
-    LCD_Select();
-    SPI_Write(0x2);
 
-}
-void LCD_ShiftCursorLeft(void)
-{
-
-    LCD_Select();
-    SPI_Write(0x10);
-
-
-}
-void LCD_ShiftCursorRight(void)
-{
-    LCD_Select();
-    SPI_Write(0x14);
-
+void LCD_Print(char* str) {
+    while (*str) LCD_Write(*(str++));
 }

@@ -1,4 +1,14 @@
 Version 4.0 HI-TECH Software Intermediate Code
+"24 ./LCD_Drivers.h
+[; ;./LCD_Drivers.h: 24: void LCD_Select(void);
+[v _LCD_Select `(v ~T0 @X0 0 ef ]
+"44241 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 44241: extern volatile __bit TRISC5 __attribute__((address(0x475)));
+[v _TRISC5 `Vb ~T0 @X0 0 e@1141 ]
+[v F11981 `(v ~T0 @X0 1 tf1`ul ]
+"92 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic.h
+[v __delay `JF11981 ~T0 @X0 0 e ]
+[p i __delay ]
 "559 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 559:     struct {
 [s S33 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -10,27 +20,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "570
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 570: extern volatile PORTCbits_t PORTCbits __attribute__((address(0x00E)));
 [v _PORTCbits `VS32 ~T0 @X0 0 e@14 ]
-"6019
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 6019:     struct {
-[s S286 :4 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S286 . SSPM CKP SSPEN SSPOV WCOL ]
-"6026
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 6026:     struct {
-[s S287 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S287 . SSPM0 SSPM1 SSPM2 SSPM3 ]
-"6018
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 6018: typedef union {
-[u S285 `S286 1 `S287 1 ]
-[n S285 . . . ]
-"6033
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 6033: extern volatile SSP1CON1bits_t SSP1CON1bits __attribute__((address(0x215)));
-[v _SSP1CON1bits `VS285 ~T0 @X0 0 e@533 ]
-"20 ./Lab3_SPI.h
-[; ;./Lab3_SPI.h: 20: void SPI_Write(char Data_8bit);
-[v _SPI_Write `(v ~T0 @X0 0 ef1`uc ]
-"44241 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 44241: extern volatile __bit TRISC5 __attribute__((address(0x475)));
-[v _TRISC5 `Vb ~T0 @X0 0 e@1141 ]
+"25 ./LCD_Drivers.h
+[; ;./LCD_Drivers.h: 25: void LCD_Write(char c);
+[v _LCD_Write `(v ~T0 @X0 0 ef1`uc ]
+"5116 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 5116: extern volatile unsigned char SSP1BUF __attribute__((address(0x211)));
+[v _SSP1BUF `Vuc ~T0 @X0 0 e@529 ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 54: __asm("INDF0 equ 00h");
 [; <" INDF0 equ 00h ;# ">
@@ -1717,270 +1712,114 @@ Version 4.0 HI-TECH Software Intermediate Code
 "37740
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 37740: __asm("TOSH equ 0FEFh");
 [; <" TOSH equ 0FEFh ;# ">
-"6 LCD_Drivers.c
-[; ;LCD_Drivers.c: 6: void LCD_Init(void)
-[v _LCD_Init `(v ~T0 @X0 1 ef ]
+"5 ./Lab3_Config.h
+[p x FOSC = INTOSC ]
+"6
+[p x WDTE = OFF ]
 "7
-[; ;LCD_Drivers.c: 7: {
+[p x PLLEN = ON ]
+"8 LCD_Drivers.c
+[; ;LCD_Drivers.c: 8: void LCD_Init(void) {
+[v _LCD_Init `(v ~T0 @X0 1 ef ]
 {
 [e :U _LCD_Init ]
 [f ]
-"9
-[; ;LCD_Drivers.c: 9:     PORTCbits.RC7 = 1;
-[e = . . _PORTCbits 0 7 -> -> 1 `i `uc ]
 "10
-[; ;LCD_Drivers.c: 10:     PORTCbits.RC6 = 1;
-[e = . . _PORTCbits 0 6 -> -> 1 `i `uc ]
+[; ;LCD_Drivers.c: 10:     LCD_Select();
+[e ( _LCD_Select ..  ]
 "11
-[; ;LCD_Drivers.c: 11:     SSP1CON1bits.WCOL = 0;
-[e = . . _SSP1CON1bits 0 4 -> -> 0 `i `uc ]
-"12
-[; ;LCD_Drivers.c: 12:     SPI_Write(0xFF);
-[e ( _SPI_Write (1 -> -> 255 `i `uc ]
-"13
-[; ;LCD_Drivers.c: 13:     SPI_Write(0xFF);
-[e ( _SPI_Write (1 -> -> 255 `i `uc ]
-"14
-[; ;LCD_Drivers.c: 14:     SPI_Write(0xFF);
-[e ( _SPI_Write (1 -> -> 255 `i `uc ]
-"15
-[; ;LCD_Drivers.c: 15:     SPI_Write(0xFF);
-[e ( _SPI_Write (1 -> -> 255 `i `uc ]
-"16
-[; ;LCD_Drivers.c: 16:     SPI_Write(0xFF);
-[e ( _SPI_Write (1 -> -> 255 `i `uc ]
-"17
-[; ;LCD_Drivers.c: 17:     SPI_Write(0xFF);
-[e ( _SPI_Write (1 -> -> 255 `i `uc ]
-"18
-[; ;LCD_Drivers.c: 18:     SPI_Write(0xFF);
-[e ( _SPI_Write (1 -> -> 255 `i `uc ]
-"19
-[; ;LCD_Drivers.c: 19:     SPI_Write(0xFF);
-[e ( _SPI_Write (1 -> -> 255 `i `uc ]
-"20
-[; ;LCD_Drivers.c: 20:     SPI_Write(0xFF);
-[e ( _SPI_Write (1 -> -> 255 `i `uc ]
-"21
-[; ;LCD_Drivers.c: 21:     SPI_Write(0xFF);
-[e ( _SPI_Write (1 -> -> 255 `i `uc ]
-"23
-[; ;LCD_Drivers.c: 23:     PORTCbits.RC6 = 0;
-[e = . . _PORTCbits 0 6 -> -> 0 `i `uc ]
-"24
-[; ;LCD_Drivers.c: 24:     SSP1CON1bits.WCOL = 0;
-[e = . . _SSP1CON1bits 0 4 -> -> 0 `i `uc ]
-"30
-[; ;LCD_Drivers.c: 30:     for(int i=0; i<10000; i++);
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $ < _i -> 10000 `i 1732  ]
-[e $U 1733  ]
-[e :U 1732 ]
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 10000 `i 1732  ]
-[e :U 1733 ]
-}
-"32
-[; ;LCD_Drivers.c: 32:     TRISC5 = 0;
+[; ;LCD_Drivers.c: 11:     TRISC5 = 0;
 [e = _TRISC5 -> -> 0 `i `b ]
-"33
-[; ;LCD_Drivers.c: 33:     PORTCbits.RC5 = 0;
+"12
+[; ;LCD_Drivers.c: 12:     _delay((unsigned long)((50)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"14
+[; ;LCD_Drivers.c: 14:     PORTCbits.RC5 = 0;
 [e = . . _PORTCbits 0 5 -> -> 0 `i `uc ]
-"34
-[; ;LCD_Drivers.c: 34:     SPI_Write(0b00111000);
-[e ( _SPI_Write (1 -> -> 56 `i `uc ]
-"35
-[; ;LCD_Drivers.c: 35:     for(int i=0; i<10000; i++);
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $ < _i -> 10000 `i 1735  ]
-[e $U 1736  ]
-[e :U 1735 ]
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 10000 `i 1735  ]
-[e :U 1736 ]
-}
-"38
-[; ;LCD_Drivers.c: 38:     SPI_Write(0b00001111);
-[e ( _SPI_Write (1 -> -> 15 `i `uc ]
-"39
-[; ;LCD_Drivers.c: 39:     for(int i=0; i<10000; i++);
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $ < _i -> 10000 `i 1738  ]
-[e $U 1739  ]
-[e :U 1738 ]
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 10000 `i 1738  ]
-[e :U 1739 ]
-}
-"41
-[; ;LCD_Drivers.c: 41:     SPI_Write(0b1);
-[e ( _SPI_Write (1 -> -> 1 `i `uc ]
-"42
-[; ;LCD_Drivers.c: 42:     for(int i =0; i<10000; i++);
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $ < _i -> 10000 `i 1741  ]
-[e $U 1742  ]
-[e :U 1741 ]
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 10000 `i 1741  ]
-[e :U 1742 ]
-}
-"43
-[; ;LCD_Drivers.c: 43:     SPI_Write(0b00000110);
-[e ( _SPI_Write (1 -> -> 6 `i `uc ]
-"44
-[; ;LCD_Drivers.c: 44:     for(int i =0; i<10000; i++);
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $ < _i -> 10000 `i 1744  ]
-[e $U 1745  ]
-[e :U 1744 ]
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 10000 `i 1744  ]
-[e :U 1745 ]
-}
-"45
-[; ;LCD_Drivers.c: 45:     PORTCbits.RC5 = 1;
-[e = . . _PORTCbits 0 5 -> -> 1 `i `uc ]
-"46
-[; ;LCD_Drivers.c: 46:     for(int i =0; i<10000; i++);
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $ < _i -> 10000 `i 1747  ]
-[e $U 1748  ]
-[e :U 1747 ]
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 10000 `i 1747  ]
-[e :U 1748 ]
-}
-"48
-[; ;LCD_Drivers.c: 48:     SPI_Write('A');
-[e ( _SPI_Write (1 -> -> 65 `ui `uc ]
-"49
-[; ;LCD_Drivers.c: 49: }
+"15
+[; ;LCD_Drivers.c: 15:     LCD_Write(0b00111000);
+[e ( _LCD_Write (1 -> -> 56 `i `uc ]
+"17
+[; ;LCD_Drivers.c: 17:     LCD_Write(0b00001111);
+[e ( _LCD_Write (1 -> -> 15 `i `uc ]
+"19
+[; ;LCD_Drivers.c: 19:     LCD_Write(0b00000001);
+[e ( _LCD_Write (1 -> -> 1 `i `uc ]
+"20
+[; ;LCD_Drivers.c: 20:     _delay((unsigned long)((15)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 15 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"22
+[; ;LCD_Drivers.c: 22:     LCD_Write(0b00000110);
+[e ( _LCD_Write (1 -> -> 6 `i `uc ]
+"77
+[; ;LCD_Drivers.c: 77: }
 [e :UE 1731 ]
 }
-"51
-[; ;LCD_Drivers.c: 51: void SD_Select(void)
+"79
+[; ;LCD_Drivers.c: 79: void SD_Select(void) {
 [v _SD_Select `(v ~T0 @X0 1 ef ]
-"52
-[; ;LCD_Drivers.c: 52: {
 {
 [e :U _SD_Select ]
 [f ]
-"53
-[; ;LCD_Drivers.c: 53:     PORTCbits.RC7 = 0;
+"80
+[; ;LCD_Drivers.c: 80:     PORTCbits.RC7 = 0;
 [e = . . _PORTCbits 0 7 -> -> 0 `i `uc ]
-"54
-[; ;LCD_Drivers.c: 54:     PORTCbits.RC6 = 1;
+"81
+[; ;LCD_Drivers.c: 81:     PORTCbits.RC6 = 1;
 [e = . . _PORTCbits 0 6 -> -> 1 `i `uc ]
-"55
-[; ;LCD_Drivers.c: 55:         SSP1CON1bits.WCOL = 0;
-[e = . . _SSP1CON1bits 0 4 -> -> 0 `i `uc ]
-"56
-[; ;LCD_Drivers.c: 56: }
-[e :UE 1750 ]
+"82
+[; ;LCD_Drivers.c: 82: }
+[e :UE 1732 ]
 }
-"57
-[; ;LCD_Drivers.c: 57: void LCD_Select(void)
+"83
+[; ;LCD_Drivers.c: 83: void LCD_Select(void) {
 [v _LCD_Select `(v ~T0 @X0 1 ef ]
-"58
-[; ;LCD_Drivers.c: 58: {
 {
 [e :U _LCD_Select ]
 [f ]
-"60
-[; ;LCD_Drivers.c: 60:     PORTCbits.RC7 = 1;
-[e = . . _PORTCbits 0 7 -> -> 1 `i `uc ]
-"61
-[; ;LCD_Drivers.c: 61:     PORTCbits.RC6 = 0;
-[e = . . _PORTCbits 0 6 -> -> 0 `i `uc ]
-"62
-[; ;LCD_Drivers.c: 62:     SSP1CON1bits.WCOL = 0;
-[e = . . _SSP1CON1bits 0 4 -> -> 0 `i `uc ]
-"64
-[; ;LCD_Drivers.c: 64: }
-[e :UE 1751 ]
-}
-"65
-[; ;LCD_Drivers.c: 65: void LCD_ClearScreen(void)
-[v _LCD_ClearScreen `(v ~T0 @X0 1 ef ]
-"66
-[; ;LCD_Drivers.c: 66: {
-{
-[e :U _LCD_ClearScreen ]
-[f ]
-"67
-[; ;LCD_Drivers.c: 67:     LCD_Select();
-[e ( _LCD_Select ..  ]
-"68
-[; ;LCD_Drivers.c: 68:     SPI_Write(1);
-[e ( _SPI_Write (1 -> -> 1 `i `uc ]
-"70
-[; ;LCD_Drivers.c: 70: }
-[e :UE 1752 ]
-}
-"71
-[; ;LCD_Drivers.c: 71: void LCD_ReturnHome(void)
-[v _LCD_ReturnHome `(v ~T0 @X0 1 ef ]
-"72
-[; ;LCD_Drivers.c: 72: {
-{
-[e :U _LCD_ReturnHome ]
-[f ]
-"73
-[; ;LCD_Drivers.c: 73:     LCD_Select();
-[e ( _LCD_Select ..  ]
-"74
-[; ;LCD_Drivers.c: 74:     SPI_Write(0x2);
-[e ( _SPI_Write (1 -> -> 2 `i `uc ]
-"76
-[; ;LCD_Drivers.c: 76: }
-[e :UE 1753 ]
-}
-"77
-[; ;LCD_Drivers.c: 77: void LCD_ShiftCursorLeft(void)
-[v _LCD_ShiftCursorLeft `(v ~T0 @X0 1 ef ]
-"78
-[; ;LCD_Drivers.c: 78: {
-{
-[e :U _LCD_ShiftCursorLeft ]
-[f ]
-"80
-[; ;LCD_Drivers.c: 80:     LCD_Select();
-[e ( _LCD_Select ..  ]
-"81
-[; ;LCD_Drivers.c: 81:     SPI_Write(0x10);
-[e ( _SPI_Write (1 -> -> 16 `i `uc ]
-"84
-[; ;LCD_Drivers.c: 84: }
-[e :UE 1754 ]
-}
 "85
-[; ;LCD_Drivers.c: 85: void LCD_ShiftCursorRight(void)
-[v _LCD_ShiftCursorRight `(v ~T0 @X0 1 ef ]
+[; ;LCD_Drivers.c: 85:     PORTCbits.RC7 = 1;
+[e = . . _PORTCbits 0 7 -> -> 1 `i `uc ]
 "86
-[; ;LCD_Drivers.c: 86: {
-{
-[e :U _LCD_ShiftCursorRight ]
-[f ]
-"87
-[; ;LCD_Drivers.c: 87:     LCD_Select();
-[e ( _LCD_Select ..  ]
+[; ;LCD_Drivers.c: 86:     PORTCbits.RC6 = 0;
+[e = . . _PORTCbits 0 6 -> -> 0 `i `uc ]
 "88
-[; ;LCD_Drivers.c: 88:     SPI_Write(0x14);
-[e ( _SPI_Write (1 -> -> 20 `i `uc ]
+[; ;LCD_Drivers.c: 88: }
+[e :UE 1733 ]
+}
 "90
-[; ;LCD_Drivers.c: 90: }
-[e :UE 1755 ]
+[; ;LCD_Drivers.c: 90: void LCD_Write(char c) {
+[v _LCD_Write `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _LCD_Write ]
+[v _c `uc ~T0 @X0 1 r1 ]
+[f ]
+"91
+[; ;LCD_Drivers.c: 91:     SSP1BUF = c;
+[e = _SSP1BUF -> _c `uc ]
+"92
+[; ;LCD_Drivers.c: 92:     _delay((unsigned long)((1)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"93
+[; ;LCD_Drivers.c: 93: }
+[e :UE 1734 ]
+}
+"95
+[; ;LCD_Drivers.c: 95: void LCD_Print(char* str) {
+[v _LCD_Print `(v ~T0 @X0 1 ef1`*uc ]
+{
+[e :U _LCD_Print ]
+[v _str `*uc ~T0 @X0 1 r1 ]
+[f ]
+"96
+[; ;LCD_Drivers.c: 96:     while (*str) LCD_Write(*(str++));
+[e $U 1736  ]
+[e :U 1737 ]
+[e ( _LCD_Write (1 *U ++ _str * -> -> 1 `i `x -> -> # *U _str `i `x ]
+[e :U 1736 ]
+[e $ != -> *U _str `i -> 0 `i 1737  ]
+[e :U 1738 ]
+"97
+[; ;LCD_Drivers.c: 97: }
+[e :UE 1735 ]
 }

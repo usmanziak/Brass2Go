@@ -7,33 +7,33 @@
 [v ___fladd __fladd `(d  1 e 4 0 ]
 "4 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\sources\c99\common\Umul8_16.c
 [v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
-"7 C:\Users\lukeg\OneDrive - University of Calgary\PIC\LCD-Dev\LCD.X\Lab3_Main.c
+"7 C:\Users\Toshi\Desktop\school\second year\ILS\Brass2Go\LCD-Driver-Dev\LCD.X\Lab3_Main.c
 [v _main main `(v  1 e 1 0 ]
-"11 C:\Users\lukeg\OneDrive - University of Calgary\PIC\LCD-Dev\LCD.X\Lab3_SD.c
-[v _SD_Init SD_Init `(v  1 e 1 0 ]
-"78
+"79 C:\Users\Toshi\Desktop\school\second year\ILS\Brass2Go\LCD-Driver-Dev\LCD.X\Lab3_SD.c
 [v _SD_SendCommand SD_SendCommand `(v  1 e 1 0 ]
-"114
+"115
 [v _SD_Read8bitResponse SD_Read8bitResponse `(v  1 e 1 0 ]
-"135
+"136
 [v _SD_Check8bitResponse SD_Check8bitResponse `(a  1 e 1 0 ]
-"145
+"146
 [v _SD_Read40bitResponse SD_Read40bitResponse `(v  1 e 1 0 ]
-"171
+"172
 [v _SD_Check40bitResponse SD_Check40bitResponse `(a  1 e 1 0 ]
-"7 C:\Users\lukeg\OneDrive - University of Calgary\PIC\LCD-Dev\LCD.X\Lab3_SPI.c
+"7 C:\Users\Toshi\Desktop\school\second year\ILS\Brass2Go\LCD-Driver-Dev\LCD.X\Lab3_SPI.c
 [v _SPI_Init SPI_Init `(v  1 e 1 0 ]
 "39
 [v _SPI_Write SPI_Write `(v  1 e 1 0 ]
 "48
 [v _SPI_Read SPI_Read `(uc  1 e 1 0 ]
-"6 C:\Users\lukeg\OneDrive - University of Calgary\PIC\LCD-Dev\LCD.X\LCD_Drivers.c
+"10 C:\Users\Toshi\Desktop\school\second year\ILS\Brass2Go\LCD-Driver-Dev\LCD.X\LCD_Drivers.c
 [v _LCD_Init LCD_Init `(v  1 e 1 0 ]
-"31
+"52
 [v _LCD_Select LCD_Select `(v  1 e 1 0 ]
-"6 C:\Users\lukeg\OneDrive - University of Calgary\PIC\LCD-Dev\LCD.X/Lab3_CRC.h
+"86
+[v _LCD_Write LCD_Write `(v  1 e 1 0 ]
+"6 C:\Users\Toshi\Desktop\school\second year\ILS\Brass2Go\LCD-Driver-Dev\LCD.X/Lab3_CRC.h
 [v _CRCTable CRCTable `DC[256]uc  1 e 256 0 ]
-"11 C:\Users\lukeg\OneDrive - University of Calgary\PIC\LCD-Dev\LCD.X/Lab3_SD.h
+"11 C:\Users\Toshi\Desktop\school\second year\ILS\Brass2Go\LCD-Driver-Dev\LCD.X/Lab3_SD.h
 [v _GLBL_Resp8 GLBL_Resp8 `uc  1 e 1 0 ]
 "12
 [v _GLBL_Resp40 GLBL_Resp40 `[5]uc  1 e 5 0 ]
@@ -53,9 +53,21 @@
 "570 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h
 [u S31 . 1 `S22 1 . 1 0 ]
 [v _PORTCbits PORTCbits `VES31  1 e 1 @14 ]
+[s S210 . 1 `uc 1 TRISC0 1 0 :1:0 
+`uc 1 TRISC1 1 0 :1:1 
+`uc 1 TRISC2 1 0 :1:2 
+`uc 1 TRISC3 1 0 :1:3 
+`uc 1 TRISC4 1 0 :1:4 
+`uc 1 TRISC5 1 0 :1:5 
+`uc 1 TRISC6 1 0 :1:6 
+`uc 1 TRISC7 1 0 :1:7 
+]
+"1776
+[u S219 . 1 `S210 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES219  1 e 1 @142 ]
 "2410
 [v _OSCCON OSCCON `VEuc  1 e 1 @155 ]
-[s S211 . 1 `uc 1 HFIOFS 1 0 :1:0 
+[s S232 . 1 `uc 1 HFIOFS 1 0 :1:0 
 `uc 1 LFIOFR 1 0 :1:1 
 `uc 1 MFIOFR 1 0 :1:2 
 `uc 1 HFIOFL 1 0 :1:3 
@@ -65,8 +77,8 @@
 `uc 1 SOSCR 1 0 :1:7 
 ]
 "2499
-[u S220 . 1 `S211 1 . 1 0 ]
-[v _OSCSTATbits OSCSTATbits `VES220  1 e 1 @156 ]
+[u S241 . 1 `S232 1 . 1 0 ]
+[v _OSCSTATbits OSCSTATbits `VES241  1 e 1 @156 ]
 "5116
 [v _SSP1BUF SSP1BUF `VEuc  1 e 1 @529 ]
 "5370
@@ -124,99 +136,22 @@
 [v _TRISC6 TRISC6 `VEb  1 e 0 @1142 ]
 "44247
 [v _TRISC7 TRISC7 `VEb  1 e 0 @1143 ]
-"7 C:\Users\lukeg\OneDrive - University of Calgary\PIC\LCD-Dev\LCD.X\Lab3_Main.c
+"7 C:\Users\Toshi\Desktop\school\second year\ILS\Brass2Go\LCD-Driver-Dev\LCD.X\Lab3_Main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"28
+"30
 } 0
-"7 C:\Users\lukeg\OneDrive - University of Calgary\PIC\LCD-Dev\LCD.X\Lab3_SPI.c
+"7 C:\Users\Toshi\Desktop\school\second year\ILS\Brass2Go\LCD-Driver-Dev\LCD.X\Lab3_SPI.c
 [v _SPI_Init SPI_Init `(v  1 e 1 0 ]
 {
 "34
 } 0
-"11 C:\Users\lukeg\OneDrive - University of Calgary\PIC\LCD-Dev\LCD.X\Lab3_SD.c
-[v _SD_Init SD_Init `(v  1 e 1 0 ]
-{
-"70
-} 0
-"78
-[v _SD_SendCommand SD_SendCommand `(v  1 e 1 0 ]
-{
-[v SD_SendCommand@CMD_6bit CMD_6bit `uc  1 a 1 wreg ]
-"81
-[v SD_SendCommand@Checksum Checksum `uc  1 a 1 8 ]
-"80
-[v SD_SendCommand@ByteToSend ByteToSend `uc  1 a 1 7 ]
-"78
-[v SD_SendCommand@CMD_6bit CMD_6bit `uc  1 a 1 wreg ]
-[v SD_SendCommand@ARG3 ARG3 `uc  1 p 1 1 ]
-[v SD_SendCommand@ARG2 ARG2 `uc  1 p 1 2 ]
-[v SD_SendCommand@ARG1 ARG1 `uc  1 p 1 3 ]
-[v SD_SendCommand@ARG0 ARG0 `uc  1 p 1 4 ]
-[v SD_SendCommand@CMD_6bit CMD_6bit `uc  1 a 1 6 ]
-"108
-} 0
-"114
-[v _SD_Read8bitResponse SD_Read8bitResponse `(v  1 e 1 0 ]
-{
-"116
-[v SD_Read8bitResponse@readMessage readMessage `uc  1 a 1 1 ]
-"130
-} 0
-"145
-[v _SD_Read40bitResponse SD_Read40bitResponse `(v  1 e 1 0 ]
-{
-"147
-[v SD_Read40bitResponse@readMessage readMessage `uc  1 a 1 1 ]
-"165
-} 0
-"48 C:\Users\lukeg\OneDrive - University of Calgary\PIC\LCD-Dev\LCD.X\Lab3_SPI.c
-[v _SPI_Read SPI_Read `(uc  1 e 1 0 ]
-{
-"53
-} 0
-"135 C:\Users\lukeg\OneDrive - University of Calgary\PIC\LCD-Dev\LCD.X\Lab3_SD.c
-[v _SD_Check8bitResponse SD_Check8bitResponse `(a  1 e 1 0 ]
-{
-[v SD_Check8bitResponse@Byte Byte `uc  1 a 1 wreg ]
-"137
-[v SD_Check8bitResponse@match match `a  1 a 1 1 ]
-"135
-[v SD_Check8bitResponse@Byte Byte `uc  1 a 1 wreg ]
-"137
-[v SD_Check8bitResponse@Byte Byte `uc  1 a 1 0 ]
-"140
-} 0
-"171
-[v _SD_Check40bitResponse SD_Check40bitResponse `(a  1 e 1 0 ]
-{
-[v SD_Check40bitResponse@Byte4 Byte4 `uc  1 a 1 wreg ]
-"173
-[v SD_Check40bitResponse@match match `a  1 a 1 5 ]
-"171
-[v SD_Check40bitResponse@Byte4 Byte4 `uc  1 a 1 wreg ]
-[v SD_Check40bitResponse@Byte3 Byte3 `uc  1 p 1 0 ]
-[v SD_Check40bitResponse@Byte2 Byte2 `uc  1 p 1 1 ]
-[v SD_Check40bitResponse@Byte1 Byte1 `uc  1 p 1 2 ]
-[v SD_Check40bitResponse@Byte0 Byte0 `uc  1 p 1 3 ]
-"173
-[v SD_Check40bitResponse@Byte4 Byte4 `uc  1 a 1 4 ]
-"180
-} 0
-"6 C:\Users\lukeg\OneDrive - University of Calgary\PIC\LCD-Dev\LCD.X\LCD_Drivers.c
+"10 C:\Users\Toshi\Desktop\school\second year\ILS\Brass2Go\LCD-Driver-Dev\LCD.X\LCD_Drivers.c
 [v _LCD_Init LCD_Init `(v  1 e 1 0 ]
 {
-"21
-[v LCD_Init@i_280 i `i  1 a 2 8 ]
-"19
-[v LCD_Init@i_279 i `i  1 a 2 6 ]
-"16
-[v LCD_Init@i_278 i `i  1 a 2 4 ]
-"12
-[v LCD_Init@i i `i  1 a 2 2 ]
-"24
+"45
 } 0
-"39 C:\Users\lukeg\OneDrive - University of Calgary\PIC\LCD-Dev\LCD.X\Lab3_SPI.c
+"39 C:\Users\Toshi\Desktop\school\second year\ILS\Brass2Go\LCD-Driver-Dev\LCD.X\Lab3_SPI.c
 [v _SPI_Write SPI_Write `(v  1 e 1 0 ]
 {
 [v SPI_Write@Data_8bit Data_8bit `uc  1 a 1 wreg ]
@@ -225,8 +160,16 @@
 [v SPI_Write@Data_8bit Data_8bit `uc  1 a 1 0 ]
 "43
 } 0
-"31 C:\Users\lukeg\OneDrive - University of Calgary\PIC\LCD-Dev\LCD.X\LCD_Drivers.c
+"86 C:\Users\Toshi\Desktop\school\second year\ILS\Brass2Go\LCD-Driver-Dev\LCD.X\LCD_Drivers.c
+[v _LCD_Write LCD_Write `(v  1 e 1 0 ]
+{
+[v LCD_Write@c c `uc  1 a 1 wreg ]
+[v LCD_Write@c c `uc  1 a 1 wreg ]
+[v LCD_Write@c c `uc  1 a 1 2 ]
+"89
+} 0
+"52
 [v _LCD_Select LCD_Select `(v  1 e 1 0 ]
 {
-"37
+"58
 } 0

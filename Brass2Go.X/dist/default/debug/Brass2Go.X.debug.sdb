@@ -61,7 +61,7 @@ CLOSED 3
 [v _SPI_Init SPI_Init `(v  1 e 1 0 ]
 "38
 [v _SPI_Write SPI_Write `(v  1 e 1 0 ]
-"48
+"47
 [v _SPI_Read SPI_Read `T(uc  1 e 1 0 ]
 "8 C:\Users\Toshi\Desktop\school\second year\ILS\Brass2Go\Brass2Go.X\timer.c
 [v _timer_Init timer_Init `(i  1 e 2 0 ]
@@ -254,7 +254,7 @@ CLOSED 3
 "140
 [v _main main `(v  1 e 1 0 ]
 {
-"231
+"255
 } 0
 "8 C:\Users\Toshi\Desktop\school\second year\ILS\Brass2Go\Brass2Go.X\timer.c
 [v _timer_Init timer_Init `(i  1 e 2 0 ]
@@ -381,10 +381,10 @@ CLOSED 3
 [v SD_Read40bitResponse@readMessage readMessage `uc  1 a 1 3 ]
 "160
 } 0
-"48 C:\Users\Toshi\Desktop\school\second year\ILS\Brass2Go\Brass2Go.X\SPI.c
+"47 C:\Users\Toshi\Desktop\school\second year\ILS\Brass2Go\Brass2Go.X\SPI.c
 [v _SPI_Read SPI_Read `T(uc  1 e 1 0 ]
 {
-"52
+"51
 } 0
 "132 C:\Users\Toshi\Desktop\school\second year\ILS\Brass2Go\Brass2Go.X\SD.c
 [v _SD_Check8bitResponse SD_Check8bitResponse `(a  1 e 1 0 ]

@@ -5,7 +5,11 @@ Version 4.0 HI-TECH Software Intermediate Code
 "44241 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 44241: extern volatile __bit TRISC5 __attribute__((address(0x475)));
 [v _TRISC5 `Vb ~T0 @X0 0 e@1141 ]
-"559
+[v F11983 `(v ~T0 @X0 1 tf1`ul ]
+"92 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic.h
+[v __delay `JF11983 ~T0 @X0 0 e ]
+[p i __delay ]
+"559 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 559:     struct {
 [s S33 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S33 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
@@ -19,6 +23,12 @@ Version 4.0 HI-TECH Software Intermediate Code
 "20 ./Lab3_SPI.h
 [; ;./Lab3_SPI.h: 20: void SPI_Write(char Data_8bit);
 [v _SPI_Write `(v ~T0 @X0 0 ef1`uc ]
+"20 ./LCD_Drivers.h
+[; ;./LCD_Drivers.h: 20: void LCD_Write(char c);
+[v _LCD_Write `(v ~T0 @X0 0 ef1`uc ]
+"5116 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 5116: extern volatile unsigned char SSP1BUF __attribute__((address(0x211)));
+[v _SSP1BUF `Vuc ~T0 @X0 0 e@529 ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 54: __asm("INDF0 equ 00h");
 [; <" INDF0 equ 00h ;# ">
@@ -1705,198 +1715,221 @@ Version 4.0 HI-TECH Software Intermediate Code
 "37740
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 37740: __asm("TOSH equ 0FEFh");
 [; <" TOSH equ 0FEFh ;# ">
-"6 LCD_Drivers.c
-[; ;LCD_Drivers.c: 6: void LCD_Init(void)
-[v _LCD_Init `(v ~T0 @X0 1 ef ]
+"5 ./Lab3_Config.h
+[p x FOSC = INTOSC ]
+"6
+[p x WDTE = OFF ]
 "7
-[; ;LCD_Drivers.c: 7: {
+[p x PLLEN = ON ]
+"10 LCD_Drivers.c
+[; ;LCD_Drivers.c: 10: void LCD_Init(void)
+[v _LCD_Init `(v ~T0 @X0 1 ef ]
+"11
+[; ;LCD_Drivers.c: 11: {
 {
 [e :U _LCD_Init ]
 [f ]
-"8
-[; ;LCD_Drivers.c: 8:     LCD_Select();
+"13
+[; ;LCD_Drivers.c: 13:     LCD_Select();
 [e ( _LCD_Select ..  ]
-"9
-[; ;LCD_Drivers.c: 9:     TRISC5 = 0;
+"14
+[; ;LCD_Drivers.c: 14:     TRISC5 = 0;
 [e = _TRISC5 -> -> 0 `i `b ]
-"10
-[; ;LCD_Drivers.c: 10:     PORTCbits.RC5 = 0;
-[e = . . _PORTCbits 0 5 -> -> 0 `i `uc ]
-"11
-[; ;LCD_Drivers.c: 11:     SPI_Write(0b00111000);
-[e ( _SPI_Write (1 -> -> 56 `i `uc ]
-"12
-[; ;LCD_Drivers.c: 12:     for(int i=0; i<10000; i++);
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $ < _i -> 10000 `i 1732  ]
-[e $U 1733  ]
-[e :U 1732 ]
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 10000 `i 1732  ]
-[e :U 1733 ]
-}
 "15
-[; ;LCD_Drivers.c: 15:     SPI_Write(0b00001111);
-[e ( _SPI_Write (1 -> -> 15 `i `uc ]
-"16
-[; ;LCD_Drivers.c: 16:     for(int i=0; i<10000; i++);
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $ < _i -> 10000 `i 1735  ]
-[e $U 1736  ]
-[e :U 1735 ]
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 10000 `i 1735  ]
-[e :U 1736 ]
-}
+[; ;LCD_Drivers.c: 15:     _delay((unsigned long)((50)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 50 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"17
+[; ;LCD_Drivers.c: 17:     PORTCbits.RC5 = 0;
+[e = . . _PORTCbits 0 5 -> -> 0 `i `uc ]
 "18
-[; ;LCD_Drivers.c: 18:     SPI_Write(0b1);
-[e ( _SPI_Write (1 -> -> 1 `i `uc ]
+[; ;LCD_Drivers.c: 18:     SPI_Write(0b00110000);
+[e ( _SPI_Write (1 -> -> 48 `i `uc ]
 "19
-[; ;LCD_Drivers.c: 19:     for(int i =0; i<10000; i++);
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $ < _i -> 10000 `i 1738  ]
-[e $U 1739  ]
-[e :U 1738 ]
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 10000 `i 1738  ]
-[e :U 1739 ]
-}
-"20
-[; ;LCD_Drivers.c: 20:     SPI_Write(0b00000110);
-[e ( _SPI_Write (1 -> -> 6 `i `uc ]
+[; ;LCD_Drivers.c: 19:     _delay((unsigned long)((1)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 "21
-[; ;LCD_Drivers.c: 21:     for(int i =0; i<10000; i++);
-{
-[v _i `i ~T0 @X0 1 a ]
-[e = _i -> 0 `i ]
-[e $ < _i -> 10000 `i 1741  ]
-[e $U 1742  ]
-[e :U 1741 ]
-[e ++ _i -> 1 `i ]
-[e $ < _i -> 10000 `i 1741  ]
-[e :U 1742 ]
-}
+[; ;LCD_Drivers.c: 21:     SPI_Write(0b00001111);
+[e ( _SPI_Write (1 -> -> 15 `i `uc ]
 "22
-[; ;LCD_Drivers.c: 22:     PORTCbits.RC5 = 1;
-[e = . . _PORTCbits 0 5 -> -> 1 `i `uc ]
-"23
-[; ;LCD_Drivers.c: 23:     SPI_Write('a');
-[e ( _SPI_Write (1 -> -> 97 `ui `uc ]
+[; ;LCD_Drivers.c: 22:     _delay((unsigned long)((1)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
 "24
-[; ;LCD_Drivers.c: 24: }
+[; ;LCD_Drivers.c: 24:     SPI_Write(0b00000001);
+[e ( _SPI_Write (1 -> -> 1 `i `uc ]
+"25
+[; ;LCD_Drivers.c: 25:     _delay((unsigned long)((20)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"27
+[; ;LCD_Drivers.c: 27:     SPI_Write(0b00000110);
+[e ( _SPI_Write (1 -> -> 6 `i `uc ]
+"28
+[; ;LCD_Drivers.c: 28:     _delay((unsigned long)((20)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 20 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"30
+[; ;LCD_Drivers.c: 30:     PORTCbits.RC5 = 1;
+[e = . . _PORTCbits 0 5 -> -> 1 `i `uc ]
+"31
+[; ;LCD_Drivers.c: 31:     LCD_Write('B');
+[e ( _LCD_Write (1 -> -> 66 `ui `uc ]
+"32
+[; ;LCD_Drivers.c: 32:     LCD_Write('r');
+[e ( _LCD_Write (1 -> -> 114 `ui `uc ]
+"33
+[; ;LCD_Drivers.c: 33:     LCD_Write('a');
+[e ( _LCD_Write (1 -> -> 97 `ui `uc ]
+"34
+[; ;LCD_Drivers.c: 34:     LCD_Write('s');
+[e ( _LCD_Write (1 -> -> 115 `ui `uc ]
+"35
+[; ;LCD_Drivers.c: 35:     LCD_Write('s');
+[e ( _LCD_Write (1 -> -> 115 `ui `uc ]
+"36
+[; ;LCD_Drivers.c: 36:     LCD_Write(' ');
+[e ( _LCD_Write (1 -> -> 32 `ui `uc ]
+"37
+[; ;LCD_Drivers.c: 37:     LCD_Write('2');
+[e ( _LCD_Write (1 -> -> 50 `ui `uc ]
+"38
+[; ;LCD_Drivers.c: 38:     LCD_Write(' ');
+[e ( _LCD_Write (1 -> -> 32 `ui `uc ]
+"39
+[; ;LCD_Drivers.c: 39:     LCD_Write('G');
+[e ( _LCD_Write (1 -> -> 71 `ui `uc ]
+"40
+[; ;LCD_Drivers.c: 40:     LCD_Write('o');
+[e ( _LCD_Write (1 -> -> 111 `ui `uc ]
+"41
+[; ;LCD_Drivers.c: 41:     LCD_Write('!');
+[e ( _LCD_Write (1 -> -> 33 `ui `uc ]
+"43
+[; ;LCD_Drivers.c: 43:     SPI_Write(0b00000001);
+[e ( _SPI_Write (1 -> -> 1 `i `uc ]
+"45
+[; ;LCD_Drivers.c: 45: }
 [e :UE 1731 ]
 }
-"26
-[; ;LCD_Drivers.c: 26: void SD_Select(void)
+"47
+[; ;LCD_Drivers.c: 47: void SD_Select(void)
 [v _SD_Select `(v ~T0 @X0 1 ef ]
-"27
-[; ;LCD_Drivers.c: 27: {
+"48
+[; ;LCD_Drivers.c: 48: {
 {
 [e :U _SD_Select ]
 [f ]
-"28
-[; ;LCD_Drivers.c: 28:     PORTCbits.RC7 = 0;
+"49
+[; ;LCD_Drivers.c: 49:     PORTCbits.RC7 = 0;
 [e = . . _PORTCbits 0 7 -> -> 0 `i `uc ]
-"29
-[; ;LCD_Drivers.c: 29:     PORTCbits.RC6 = 1;
+"50
+[; ;LCD_Drivers.c: 50:     PORTCbits.RC6 = 1;
 [e = . . _PORTCbits 0 6 -> -> 1 `i `uc ]
-"30
-[; ;LCD_Drivers.c: 30: }
-[e :UE 1744 ]
+"51
+[; ;LCD_Drivers.c: 51: }
+[e :UE 1732 ]
 }
-"31
-[; ;LCD_Drivers.c: 31: void LCD_Select(void)
+"52
+[; ;LCD_Drivers.c: 52: void LCD_Select(void)
 [v _LCD_Select `(v ~T0 @X0 1 ef ]
-"32
-[; ;LCD_Drivers.c: 32: {
+"53
+[; ;LCD_Drivers.c: 53: {
 {
 [e :U _LCD_Select ]
 [f ]
-"34
-[; ;LCD_Drivers.c: 34:     PORTCbits.RC7 = 1;
+"55
+[; ;LCD_Drivers.c: 55:     PORTCbits.RC7 = 1;
 [e = . . _PORTCbits 0 7 -> -> 1 `i `uc ]
-"35
-[; ;LCD_Drivers.c: 35:     PORTCbits.RC6 = 0;
+"56
+[; ;LCD_Drivers.c: 56:     PORTCbits.RC6 = 0;
 [e = . . _PORTCbits 0 6 -> -> 0 `i `uc ]
-"37
-[; ;LCD_Drivers.c: 37: }
-[e :UE 1745 ]
+"58
+[; ;LCD_Drivers.c: 58: }
+[e :UE 1733 ]
 }
-"38
-[; ;LCD_Drivers.c: 38: void LCD_ClearScreen(void)
+"59
+[; ;LCD_Drivers.c: 59: void LCD_ClearScreen(void)
 [v _LCD_ClearScreen `(v ~T0 @X0 1 ef ]
-"39
-[; ;LCD_Drivers.c: 39: {
+"60
+[; ;LCD_Drivers.c: 60: {
 {
 [e :U _LCD_ClearScreen ]
 [f ]
-"40
-[; ;LCD_Drivers.c: 40:     LCD_Select();
+"61
+[; ;LCD_Drivers.c: 61:     LCD_Select();
 [e ( _LCD_Select ..  ]
-"41
-[; ;LCD_Drivers.c: 41:     SPI_Write(1);
+"62
+[; ;LCD_Drivers.c: 62:     SPI_Write(1);
 [e ( _SPI_Write (1 -> -> 1 `i `uc ]
-"43
-[; ;LCD_Drivers.c: 43: }
-[e :UE 1746 ]
+"64
+[; ;LCD_Drivers.c: 64: }
+[e :UE 1734 ]
 }
-"44
-[; ;LCD_Drivers.c: 44: void LCD_ReturnHome(void)
+"65
+[; ;LCD_Drivers.c: 65: void LCD_ReturnHome(void)
 [v _LCD_ReturnHome `(v ~T0 @X0 1 ef ]
-"45
-[; ;LCD_Drivers.c: 45: {
+"66
+[; ;LCD_Drivers.c: 66: {
 {
 [e :U _LCD_ReturnHome ]
 [f ]
-"46
-[; ;LCD_Drivers.c: 46:     LCD_Select();
+"67
+[; ;LCD_Drivers.c: 67:     LCD_Select();
 [e ( _LCD_Select ..  ]
-"47
-[; ;LCD_Drivers.c: 47:     SPI_Write(0x2);
+"68
+[; ;LCD_Drivers.c: 68:     SPI_Write(0x2);
 [e ( _SPI_Write (1 -> -> 2 `i `uc ]
-"49
-[; ;LCD_Drivers.c: 49: }
-[e :UE 1747 ]
+"70
+[; ;LCD_Drivers.c: 70: }
+[e :UE 1735 ]
 }
-"50
-[; ;LCD_Drivers.c: 50: void LCD_ShiftCursorLeft(void)
+"71
+[; ;LCD_Drivers.c: 71: void LCD_ShiftCursorLeft(void)
 [v _LCD_ShiftCursorLeft `(v ~T0 @X0 1 ef ]
-"51
-[; ;LCD_Drivers.c: 51: {
+"72
+[; ;LCD_Drivers.c: 72: {
 {
 [e :U _LCD_ShiftCursorLeft ]
 [f ]
-"53
-[; ;LCD_Drivers.c: 53:     LCD_Select();
+"74
+[; ;LCD_Drivers.c: 74:     LCD_Select();
 [e ( _LCD_Select ..  ]
-"54
-[; ;LCD_Drivers.c: 54:     SPI_Write(0x10);
+"75
+[; ;LCD_Drivers.c: 75:     SPI_Write(0x10);
 [e ( _SPI_Write (1 -> -> 16 `i `uc ]
-"57
-[; ;LCD_Drivers.c: 57: }
-[e :UE 1748 ]
+"78
+[; ;LCD_Drivers.c: 78: }
+[e :UE 1736 ]
 }
-"58
-[; ;LCD_Drivers.c: 58: void LCD_ShiftCursorRight(void)
+"79
+[; ;LCD_Drivers.c: 79: void LCD_ShiftCursorRight(void)
 [v _LCD_ShiftCursorRight `(v ~T0 @X0 1 ef ]
-"59
-[; ;LCD_Drivers.c: 59: {
+"80
+[; ;LCD_Drivers.c: 80: {
 {
 [e :U _LCD_ShiftCursorRight ]
 [f ]
-"60
-[; ;LCD_Drivers.c: 60:     LCD_Select();
+"81
+[; ;LCD_Drivers.c: 81:     LCD_Select();
 [e ( _LCD_Select ..  ]
-"61
-[; ;LCD_Drivers.c: 61:     SPI_Write(0x14);
+"82
+[; ;LCD_Drivers.c: 82:     SPI_Write(0x14);
 [e ( _SPI_Write (1 -> -> 20 `i `uc ]
-"63
-[; ;LCD_Drivers.c: 63: }
-[e :UE 1749 ]
+"84
+[; ;LCD_Drivers.c: 84: }
+[e :UE 1737 ]
+}
+"86
+[; ;LCD_Drivers.c: 86: void LCD_Write(char c) {
+[v _LCD_Write `(v ~T0 @X0 1 ef1`uc ]
+{
+[e :U _LCD_Write ]
+[v _c `uc ~T0 @X0 1 r1 ]
+[f ]
+"87
+[; ;LCD_Drivers.c: 87:     SSP1BUF = c;
+[e = _SSP1BUF -> _c `uc ]
+"88
+[; ;LCD_Drivers.c: 88:     _delay((unsigned long)((100)*(32000000/4000.0)));
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 32000000 `l `d .4000.0 `ul ]
+"89
+[; ;LCD_Drivers.c: 89: }
+[e :UE 1738 ]
 }

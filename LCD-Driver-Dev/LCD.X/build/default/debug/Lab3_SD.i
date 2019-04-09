@@ -19511,6 +19511,7 @@ void SD_Init(void)
 {
 
 
+
     { PORTCbits.RC7 = 1; SSP1CON1bits.WCOL = 0; };
 
     SPI_Write(0xFF);
@@ -19715,7 +19716,7 @@ _Bool SD_WriteBlock(char ADDR3, char ADDR2, char ADDR1, char ADDR0)
 
     return 1;
 }
-# 227 "Lab3_SD.c"
+# 228 "Lab3_SD.c"
 _Bool SD_ReadBlock(char ADDR3, char ADDR2, char ADDR1, char ADDR0)
 {
     char readMessage = 0xFF;

@@ -19529,10 +19529,13 @@ void LCD_ClearScreen(void);
 void LCD_ReturnHome(void);
 void LCD_ShiftCursorLeft(void);
 void LCD_ShiftCursorRight(void);
+void LCD_Write(char c);
 # 5 "Lab3_Main.c" 2
 
 
 void main(void) {
+    TRISCbits.TRISC6 = 0;
+    TRISCbits.TRISC7 = 0;
 
 
     OSCCON = 0xF4;
@@ -19540,7 +19543,7 @@ void main(void) {
 
 
     SPI_Init();
-    SD_Init();
+
     LCD_Init();
 
     while(1)

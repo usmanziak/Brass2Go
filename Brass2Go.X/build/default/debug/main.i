@@ -19812,24 +19812,35 @@ void main(void) {
 
                         switch (channels) {
                             case 1:
-                                sdata[0] = SPI_Read();
-                                sdata[1] = SPI_Read();
+                                PORTCbits.RC1 = 1;
+                                SSP1BUF = 0xFF;
+                                while(SSP1STATbits.BF == 0);
+                                sdata[0] = SSP1BUF;
+                                SSP1BUF = 0xFF;
+                                while(SSP1STATbits.BF == 0);
+                                sdata[1] = SSP1BUF;
+                                PORTCbits.RC1 = 0;
+
                                 lbuffer[ buffer_write_index ] = *((short*)sdata) - 0x8000;
                                 ++buffer_write_index;
                             break;
                             case 2:
-                                if (samplePending) {
-                                    samplePending = 0;
-                                    sdata[0] = SPI_Read();
-                                    sdata[1] = SPI_Read();
-                                    rbuffer[ buffer_write_index++ ] = *((short*)sdata) - 0x8000;
-                                    __nop();
-                                } else {
-                                    samplePending = 1;
-                                    sdata[0] = SPI_Read();
-                                    sdata[1] = SPI_Read();
-                                    lbuffer[ buffer_write_index ] = *((short*)sdata) - 0x8000;
-                                }
+# 222 "main.c"
+                                SSP1BUF = 0xFF;
+                                while(SSP1STATbits.BF == 0);
+                                sdata[0] = SSP1BUF;
+                                SSP1BUF = 0xFF;
+                                while(SSP1STATbits.BF == 0);
+                                sdata[1] = SSP1BUF;
+                                lbuffer[ buffer_write_index ] = *((short*)sdata) - 0x8000;
+
+                                SSP1BUF = 0xFF;
+                                while(SSP1STATbits.BF == 0);
+                                sdata[0] = SSP1BUF;
+                                SSP1BUF = 0xFF;
+                                while(SSP1STATbits.BF == 0);
+                                sdata[1] = SSP1BUF;
+                                rbuffer[ buffer_write_index++ ] = *((short*)sdata) - 0x8000;
                             break;
                             default:
                                 error(CHANNELS);
