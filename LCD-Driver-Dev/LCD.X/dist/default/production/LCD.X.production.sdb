@@ -143,7 +143,7 @@
 "7 C:\Users\Toshi\Desktop\school\second year\ILS\Brass2Go\LCD-Driver-Dev\LCD.X\Lab3_Main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"30
+"29
 } 0
 "7 C:\Users\Toshi\Desktop\school\second year\ILS\Brass2Go\LCD-Driver-Dev\LCD.X\Lab3_SPI.c
 [v _SPI_Init SPI_Init `(v  1 e 1 0 ]
@@ -232,7 +232,7 @@
 [v _LCD_Print LCD_Print `(v  1 e 1 0 ]
 {
 [v LCD_Print@str str `*.25uc  1 p 2 2 ]
-"97
+"118
 } 0
 "8
 [v _LCD_Init LCD_Init `(v  1 e 1 0 ]

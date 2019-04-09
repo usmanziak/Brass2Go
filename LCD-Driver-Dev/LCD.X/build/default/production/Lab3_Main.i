@@ -19547,9 +19547,8 @@ void main(void) {
 
 
     PORTCbits.RC5 = 1;
-    LCD_Print("Hello World!");
-
-
+    LCD_Print("Hello World!\n");
+    LCD_Print("This was\b\b\bis the 2nd line");
 
     while(1);
     return;

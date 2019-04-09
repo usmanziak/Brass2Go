@@ -1,53 +1,13 @@
 Version 4.0 HI-TECH Software Intermediate Code
-[p mainexit ]
-"1765 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 1765:     struct {
-[s S89 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S89 . TRISC0 TRISC1 TRISC2 TRISC3 TRISC4 TRISC5 TRISC6 TRISC7 ]
-"1764
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 1764: typedef union {
-[u S88 `S89 1 ]
-[n S88 . . ]
-"1776
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 1776: extern volatile TRISCbits_t TRISCbits __attribute__((address(0x08E)));
-[v _TRISCbits `VS88 ~T0 @X0 0 e@142 ]
-"2410
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 2410: extern volatile unsigned char OSCCON __attribute__((address(0x09B)));
-[v _OSCCON `Vuc ~T0 @X0 0 e@155 ]
-"2488
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 2488:     struct {
-[s S120 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S120 . HFIOFS LFIOFR MFIOFR HFIOFL HFIOFR OSTS PLLR SOSCR ]
-"2487
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 2487: typedef union {
-[u S119 `S120 1 ]
-[n S119 . . ]
-"2499
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 2499: extern volatile OSCSTATbits_t OSCSTATbits __attribute__((address(0x09C)));
-[v _OSCSTATbits `VS119 ~T0 @X0 0 e@156 ]
-"15 ./Lab3_SPI.h
-[; ;./Lab3_SPI.h: 15: void SPI_Init(void);
-[v _SPI_Init `(v ~T0 @X0 0 ef ]
-"28 ./Lab3_SD.h
-[; ;./Lab3_SD.h: 28: void SD_Init(void);
-[v _SD_Init `(v ~T0 @X0 0 ef ]
-"21 ./LCD_Drivers.h
-[; ;./LCD_Drivers.h: 21: void LCD_Init(void);
-[v _LCD_Init `(v ~T0 @X0 0 ef ]
-"559 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 559:     struct {
-[s S38 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
-[n S38 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
-"558
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 558: typedef union {
-[u S37 `S38 1 ]
-[n S37 . . ]
-"570
-[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 570: extern volatile PORTCbits_t PORTCbits __attribute__((address(0x00E)));
-[v _PORTCbits `VS37 ~T0 @X0 0 e@14 ]
-"26 ./LCD_Drivers.h
-[; ;./LCD_Drivers.h: 26: void LCD_Print(char* str);
-[v _LCD_Print `(v ~T0 @X0 0 ef1`*uc ]
+"3772 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 3772: extern volatile unsigned char ANSELB __attribute__((address(0x18D)));
+[v _ANSELB `Vuc ~T0 @X0 0 e@397 ]
+"1697
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 1697: extern volatile unsigned char TRISB __attribute__((address(0x08D)));
+[v _TRISB `Vuc ~T0 @X0 0 e@141 ]
+"491
+[; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 491: extern volatile unsigned char PORTB __attribute__((address(0x00D)));
+[v _PORTB `Vuc ~T0 @X0 0 e@13 ]
 "54 C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 54: __asm("INDF0 equ 00h");
 [; <" INDF0 equ 00h ;# ">
@@ -1734,352 +1694,78 @@ Version 4.0 HI-TECH Software Intermediate Code
 "37740
 [; ;C:\Program Files (x86)\Microchip\xc8\v2.05\pic\include\pic16f1778.h: 37740: __asm("TOSH equ 0FEFh");
 [; <" TOSH equ 0FEFh ;# ">
-"5 ./Lab3_Config.h
-[p x FOSC = INTOSC ]
-"6
-[p x WDTE = OFF ]
-"7
-[p x PLLEN = ON ]
-"6 ./Lab3_CRC.h
-[; ;./Lab3_CRC.h: 6: const char CRCTable[256] = {
-[v _CRCTable `Cuc ~T0 @X0 -> 256 `i e ]
-[i _CRCTable
-:U ..
--> -> 0 `i `uc
--> -> 9 `i `uc
--> -> 18 `i `uc
--> -> 27 `i `uc
--> -> 36 `i `uc
--> -> 45 `i `uc
--> -> 54 `i `uc
--> -> 63 `i `uc
--> -> 72 `i `uc
--> -> 65 `i `uc
--> -> 90 `i `uc
--> -> 83 `i `uc
--> -> 108 `i `uc
--> -> 101 `i `uc
--> -> 126 `i `uc
--> -> 119 `i `uc
--> -> 25 `i `uc
--> -> 16 `i `uc
--> -> 11 `i `uc
--> -> 2 `i `uc
--> -> 61 `i `uc
--> -> 52 `i `uc
--> -> 47 `i `uc
--> -> 38 `i `uc
--> -> 81 `i `uc
--> -> 88 `i `uc
--> -> 67 `i `uc
--> -> 74 `i `uc
--> -> 117 `i `uc
--> -> 124 `i `uc
--> -> 103 `i `uc
--> -> 110 `i `uc
--> -> 50 `i `uc
--> -> 59 `i `uc
--> -> 32 `i `uc
--> -> 41 `i `uc
--> -> 22 `i `uc
--> -> 31 `i `uc
--> -> 4 `i `uc
--> -> 13 `i `uc
--> -> 122 `i `uc
--> -> 115 `i `uc
--> -> 104 `i `uc
--> -> 97 `i `uc
--> -> 94 `i `uc
--> -> 87 `i `uc
--> -> 76 `i `uc
--> -> 69 `i `uc
--> -> 43 `i `uc
--> -> 34 `i `uc
--> -> 57 `i `uc
--> -> 48 `i `uc
--> -> 15 `i `uc
--> -> 6 `i `uc
--> -> 29 `i `uc
--> -> 20 `i `uc
--> -> 99 `i `uc
--> -> 106 `i `uc
--> -> 113 `i `uc
--> -> 120 `i `uc
--> -> 71 `i `uc
--> -> 78 `i `uc
--> -> 85 `i `uc
--> -> 92 `i `uc
--> -> 100 `i `uc
--> -> 109 `i `uc
--> -> 118 `i `uc
--> -> 127 `i `uc
--> -> 64 `i `uc
--> -> 73 `i `uc
--> -> 82 `i `uc
--> -> 91 `i `uc
--> -> 44 `i `uc
--> -> 37 `i `uc
--> -> 62 `i `uc
--> -> 55 `i `uc
--> -> 8 `i `uc
--> -> 1 `i `uc
--> -> 26 `i `uc
--> -> 19 `i `uc
--> -> 125 `i `uc
--> -> 116 `i `uc
--> -> 111 `i `uc
--> -> 102 `i `uc
--> -> 89 `i `uc
--> -> 80 `i `uc
--> -> 75 `i `uc
--> -> 66 `i `uc
--> -> 53 `i `uc
--> -> 60 `i `uc
--> -> 39 `i `uc
--> -> 46 `i `uc
--> -> 17 `i `uc
--> -> 24 `i `uc
--> -> 3 `i `uc
--> -> 10 `i `uc
--> -> 86 `i `uc
--> -> 95 `i `uc
--> -> 68 `i `uc
--> -> 77 `i `uc
--> -> 114 `i `uc
--> -> 123 `i `uc
--> -> 96 `i `uc
--> -> 105 `i `uc
--> -> 30 `i `uc
--> -> 23 `i `uc
--> -> 12 `i `uc
--> -> 5 `i `uc
--> -> 58 `i `uc
--> -> 51 `i `uc
--> -> 40 `i `uc
--> -> 33 `i `uc
--> -> 79 `i `uc
--> -> 70 `i `uc
--> -> 93 `i `uc
--> -> 84 `i `uc
--> -> 107 `i `uc
--> -> 98 `i `uc
--> -> 121 `i `uc
--> -> 112 `i `uc
--> -> 7 `i `uc
--> -> 14 `i `uc
--> -> 21 `i `uc
--> -> 28 `i `uc
--> -> 35 `i `uc
--> -> 42 `i `uc
--> -> 49 `i `uc
--> -> 56 `i `uc
--> -> 65 `i `uc
--> -> 72 `i `uc
--> -> 83 `i `uc
--> -> 90 `i `uc
--> -> 101 `i `uc
--> -> 108 `i `uc
--> -> 119 `i `uc
--> -> 126 `i `uc
--> -> 9 `i `uc
--> -> 0 `i `uc
--> -> 27 `i `uc
--> -> 18 `i `uc
--> -> 45 `i `uc
--> -> 36 `i `uc
--> -> 63 `i `uc
--> -> 54 `i `uc
--> -> 88 `i `uc
--> -> 81 `i `uc
--> -> 74 `i `uc
--> -> 67 `i `uc
--> -> 124 `i `uc
--> -> 117 `i `uc
--> -> 110 `i `uc
--> -> 103 `i `uc
--> -> 16 `i `uc
--> -> 25 `i `uc
--> -> 2 `i `uc
--> -> 11 `i `uc
--> -> 52 `i `uc
--> -> 61 `i `uc
--> -> 38 `i `uc
--> -> 47 `i `uc
--> -> 115 `i `uc
--> -> 122 `i `uc
--> -> 97 `i `uc
--> -> 104 `i `uc
--> -> 87 `i `uc
--> -> 94 `i `uc
--> -> 69 `i `uc
--> -> 76 `i `uc
--> -> 59 `i `uc
--> -> 50 `i `uc
--> -> 41 `i `uc
--> -> 32 `i `uc
--> -> 31 `i `uc
--> -> 22 `i `uc
--> -> 13 `i `uc
--> -> 4 `i `uc
--> -> 106 `i `uc
--> -> 99 `i `uc
--> -> 120 `i `uc
--> -> 113 `i `uc
--> -> 78 `i `uc
--> -> 71 `i `uc
--> -> 92 `i `uc
--> -> 85 `i `uc
--> -> 34 `i `uc
--> -> 43 `i `uc
--> -> 48 `i `uc
--> -> 57 `i `uc
--> -> 6 `i `uc
--> -> 15 `i `uc
--> -> 20 `i `uc
--> -> 29 `i `uc
--> -> 37 `i `uc
--> -> 44 `i `uc
--> -> 55 `i `uc
--> -> 62 `i `uc
--> -> 1 `i `uc
--> -> 8 `i `uc
--> -> 19 `i `uc
--> -> 26 `i `uc
--> -> 109 `i `uc
--> -> 100 `i `uc
--> -> 127 `i `uc
--> -> 118 `i `uc
--> -> 73 `i `uc
--> -> 64 `i `uc
--> -> 91 `i `uc
--> -> 82 `i `uc
--> -> 60 `i `uc
--> -> 53 `i `uc
--> -> 46 `i `uc
--> -> 39 `i `uc
--> -> 24 `i `uc
--> -> 17 `i `uc
--> -> 10 `i `uc
--> -> 3 `i `uc
--> -> 116 `i `uc
--> -> 125 `i `uc
--> -> 102 `i `uc
--> -> 111 `i `uc
--> -> 80 `i `uc
--> -> 89 `i `uc
--> -> 66 `i `uc
--> -> 75 `i `uc
--> -> 23 `i `uc
--> -> 30 `i `uc
--> -> 5 `i `uc
--> -> 12 `i `uc
--> -> 51 `i `uc
--> -> 58 `i `uc
--> -> 33 `i `uc
--> -> 40 `i `uc
--> -> 95 `i `uc
--> -> 86 `i `uc
--> -> 77 `i `uc
--> -> 68 `i `uc
--> -> 123 `i `uc
--> -> 114 `i `uc
--> -> 105 `i `uc
--> -> 96 `i `uc
--> -> 14 `i `uc
--> -> 7 `i `uc
--> -> 28 `i `uc
--> -> 21 `i `uc
--> -> 42 `i `uc
--> -> 35 `i `uc
--> -> 56 `i `uc
--> -> 49 `i `uc
--> -> 70 `i `uc
--> -> 79 `i `uc
--> -> 84 `i `uc
--> -> 93 `i `uc
--> -> 98 `i `uc
--> -> 107 `i `uc
--> -> 112 `i `uc
--> -> 121 `i `uc
-..
-]
-"11 ./Lab3_SD.h
-[; ;./Lab3_SD.h: 11: char GLBL_Resp8 = 0xFF;
-[v _GLBL_Resp8 `uc ~T0 @X0 1 e ]
-[i _GLBL_Resp8
--> -> 255 `i `uc
-]
-"12
-[; ;./Lab3_SD.h: 12: char GLBL_Resp40[5] = {0xFF,0xFF,0xFF,0xFF,0xFF};
-[v _GLBL_Resp40 `uc ~T0 @X0 -> 5 `i e ]
-[i _GLBL_Resp40
-:U ..
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
--> -> 255 `i `uc
-..
-]
-"13
-[; ;./Lab3_SD.h: 13: char GLBL_WriteBuffer[512];
-[v _GLBL_WriteBuffer `uc ~T0 @X0 -> 512 `i e ]
+"9 buttons.c
+[; ;buttons.c: 9: void BrassButtons_Init(void)
+[v _BrassButtons_Init `(v ~T0 @X0 1 ef ]
 "14
-[; ;./Lab3_SD.h: 14: char GLBL_ReadBuffer[512];
-[v _GLBL_ReadBuffer `uc ~T0 @X0 -> 512 `i e ]
-[v $root$_main `(v ~T0 @X0 0 e ]
-"7 Lab3_Main.c
-[; ;Lab3_Main.c: 7: void main(void) {
-[v _main `(v ~T0 @X0 1 ef ]
+[; ;buttons.c: 14: {
 {
-[e :U _main ]
+[e :U _BrassButtons_Init ]
 [f ]
-"8
-[; ;Lab3_Main.c: 8:     TRISCbits.TRISC6 = 0;
-[e = . . _TRISCbits 0 6 -> -> 0 `i `uc ]
-"9
-[; ;Lab3_Main.c: 9:     TRISCbits.TRISC7 = 0;
-[e = . . _TRISCbits 0 7 -> -> 0 `i `uc ]
-"12
-[; ;Lab3_Main.c: 12:     OSCCON = 0xF4;
-[e = _OSCCON -> -> 244 `i `uc ]
-"13
-[; ;Lab3_Main.c: 13:     while(OSCSTATbits.HFIOFR == 0);
-[e $U 1732  ]
-[e :U 1733 ]
-[e :U 1732 ]
-[e $ == -> . . _OSCSTATbits 0 4 `i -> 0 `i 1733  ]
-[e :U 1734 ]
 "16
-[; ;Lab3_Main.c: 16:     SPI_Init();
-[e ( _SPI_Init ..  ]
+[; ;buttons.c: 16:     ANSELB = 0;
+[e = _ANSELB -> -> 0 `i `uc ]
 "17
-[; ;Lab3_Main.c: 17:     SD_Init();
-[e ( _SD_Init ..  ]
+[; ;buttons.c: 17:     TRISB = 0b00001110;
+[e = _TRISB -> -> 14 `i `uc ]
 "18
-[; ;Lab3_Main.c: 18:     LCD_Init();
-[e ( _LCD_Init ..  ]
-"23
-[; ;Lab3_Main.c: 23:     PORTCbits.RC5 = 1;
-[e = . . _PORTCbits 0 5 -> -> 1 `i `uc ]
-"24
-[; ;Lab3_Main.c: 24:     LCD_Print("Hello World!\n");
-[e ( _LCD_Print (1 :s 1C ]
-"25
-[; ;Lab3_Main.c: 25:     LCD_Print("This was\b\b\bis the 2nd line");
-[e ( _LCD_Print (1 :s 2C ]
-"27
-[; ;Lab3_Main.c: 27:     while(1);
-[e :U 1736 ]
-[e :U 1735 ]
-[e $U 1736  ]
-[e :U 1737 ]
-"28
-[; ;Lab3_Main.c: 28:     return;
+[; ;buttons.c: 18:     PORTB = 0;
+[e = _PORTB -> -> 0 `i `uc ]
+"21
+[; ;buttons.c: 21:     return;
 [e $UE 1731  ]
-"29
-[; ;Lab3_Main.c: 29: }
+"23
+[; ;buttons.c: 23: }
 [e :UE 1731 ]
 }
-[a 2C 84 104 105 115 32 119 97 115 8 8 8 105 115 32 116 104 101 32 50 110 100 32 108 105 110 101 0 ]
-[a 1C 72 101 108 108 111 32 87 111 114 108 100 33 10 0 ]
+"26
+[; ;buttons.c: 26: unsigned char BrassButtons_Pressed(void)
+[v _BrassButtons_Pressed `(uc ~T0 @X0 1 ef ]
+"34
+[; ;buttons.c: 34: {
+{
+[e :U _BrassButtons_Pressed ]
+[f ]
+"35
+[; ;buttons.c: 35:     return PORTB >> 1;
+[e ) -> >> -> _PORTB `i -> 1 `i `uc ]
+[e $UE 1732  ]
+"36
+[; ;buttons.c: 36: }
+[e :UE 1732 ]
+}
+"38
+[; ;buttons.c: 38: unsigned char Check_Buttons(unsigned char encoded_byte)
+[v _Check_Buttons `(uc ~T0 @X0 1 ef1`uc ]
+"41
+[; ;buttons.c: 41: {
+{
+[e :U _Check_Buttons ]
+"38
+[; ;buttons.c: 38: unsigned char Check_Buttons(unsigned char encoded_byte)
+[v _encoded_byte `uc ~T0 @X0 1 r1 ]
+"41
+[; ;buttons.c: 41: {
+[f ]
+"42
+[; ;buttons.c: 42:     unsigned char correct_buttons = (0b00001110 & encoded_byte) >> 1;
+[v _correct_buttons `uc ~T0 @X0 1 a ]
+[e = _correct_buttons -> >> & -> 14 `i -> _encoded_byte `i -> 1 `i `uc ]
+"43
+[; ;buttons.c: 43:     if(BrassButtons_Pressed() == correct_buttons)
+[e $ ! == -> ( _BrassButtons_Pressed ..  `i -> _correct_buttons `i 1734  ]
+"44
+[; ;buttons.c: 44:         return 1;
+[e ) -> -> 1 `i `uc ]
+[e $UE 1733  ]
+[e $U 1735  ]
+"45
+[; ;buttons.c: 45:     else return 0;
+[e :U 1734 ]
+[e ) -> -> 0 `i `uc ]
+[e $UE 1733  ]
+[e :U 1735 ]
+"46
+[; ;buttons.c: 46: }
+[e :UE 1733 ]
+}

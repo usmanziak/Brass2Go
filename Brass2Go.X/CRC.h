@@ -1,5 +1,5 @@
-#ifndef LAB3_CRC_H
-#define	LAB3_CRC_H
+#ifndef B2G_CRC_H
+#define	B2G_CRC_H
 
 /* ---------------------------- Global Variables ---------------------------- */
 

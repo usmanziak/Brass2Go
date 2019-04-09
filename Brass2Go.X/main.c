@@ -8,6 +8,7 @@
 #include "wave.h"
 #include "error.h"
 #include "buttons.h"
+#include "LCD.h"
 
 //#pragma config FOSC = ECH
 //#pragma config CLKOUTEN = ON

@@ -21,8 +21,8 @@ void main(void) {
 //    LCD_Write(0x80 | 0x00); // set DDRAM address
     
     LCD_DATA_MODE();
-    LCD_Print("Hello World!");
-    
+    LCD_Print("Hello World!\n");
+    LCD_Print("This was\b\b\bis the 2nd line");
     
     while(1);
     return;

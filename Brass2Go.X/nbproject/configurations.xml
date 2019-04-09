@@ -13,6 +13,7 @@
       <itemPath>wave.h</itemPath>
       <itemPath>error.h</itemPath>
       <itemPath>buttons.h</itemPath>
+      <itemPath>LCD.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -27,6 +28,7 @@
       <itemPath>main.c</itemPath>
       <itemPath>DAC.c</itemPath>
       <itemPath>buttons.c</itemPath>
+      <itemPath>LCD.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

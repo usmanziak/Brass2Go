@@ -1812,14 +1812,87 @@ Version 4.0 HI-TECH Software Intermediate Code
 [v _str `*uc ~T0 @X0 1 r1 ]
 [f ]
 "96
-[; ;LCD_Drivers.c: 96:     while (*str) LCD_Write(*(str++));
+[; ;LCD_Drivers.c: 96:     while (*str) {
 [e $U 1736  ]
 [e :U 1737 ]
-[e ( _LCD_Write (1 *U ++ _str * -> -> 1 `i `x -> -> # *U _str `i `x ]
+{
+"97
+[; ;LCD_Drivers.c: 97:         switch(*str) {
+[e $U 1740  ]
+{
+"98
+[; ;LCD_Drivers.c: 98:             case '\n':
+[e :U 1741 ]
+"99
+[; ;LCD_Drivers.c: 99:                 PORTCbits.RC5 = 0;
+[e = . . _PORTCbits 0 5 -> -> 0 `i `uc ]
+"100
+[; ;LCD_Drivers.c: 100:                 LCD_Write(0x80 | 0x40);
+[e ( _LCD_Write (1 -> | -> 128 `i -> 64 `i `uc ]
+"101
+[; ;LCD_Drivers.c: 101:                 PORTCbits.RC5 = 1;
+[e = . . _PORTCbits 0 5 -> -> 1 `i `uc ]
+"102
+[; ;LCD_Drivers.c: 102:                 break;
+[e $U 1739  ]
+"103
+[; ;LCD_Drivers.c: 103:             case '\r':
+[e :U 1742 ]
+"104
+[; ;LCD_Drivers.c: 104:                 PORTCbits.RC5 = 0;
+[e = . . _PORTCbits 0 5 -> -> 0 `i `uc ]
+"105
+[; ;LCD_Drivers.c: 105:                 LCD_Write(0x02);
+[e ( _LCD_Write (1 -> -> 2 `i `uc ]
+"106
+[; ;LCD_Drivers.c: 106:                 PORTCbits.RC5 = 1;
+[e = . . _PORTCbits 0 5 -> -> 1 `i `uc ]
+"107
+[; ;LCD_Drivers.c: 107:                 break;
+[e $U 1739  ]
+"108
+[; ;LCD_Drivers.c: 108:             case '\b':
+[e :U 1743 ]
+"109
+[; ;LCD_Drivers.c: 109:                 PORTCbits.RC5 = 0;
+[e = . . _PORTCbits 0 5 -> -> 0 `i `uc ]
+"110
+[; ;LCD_Drivers.c: 110:                 LCD_Write(0x10);
+[e ( _LCD_Write (1 -> -> 16 `i `uc ]
+"111
+[; ;LCD_Drivers.c: 111:                 PORTCbits.RC5 = 1;
+[e = . . _PORTCbits 0 5 -> -> 1 `i `uc ]
+"112
+[; ;LCD_Drivers.c: 112:                 break;
+[e $U 1739  ]
+"113
+[; ;LCD_Drivers.c: 113:             default:
+[e :U 1744 ]
+"114
+[; ;LCD_Drivers.c: 114:                 LCD_Write(*str);
+[e ( _LCD_Write (1 *U _str ]
+"115
+[; ;LCD_Drivers.c: 115:         }
+}
+[e $U 1739  ]
+[e :U 1740 ]
+[e [\ -> *U _str `i , $ -> -> 10 `ui `i 1741
+ , $ -> -> 13 `ui `i 1742
+ , $ -> -> 8 `ui `i 1743
+ 1744 ]
+[e :U 1739 ]
+"116
+[; ;LCD_Drivers.c: 116:         ++str;
+[e =+ _str * -> -> 1 `i `x -> -> # *U _str `i `x ]
+"117
+[; ;LCD_Drivers.c: 117:     }
+}
 [e :U 1736 ]
+"96
+[; ;LCD_Drivers.c: 96:     while (*str) {
 [e $ != -> *U _str `i -> 0 `i 1737  ]
 [e :U 1738 ]
-"97
-[; ;LCD_Drivers.c: 97: }
+"118
+[; ;LCD_Drivers.c: 118: }
 [e :UE 1735 ]
 }
