@@ -1,9 +1,6 @@
-#include <pic16f1778.h>
-#include "LCD_Drivers.h"
-#include "Lab3_Config.h"
-#include "Lab3_SPI.h"
 #include <xc.h>
 #include <pic.h>
+#include "LCD.h"
 
 void LCD_Init(void) {
     
