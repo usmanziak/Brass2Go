@@ -1,22 +1,36 @@
 import sys
 import os
-import librosa
+from mido import MidiFile
+import mido
 
-button_dict = {"0": 0, "1": 1, "2": 2, "3": 3,
+button_dict = {"0": 0, "1": 1, "2": 2,
                "3": 4, "12": 3, "13": 5, "23": 6, "123": 7}
+note_button_dict = {52: 7, 53: 5, 54: 6, 55: 3, 56: 1, 57: 2,
+58: 0, 59: 7,60: 5, 61: 6, 62: 3, 63: 1, 64: 2, 65: 0, 66: 6,
+67: 3, 68: 1, 69: 2, 70: 0, 71: 3, 72: 1, 73: 2,74: 0, 75: 1,
+76: 2, 77: 0, 78: 6, 79: 3,80: 1, 81: 2, 82: 0, 83: 6, 84: 1,
+85: 2, 86: 0, 87: 1, 88: 2, 89: 0, 90: 6, 91: 3, 92: 1, 93: 2,
+94: 0
+}
 
 
 def get_note_sectors(filename):
-    """Uses librosa to find the the sample of each new note
-    Returns: List of sample numbers                     """
-    # TODO: Downsample audio signal
-    y, sr = librosa.load(filename, sr=44100)
-    tempo, note_frames = librosa.beat.beat_track(y=y, sr=sr)
-    note_sectors = [i * 2 for i in note_frames]
-    # each sector is 256 samples
-    # We may have to shift the samples so they are triggered a little later to
-    # account for human reaction time e.g. [i * 2 + 10 for i in note_frames]
-    return note_sectors
+    """Uses mido to parse MIDI file and return a list in the format of
+        [(note, sector_where_note_occurs),...]"""
+    mid = MidiFile(filename)
+    note_time_list = []
+    running_time = 0
+    for msg in mid:
+        running_time += msg.time
+
+        if not msg.is_meta:
+            if msg.type == 'note_on':
+
+                if msg.velocity != 0:
+                    note_time_list.append((msg.note, running_time))
+    note_sector_list = [(note, int(note_time*44100/256 + 1)) for note, note_time in note_time_list]
+    print(note_time_list)
+    return note_sector_list
 
 
 def add_note_flags(filename, sector_list, note_list):
@@ -50,17 +64,17 @@ def main():
     if len(sys.argv) != 3:
         print("""Incorrect number of command-line arguments
 The specific format should be
-SCRIPT.py 'INPUT_AUDIO_FILE.wav' 'INPUT_NOTE_FILE.txt'\n""")
+SCRIPT.py 'INPUT_AUDIO_FILE.wav' 'INPUT_MIDI_FILE.mid'\n""")
         quit()
     filename_audio_in = sys.argv[1]
-    filename_notes_in = sys.argv[2]
-    notes_file = open(filename_notes_in)
-    note_list = notes_file.read().replace(",", " ").split()
+    filename_midi_in = sys.argv[2]
 
-    # Replace commas with whitespace for .split() purposes
+    note_sector_list = get_note_sectors(filename_midi_in)
+
     try:
-        sector_list = get_note_sectors(filename_audio_in)
-        note_list = [button_dict.get(i) for i in note_list]
+        note_list = [note_button_dict.get(notes) for notes, sectors in note_sector_list]
+        sector_list = [sectors for notes, sectors in note_sector_list]
+        print(note_list)
         add_note_flags(filename_audio_in, sector_list, note_list)
         print("Successfully formatted file")
     except OSError:
