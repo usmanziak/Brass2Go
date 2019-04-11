@@ -11,7 +11,7 @@
 void SD_Init(void) {
     //Step 1:
     //Set Chip Select high, and write 0xFF for at least 74 cycles.
-    SD_SET_CS_HIGH();
+    SD_DESELECT();
     
     SPI_Write(0xFF);
     SPI_Write(0xFF);
@@ -24,8 +24,8 @@ void SD_Init(void) {
     SPI_Write(0xFF);
     SPI_Write(0xFF);
     
-    SD_SET_CS_LOW();
-
+    SD_SELECT();
+        
     //Step 2:
     //Send CMD0 with argument 0x00000000.
     //Expect 8-bit response 0x01.
@@ -66,6 +66,8 @@ void SD_Init(void) {
         SD_Read8bitResponse();
         asm("NOP");
     } while (SD_Check8bitResponse(0x00) == false);
+    
+    SD_DESELECT();
 }
 
 //REQUIRES: SPI interface initialized using SPI_Init.

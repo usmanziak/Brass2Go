@@ -7,6 +7,35 @@
 #include "SPI.h"
 #include "SD.h"
 
+#define SD_CS_PIN LATC7
+
+/* ------------------ #define based Function Declarations ------------------- */
+
+#define READ_BYTE() {   \
+                    SSP1BUF = 0xFF; \
+                    while(SSP1STATbits.BF == 0);    \
+                    sdata[1] = SSP1BUF; \
+                    ++byteCounter;  \
+                    }   \
+
+
+//REQUIRES: SPI interface initialized using SPI_Init.
+//PROMISES: Sets the Chip Select line for the SD Card high.
+//          Clears any collision detected by the SPI interface.
+#define SD_DESELECT(){           \
+    SD_CS_PIN = 1;              \
+    SSP1CON1bits.WCOL = 0;          \
+    }
+
+//REQUIRES: SPI interface initialized using SPI_Init.
+//PROMISES: Sets the Chip Select line for the SD Card low.
+//          Clears any collision detected by the SPI interface.
+#define SD_SELECT(){            \
+    SD_CS_PIN = 0;              \
+    SSP1CON1bits.WCOL = 0;          \
+    }
+
+
 /* ---------------------------- Global Variables ---------------------------- */
 
 char GLBL_Resp8 = 0xFF;
@@ -97,25 +126,6 @@ bool SD_OpenBlock(long address);
 bool SD_OpenStream(long address);
 
 bool SD_CloseStream();
-
-
-/* ------------------ #define based Function Declarations ------------------- */
-
-//REQUIRES: SPI interface initialized using SPI_Init.
-//PROMISES: Sets the Chip Select line for the SD Card high.
-//          Clears any collision detected by the SPI interface.
-#define SD_SET_CS_HIGH(){           \
-    PORTCbits.RC7 = 1;              \
-    SSP1CON1bits.WCOL = 0;          \
-    }
-
-//REQUIRES: SPI interface initialized using SPI_Init.
-//PROMISES: Sets the Chip Select line for the SD Card low.
-//          Clears any collision detected by the SPI interface.
-#define SD_SET_CS_LOW(){            \
-    PORTCbits.RC7 = 0;              \
-    SSP1CON1bits.WCOL = 0;          \
-    }
 
 /* -------------------------------------------------------------------------- */
 

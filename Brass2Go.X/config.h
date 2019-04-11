@@ -9,5 +9,7 @@
 #include <stdbool.h>
 #include <xc.h>
 
+#define delay(ms) __delay_ms(ms)
+
 #endif	/* CONFIGURATION_H */
 

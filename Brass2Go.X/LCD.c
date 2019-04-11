@@ -1,10 +1,11 @@
 #include <xc.h>
 #include <pic.h>
 #include "LCD.h"
+#include "config.h"
 
 void LCD_Init(void) {
     
-    LCD_Select();
+    LCD_SELECT();
     TRISC5 = 0; //Set RC5 to digital output
     __delay_ms(50);
     
@@ -17,6 +18,9 @@ void LCD_Init(void) {
     __delay_ms(15);
     
     LCD_Write(0b00000110);//Entry mode
+    
+    LCD_DESELECT();
+}
     
     // create a new character (cross))
    /*
@@ -71,18 +75,7 @@ void LCD_Init(void) {
     RS_PIN = 0;
     LCD_Write(0x10000000); // set DDRAM address
     */
-}
-
-void SD_Select(void) {
-    PORTCbits.RC7 = 0;    // SD Chip-Select Enabled
-    PORTCbits.RC6 = 1;    // LCD Chip-Select NOT-Enabled
-}
-void LCD_Select(void) {
-   
-    PORTCbits.RC7 = 1;    // SD Chip-Select NOT-Enabled
-    PORTCbits.RC6 = 0;    // LCD Chip-Select Enabled
-    
-}
+//}
 
 void LCD_Write(char c) {
     SSP1BUF = c;

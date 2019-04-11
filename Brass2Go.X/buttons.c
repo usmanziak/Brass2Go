@@ -6,6 +6,7 @@
  */
 #include <xc.h>
 #include "buttons.h"
+
 void BrassButtons_Init(void)
 /*  REQUIRES: Nothing
  * 
@@ -13,12 +14,7 @@ void BrassButtons_Init(void)
  */
 {
     
-    ANSELB = 0;
-    TRISB = 0b00001110;
-    PORTB = 0;
-    
-    
-    return;
+    TRISB = 0b00001110;    
     
 }
 
