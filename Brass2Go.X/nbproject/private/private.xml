@@ -3,7 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Toshi/Desktop/school/second%20year/ILS/Brass2Go/Brass2Go.X/main.c</file>
+            <file>file:/C:/Users/lukeg/OneDrive%20-%20University%20of%20Calgary/PIC/Brass2Go/Brass2Go.X/LCD.h</file>
+            <file>file:/C:/Users/lukeg/OneDrive%20-%20University%20of%20Calgary/PIC/Brass2Go/Brass2Go.X/CRC.h</file>
+            <file>file:/C:/Users/lukeg/OneDrive%20-%20University%20of%20Calgary/PIC/Brass2Go/Brass2Go.X/error.h</file>
+            <file>file:/C:/Users/lukeg/OneDrive%20-%20University%20of%20Calgary/PIC/Brass2Go/Brass2Go.X/main.c</file>
+            <file>file:/C:/Users/lukeg/OneDrive%20-%20University%20of%20Calgary/PIC/Brass2Go/Brass2Go.X/buttons.c</file>
+            <file>file:/C:/Users/lukeg/OneDrive%20-%20University%20of%20Calgary/PIC/Brass2Go/Brass2Go.X/config.h</file>
+            <file>file:/C:/Users/lukeg/OneDrive%20-%20University%20of%20Calgary/PIC/Brass2Go/Brass2Go.X/buttons.h</file>
+            <file>file:/C:/Users/lukeg/OneDrive%20-%20University%20of%20Calgary/PIC/Brass2Go/Brass2Go.X/LCD.c</file>
+            <file>file:/C:/Users/lukeg/OneDrive%20-%20University%20of%20Calgary/PIC/Brass2Go/Brass2Go.X/wave.h</file>
+            <file>file:/C:/Users/lukeg/OneDrive%20-%20University%20of%20Calgary/PIC/Brass2Go/Brass2Go.X/SD.c</file>
+            <file>file:/C:/Users/lukeg/OneDrive%20-%20University%20of%20Calgary/PIC/Brass2Go/Brass2Go.X/SPI.c</file>
+            <file>file:/C:/Users/lukeg/OneDrive%20-%20University%20of%20Calgary/PIC/Brass2Go/Brass2Go.X/timer.h</file>
+            <file>file:/C:/Users/lukeg/OneDrive%20-%20University%20of%20Calgary/PIC/Brass2Go/Brass2Go.X/SPI.h</file>
+            <file>file:/C:/Users/lukeg/OneDrive%20-%20University%20of%20Calgary/PIC/Brass2Go/Brass2Go.X/SD.h</file>
         </group>
     </open-files>
 </project-private>

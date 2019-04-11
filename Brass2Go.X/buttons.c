@@ -13,8 +13,12 @@ void BrassButtons_Init(void)
  *  PROMISES: Sets Pins RB1, RB2, RB3 as digital output
  */
 {
+    ANSELB = 0;
     
-    TRISB = 0b00001110;    
+    TRISB1 = 1;
+    TRISB2 = 1;
+    TRISB3 = 1;
+    return;
     
 }
 
@@ -28,7 +32,7 @@ unsigned char BrassButtons_Pressed(void)
  *                if 23 is pressed, it will return 0b00000110
  */
 {
-    return PORTB >> 1;
+    return (0b00001110 & PORTB) >> 1;
 }
 
 unsigned char Check_Buttons(unsigned char encoded_byte)

@@ -24,7 +24,10 @@
 #define OFF1    LATCbits.LATC1 = 0;
 #define ON6     LATBbits.LATB0 = 1;
 #define OFF6    LATBbits.LATB0 = 0;
-
+#define ONRED   LATBbits.LATB5 = 1;
+#define OFFRED  LATBbits.LATB5 = 0;
+#define ONGREEN LATBbits.LATB4 = 1;
+#define OFFGREEN LATBbits.LATB4 = 0;
 unsigned short channels;
 unsigned long  sampRate;
 unsigned short bitsPerSamp;
@@ -118,7 +121,8 @@ void init() {
     
     TRISB1 = 1;
     ANSB1 = 0;
-    
+    TRISB4 = 0; //GREEN LED
+    TRISB5 = 0; //RED LED
     TRISC0 = 0;
     TRISC1 = 0;
     TRISB0 = 0;
@@ -240,9 +244,18 @@ void task_playing() {
                         first_byte = sdata[0];
                         if(first_byte % 2 == 1){        //IF BIT 0 == 1
                             ++total_presses;
-                            ON6
                             if(Check_Buttons(first_byte) == 0)
-                                ++number_of_errors;
+                            {
+                                
+                                ONRED
+                                OFFGREEN
+                                number_of_errors++;
+                            }else
+                            {
+                                OFFRED
+                                ONGREEN
+                            }
+                                
                         }
                     }
                 break;
