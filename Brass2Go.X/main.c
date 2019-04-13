@@ -28,6 +28,8 @@
 #define OFFRED  LATBbits.LATB5 = 0;
 #define ONGREEN LATBbits.LATB4 = 1;
 #define OFFGREEN LATBbits.LATB4 = 0;
+
+#pragma config MCLRE = OFF
 unsigned short channels;
 unsigned long  sampRate;
 unsigned short bitsPerSamp;
@@ -160,13 +162,19 @@ short total_presses = 0;
 
 void task_playing();
 void task_analysis();
-    
+void task_startScreen();
     
 void main(void) {
     init();
     address = 0;
     
     LCD_SELECT();
+    LCD_DATA_MODE();
+    task_startScreen();
+    LCD_CMD_MODE();
+    
+    LCD_Write(0b00000001); //Clear display
+    __delay_ms(15);
     LCD_DATA_MODE();
     LCD_Print("Playing!\n");
     LCD_DESELECT();
@@ -194,95 +202,111 @@ void task_analysis() {
     sprintf(message, "%d/%d wrong\n%.2f%% correct", number_of_errors, total_presses, 100*(float)(total_presses-number_of_errors)/total_presses);
     LCD_Print(message);
     
-    while(1);
+    while(!PORTBbits.RB1);
+    delay(1000);
+    RESET();
 }
 
 void task_playing() {
 
-    if (blockIndex >= 512) { // end of block condition
-        if (byteCounter >= dataLength) {
-            PIE1bits.TMR2IE = 0;
-            SD_CloseStream();
-            SD_DESELECT();
-            task = &task_analysis;
-            return;
-        }
-        ++address;
-        blockIndex = 0;
-        SPI_Read();
-        SPI_Read();
-        SPI_Read();
-        SPI_Read();
-        check_buttons = true;
-        OFF6
-//                    ON6
-    } else {
-        PIE1bits.TMR2IE = 0;        // disable timer interrupts while accessing buffer_read_index
-        if (buffer_write_index != buffer_read_index) { // read into the buffer if there's space
-            PIE1bits.TMR2IE = 1;
-//                        ON1
-            switch (channels) {
-                case 1:
-                    SSP1BUF = 0xFF;
-                    while(SSP1STATbits.BF == 0);
-                    sdata[0] = SSP1BUF;
-                    
-                    SSP1BUF = 0xFF;
-                    while(SSP1STATbits.BF == 0);
-                    sdata[1] = SSP1BUF;
-
-                    byteCounter += 2;
-                    
-                    lbuffer[ buffer_write_index ] = /*rbuffer[ buffer_write_index ] =*/ *((short*)sdata) - 0x8000;
-                    ++buffer_write_index;
-
-                    //CHECK IF THE CORRECT BUTTONS ARE PRESSED AND 
-                    //ADD TO THE NUMBER OF ERRORS IF IT IS WRONG
-                    
-                    if(check_buttons) {
-                        check_buttons = false;
-                        first_byte = sdata[0];
-                        if(first_byte % 2 == 1){        //IF BIT 0 == 1
-                            ++total_presses;
-                            if(Check_Buttons(first_byte) == 0)
-                            {
-                                
-                                ONRED
-                                OFFGREEN
-                                number_of_errors++;
-                            }else
-                            {
-                                OFFRED
-                                ONGREEN
-                            }
-                                
-                        }
-                    }
-                break;
-                case 2:
-                    if (samplePending) {
-                        samplePending = false;
-                        sdata[0] = SPI_Read();
-                        sdata[1] = SPI_Read();
-                        rbuffer[ buffer_write_index++ ] = *((short*)sdata) - 0x8000;
-                        __nop();
-                    } else {
-                        samplePending = true;
-                        sdata[0] = SPI_Read();
-                        sdata[1] = SPI_Read();
-                        lbuffer[ buffer_write_index ] = *((short*)sdata) - 0x8000;
-                    }
-                break;
-                default:
-                    error(CHANNELS);
+    while(1)
+    {
+        if (blockIndex >= 512) { // end of block condition
+            if (byteCounter >= dataLength) {
+                PIE1bits.TMR2IE = 0;
+                SD_CloseStream();
+                SD_DESELECT();
+                task = &task_analysis;
+                return;
             }
+            ++address;
+            blockIndex = 0;
+            SPI_Read();
+            SPI_Read();
+            SPI_Read();
+            SPI_Read();
+            check_buttons = true;
+            OFF6
+    //                    ON6
+        } else {
+            PIE1bits.TMR2IE = 0;        // disable timer interrupts while accessing buffer_read_index
+            if (buffer_write_index != buffer_read_index) { // read into the buffer if there's space
+                PIE1bits.TMR2IE = 1;
+    //                        ON1
+                switch (channels) {
+                    case 1:
+                        SSP1BUF = 0xFF;
+                        while(SSP1STATbits.BF == 0);
+                        sdata[0] = SSP1BUF;
 
-//                        OFF1
+                        SSP1BUF = 0xFF;
+                        while(SSP1STATbits.BF == 0);
+                        sdata[1] = SSP1BUF;
 
-            buffer_write_index %= BUFFER_SIZE;
-            blockIndex += 2;
+                        byteCounter += 2;
 
-        } else PIE1bits.TMR2IE = 1;
+                        lbuffer[ buffer_write_index ] = /*rbuffer[ buffer_write_index ] =*/ *((short*)sdata) - 0x8000;
+                        ++buffer_write_index;
+
+                        //CHECK IF THE CORRECT BUTTONS ARE PRESSED AND 
+                        //ADD TO THE NUMBER OF ERRORS IF IT IS WRONG
+
+                        if(check_buttons) {
+                            check_buttons = false;
+                            first_byte = sdata[0];
+                            if(first_byte % 2 == 1){        //IF BIT 0 == 1
+                                ++total_presses;
+                                ON6
+
+
+                                if(Check_Buttons(first_byte) == 0)
+                                {
+
+                                    ONRED
+                                    OFFGREEN
+                                    ++number_of_errors;
+                                }else
+                                {
+                                    OFFRED
+                                    ONGREEN
+                                }
+
+                            }
+                        }
+                    break;
+                    case 2:
+                        if (samplePending) {
+                            samplePending = false;
+                            sdata[0] = SPI_Read();
+                            sdata[1] = SPI_Read();
+                            rbuffer[ buffer_write_index++ ] = *((short*)sdata) - 0x8000;
+                            __nop();
+                        } else {
+                            samplePending = true;
+                            sdata[0] = SPI_Read();
+                            sdata[1] = SPI_Read();
+                            lbuffer[ buffer_write_index ] = *((short*)sdata) - 0x8000;
+                        }
+                    break;
+                    default:
+                        error(CHANNELS);
+                }
+
+    //                        OFF1
+
+                buffer_write_index %= BUFFER_SIZE;
+                blockIndex += 2;
+
+            } else PIE1bits.TMR2IE = 1;
+        }
     }
-            
+
+}
+void task_startScreen()
+{
+    LCD_Print("Brass2Go! Press\nStart to play");
+    while(PORTBbits.RB1 == 0);
+    delay(500);
+    return;
+    
 }

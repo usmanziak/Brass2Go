@@ -43,7 +43,7 @@ def get_note_sectors(filename):
 
     # Convert times to SD card sector (44100 samples per second,
     # 256 samples per sector and 2 bytes per sample)
-    note_sector_list = [(note, int(note_time*44100/256 + 1)) for note, note_time in note_time_list]
+    note_sector_list = [(note, int(note_time*44100/256 + 5)) for note, note_time in note_time_list]
 
     return note_sector_list
 

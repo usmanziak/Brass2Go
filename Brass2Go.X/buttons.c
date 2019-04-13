@@ -40,7 +40,7 @@ unsigned char Check_Buttons(unsigned char encoded_byte)
 //Pressed (encoded byte)
 {
     unsigned char correct_buttons =  (0b00001110 & encoded_byte) >> 1;
-    if(BrassButtons_Pressed() == correct_buttons)
+    if(((0b00001110 & PORTB) >> 1) == correct_buttons)
         return 1;
-    else return 0;
+    return 0;
 }
