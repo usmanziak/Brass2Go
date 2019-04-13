@@ -22,17 +22,29 @@ def get_note_sectors(filename):
     note_time_list = []
     running_time = 0
 
+    trumpets_found = 0 # number of trumpets found
+    trumpet_channel = None
+
     for msg in mid:
         running_time += msg.time
-
         if not msg.is_meta:
-            if ((msg.type == 'note_on' and msg.velocity != 0) or msg.type == 'note_off'):
+
+            if msg.type == 'program_change' and msg.program == 56:
+                # for first trumpet found, find it's channel
+                if trumpets_found == 0:
+                    trumpets_found = 1
+                    trumpet_channel = msg.channel
+                else: # Multiple trumpet case
+                    print("Error: Muliple Trumpets in MIDI file\nQuitting...")
+                    quit()
+
+            if ((msg.type == 'note_on' and msg.velocity != 0 and msg.channel == trumpet_channel) or msg.type == 'note_off'):
                     note_time_list.append((msg.note, running_time))
 
     # Convert times to SD card sector (44100 samples per second,
     # 256 samples per sector and 2 bytes per sample)
     note_sector_list = [(note, int(note_time*44100/256 + 1)) for note, note_time in note_time_list]
-    # print(note_time_list)
+
     return note_sector_list
 
 
@@ -89,7 +101,7 @@ SCRIPT.py 'INPUT_AUDIO_FILE.wav' 'INPUT_MIDI_FILE.mid'\n""")
         add_note_flags(filename_audio_in, sector_list, note_list)
         print("Successfully formatted file to ", "formatted-"+filename_audio_in )
     except OSError:
-        print("An error occured while formatting the file \nQuitting...")
+        print("An error occured with while formatting the file \nQuitting...")
         quit()
 
 
