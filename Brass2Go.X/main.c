@@ -118,7 +118,9 @@ void task_playing() {
         if (blockIndex >= 512) { // end of block condition
 
             DAC_INT(0);
-            SSP1BUF = 0xFF;
+
+            // Check for end of the file
+
             if (byteCounter >= dataLength) {
                 PIE1bits.TMR2IE = 0;
                 SD_CloseStream();
@@ -126,19 +128,26 @@ void task_playing() {
                 task = &task_analysis;
                 return;
             }
+
+
+            // Read 4 CRC bytes at the end of the block
+            SSP1BUF = 0xFF;
             while(SSP1STATbits.BF == 0);
             SSP1BUF = 0xFF;
-            ++address;
-            blockIndex = 0;
             while(SSP1STATbits.BF == 0);
             SSP1BUF = 0xFF;
+            while(SSP1STATbits.BF == 0);
+            SSP1BUF = 0xFF;
+            while(SSP1STATbits.BF == 0);
             
-            check_buttons = true;
-            while(SSP1STATbits.BF == 0);
-            SSP1BUF = 0xFF;
-            while(SSP1STATbits.BF == 0);
             DAC_INT(1);
             
+            check_buttons = true;
+            ++address;
+            blockIndex = 0;
+            
+            
+            // Check for 0 -> 1 transition of the pause button
             current_pause = PAUSEBUTTON;
             if(current_pause && !previous_pause) {
                 task = &task_paused;
@@ -153,28 +162,29 @@ void task_playing() {
 
                 if (channels == 1) {
                     LATA6 = 1;
+                    
+                    // Read 16 bit sample into sdata_lo/hi
                     SSP1BUF = 0xFF;
                     while(SSP1STATbits.BF == 0);
                     sdata_lo = SSP1BUF;
-
                     SSP1BUF = 0xFF;
                     while(SSP1STATbits.BF == 0);
                     sdata_hi = SSP1BUF;
 
-
+                    //Write to the buffer
                     lbuffer[ buffer_write_index ] =  ((sdata_hi << 8) | sdata_lo) - 0x8000;
 
 //                    LATA6 = 0;
-
+                    
                     byteCounter += 2;
                     blockIndex += 2;
 
                     //CHECK IF THE CORRECT BUTTONS ARE PRESSED AND 
                     //ADD TO THE NUMBER OF ERRORS IF IT IS WRONG
-
+                    
                     if(check_buttons) {
                         check_buttons = false;
-                        first_byte = sdata[0];
+                        first_byte = sdata_lo;
                         if(first_byte % 2 == 1){        //IF BIT 0 == 1
 
                             // note is to be played here, so check which buttons are depressed 
@@ -275,19 +285,18 @@ void task_startScreen()
 
 void task_paused()
 { 
+    //Disable SD Card SPI interface and enable LCD
     DAC_INT(0);
-    
+    SD_CloseStream();
     SD_DESELECT();
+
     LCD_SELECT();
     LCD_CMD_MODE();
+    
     LCD_Write(LCD_CLS); //Clear display
     delay(5);
     LCD_DATA_MODE();
     LCD_Print("Paused");
-    
-    /* FIXME:
-     Once LCD_Write() is called, the SD card gives a weird value for every 256th sample, giving noise after playing again
-     */
     
     do {
         previous_pause = current_pause;
@@ -303,6 +312,15 @@ void task_paused()
     LCD_DESELECT();
     
     SD_SELECT();
+    // Re-open SD card at the last address
+    SD_OpenStream(address);
+    //Reset buffer
+    buffer_read_index = 0;
+    buffer_write_index = 1;
+     
+    blockIndex = -2; // Adjust blockIndex so we do not read CRC bytes into the buffer
+    
     task = &task_playing;
-    DAC_INT(1);
+    delay(750);// Delay playback so user can get ready to play the next note
+    
 }
