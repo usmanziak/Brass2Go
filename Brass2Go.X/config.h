@@ -8,6 +8,7 @@
 
 #include <stdbool.h>
 #include <xc.h>
+#include <pic.h>
 
 #define delay(ms) __delay_ms(ms)
 

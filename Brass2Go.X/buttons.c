@@ -7,6 +7,9 @@
 #include <xc.h>
 #include "buttons.h"
 
+
+
+
 void BrassButtons_Init(void)
 /*  REQUIRES: Nothing
  * 
@@ -40,7 +43,7 @@ unsigned char Check_Buttons(unsigned char encoded_byte)
 //Pressed (encoded byte)
 {
     unsigned char correct_buttons =  (0b00001110 & encoded_byte) >> 1;
-    if(((0b00001110 & PORTB) >> 1) == correct_buttons)
+    if(BrassButtons_Pressed() == correct_buttons)
         return 1;
-    return 0;
+    else return 0;
 }

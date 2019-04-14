@@ -22,6 +22,35 @@
 #define SCOR_CC "scor"
 #define TIME_CC "time"
 #define TONE_CC "tone"
+#define READINTO(s) readBytes((char*)&s, sizeof(s));
+#define BUFFER_SIZE 32
+
+unsigned short channels;
+unsigned long  sampRate;
+unsigned short bitsPerSamp;
+
+unsigned long byteCounter = 0;
+
+char sdata[2];
+
+//SampleFrame sdata;
+
+short lbuffer[BUFFER_SIZE];
+short rbuffer[BUFFER_SIZE];
+unsigned short buffer_read_index = 0;
+unsigned short buffer_write_index = 1;
+
+short blockIndex = 0;
+unsigned long dataLength;
+char readMessage = 0xFF;
+
+
+long address = 0;
+bool isPlaying = true;
+bool samplePending = false;
+
+
+void openFile(long a);
 
 typedef char FourCC[4];
 

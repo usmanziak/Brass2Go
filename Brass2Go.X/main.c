@@ -1,6 +1,7 @@
 #include <pic.h>
 #include <xc.h>
 #include <stdio.h>
+#include "main.h"
 #include "config.h"
 #include "timer.h"
 #include "SPI.h"
@@ -9,119 +10,15 @@
 #include "wave.h"
 #include "error.h"
 #include "buttons.h"
-
 #include "LCD.h"
 
-//#pragma config FOSC = ECH
-//#pragma config CLKOUTEN = ON
 
-#define BUFFER_SIZE 32
-#define READINTO(s) readBytes((char*)&s, sizeof(s));
-
-#define ON0     LATCbits.LATC0 = 1;
-#define OFF0    LATCbits.LATC0 = 0;
-#define ON1     LATCbits.LATC1 = 1;
-#define OFF1    LATCbits.LATC1 = 0;
-#define ON6     LATBbits.LATB0 = 1;
-#define OFF6    LATBbits.LATB0 = 0;
-#define ONRED   LATBbits.LATB5 = 1;
-#define OFFRED  LATBbits.LATB5 = 0;
-#define ONGREEN LATBbits.LATB4 = 1;
-#define OFFGREEN LATBbits.LATB4 = 0;
-
-#pragma config MCLRE = OFF
-unsigned short channels;
-unsigned long  sampRate;
-unsigned short bitsPerSamp;
-
-unsigned long byteCounter = 0;
-
-char sdata[2];
-
-//SampleFrame sdata;
-
-short lbuffer[BUFFER_SIZE];
-short rbuffer[BUFFER_SIZE];
-unsigned short buffer_read_index = 0;
-unsigned short buffer_write_index = 1;
-
-short blockIndex = 0;
-unsigned long dataLength;
-char readMessage = 0xFF;
-
-BlockState state = CLOSED;
-long address = 0;
-bool isPlaying = true;
-bool samplePending = false;
-
-void (*task)();
-
-////////////////////////////////////////////////////////////////////////////////
-
-inline void pulse() {          // send a test pulse to LATC0;
-    LATCbits.LATC0 = 1;
-    LATCbits.LATC0 = 0;
-}
-
-bool fourCCeq(FourCC a, FourCC b) {
-    for (char i=0; i<4; i++) {
-        if (a[i] != b[i]) return false;
-    }
-    return true;
-}
-
-inline void readBytes(char* dest, int len) {
-    for (int i=0; i<len; i++) {
-        dest[i] = SPI_Read();
-        ++blockIndex;
-        if (blockIndex >= 512) { // end of block condition // format specific
-            SD_CloseBlock();
-            ++address;
-            blockIndex = 0;
-            state = CLOSED;
-        }
-    }
-    
-}
-
-void openFile(long a) {
-    SD_OpenStream(a);
-    state = OPEN;
-    char response = 0xFF;
-    while (response == 0xFF) response = SPI_Read();
-    if (response != 0xFE) error(OPEN_BLOCK);
-    
-    {
-        RiffTag riff;
-        READINTO(riff);
-        if (!fourCCeq(riff.ckID, RIFF_CC)) error(RIFF_HEADER);
-    }{
-        FmtChunk fmt;
-        READINTO(fmt);
-        if (!fourCCeq(fmt.WAVEID, WAVE_CC)) error(WAVE_HEADER);
-        if (!fourCCeq(fmt.fmtHeader.ckID, FMT_CC)) error(FMT_HEADER);
-        if (fmt.formatTag != WAVE_FORMAT_PCM) error(CODEC);
-        if (fmt.bitsPerSamp != 16) error(BIT_DEPTH);
-        
-        channels = fmt.channels;
-        sampRate = fmt.sampRate;
-        
-    }{
-        RiffTag data;
-        READINTO(data);
-        if (!fourCCeq(data.ckID, DATA_CC)) error(DATA_HEADER);
-        dataLength = data.ckSize;
-    }
-        __nop();
-    
-}
 
 void init() {
     // Set the system clock speed to 32MHz and wait for the ready flag.
     OSCCON = 0xF4;
     while(OSCSTATbits.HFIOFR == 0); // wait for clock to settle
     
-    TRISB1 = 1;
     ANSB1 = 0;
     TRISB4 = 0; //GREEN LED
     TRISB5 = 0; //RED LED
@@ -130,6 +27,7 @@ void init() {
     TRISB0 = 0;
     TRISC6 = 0;
     TRISC7 = 0;
+    TRISB0 = 1;
     
 //    LATCbits.LATC6 = 1;
     
@@ -153,17 +51,12 @@ void __interrupt() isr(void) {          // modifies buffer_read_index
 //    OFF0
 }
 
-////////////////////////////////////////////////////////////////////////////////
 bool check_buttons = 0;
 unsigned char first_byte = 0;
 short number_of_errors = 0;
 short total_presses = 0;
 
 
-void task_playing();
-void task_analysis();
-void task_startScreen();
-    
 void main(void) {
     init();
     address = 0;
@@ -211,6 +104,12 @@ void task_playing() {
 
     while(1)
     {
+        
+        if(PAUSEBUTTON)
+        {
+            task = &task_paused;
+            return;
+        }
         if (blockIndex >= 512) { // end of block condition
             if (byteCounter >= dataLength) {
                 PIE1bits.TMR2IE = 0;
@@ -226,13 +125,12 @@ void task_playing() {
             SPI_Read();
             SPI_Read();
             check_buttons = true;
-            OFF6
-    //                    ON6
+
         } else {
-            PIE1bits.TMR2IE = 0;        // disable timer interrupts while accessing buffer_read_index
+            DAC_INT(0);        // disable timer interrupts while accessing buffer_read_index
             if (buffer_write_index != buffer_read_index) { // read into the buffer if there's space
-                PIE1bits.TMR2IE = 1;
-    //                        ON1
+                DAC_INT(1);
+
                 switch (channels) {
                     case 1:
                         SSP1BUF = 0xFF;
@@ -255,12 +153,14 @@ void task_playing() {
                             check_buttons = false;
                             first_byte = sdata[0];
                             if(first_byte % 2 == 1){        //IF BIT 0 == 1
+                            
+                                // note is to be played here, so check which buttons are depressed 
                                 ++total_presses;
-                                ON6
 
 
-                                if(Check_Buttons(first_byte) == 0)
+                                if(!Check_Buttons(first_byte))
                                 {
+                                    // The buttons were wrong
 
                                     ONRED
                                     OFFGREEN
@@ -289,15 +189,14 @@ void task_playing() {
                         }
                     break;
                     default:
-                        error(CHANNELS);
+                        ;
                 }
 
-    //                        OFF1
 
                 buffer_write_index %= BUFFER_SIZE;
                 blockIndex += 2;
 
-            } else PIE1bits.TMR2IE = 1;
+            } else DAC_INT(1);
         }
     }
 
@@ -308,5 +207,29 @@ void task_startScreen()
     while(PORTBbits.RB1 == 0);
     delay(500);
     return;
+    
+}
+
+void task_paused()
+{ 
+    DAC_INT(0);
+    delay(500);
+    while(PORTBbits.RB0 == 0);
+    delay(500);
+    
+    
+
+    /* TODO: Release from pause state if button goes from 0 to 1
+     * 
+        while(!(current_pause && !previous_pause)) {
+            previous_pause = current_pause;
+            current_pause = PAUSEBUTTON;
+        } 
+
+    */
+    task = &task_playing;
+    DAC_INT(1);
+    return;
+    
     
 }

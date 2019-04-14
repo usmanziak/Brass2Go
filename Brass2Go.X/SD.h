@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include "CRC.h"
 #include "SPI.h"
-#include "SD.h"
+
 
 #define SD_CS_PIN LATC7
 
