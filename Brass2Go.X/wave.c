@@ -71,7 +71,6 @@ void openFile(long a) {
         if (!fourCCeq(data.ckID, DATA_CC)) error(DATA_HEADER);
         dataLength = data.ckSize;
     }
-        __nop();
     
 }
 
