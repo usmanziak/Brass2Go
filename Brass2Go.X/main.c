@@ -131,14 +131,10 @@ void task_playing() {
 
 
             // Read 4 CRC bytes at the end of the block
-            SSP1BUF = 0xFF;
-            while(SSP1STATbits.BF == 0);
-            SSP1BUF = 0xFF;
-            while(SSP1STATbits.BF == 0);
-            SSP1BUF = 0xFF;
-            while(SSP1STATbits.BF == 0);
-            SSP1BUF = 0xFF;
-            while(SSP1STATbits.BF == 0);
+            SPI_POKE();
+            SPI_POKE();
+            SPI_POKE();
+            SPI_POKE();
             
             DAC_INT(1);
             
@@ -164,12 +160,8 @@ void task_playing() {
                     LATA6 = 1;
                     
                     // Read 16 bit sample into sdata_lo/hi
-                    SSP1BUF = 0xFF;
-                    while(SSP1STATbits.BF == 0);
-                    sdata_lo = SSP1BUF;
-                    SSP1BUF = 0xFF;
-                    while(SSP1STATbits.BF == 0);
-                    sdata_hi = SSP1BUF;
+                    SPI_READ(sdata_lo);
+                    SPI_READ(sdata_hi);
 
                     //Write to the buffer
                     lbuffer[ buffer_write_index ] =  ((sdata_hi << 8) | sdata_lo) - 0x8000;
@@ -243,27 +235,15 @@ void task_playing() {
 
 
 
-                    SSP1BUF = 0xFF;
-                    while(SSP1STATbits.BF == 0);
-                    sdata_lo = SSP1BUF;
-
-                    SSP1BUF = 0xFF;
-                    while(SSP1STATbits.BF == 0);
-                    sdata_hi = SSP1BUF;
+                    SPI_READ(sdata_lo);
+                    SPI_READ(sdata_hi);
 
                     lbuffer[ buffer_write_index ] =  ((sdata_hi << 8) | sdata_lo) - 0x8000;
 
-                    SSP1BUF = 0xFF;
-                    while(SSP1STATbits.BF == 0);
-                    sdata_lo = SSP1BUF;
-
-                    SSP1BUF = 0xFF;
-                    while(SSP1STATbits.BF == 0);
-                    sdata_hi = SSP1BUF;
+                    SPI_READ(sdata_lo);
+                    SPI_READ(sdata_hi);
 
                     rbuffer[ buffer_write_index ] =  ((sdata_hi << 8) | sdata_lo) - 0x8000;
-
-
 
                     byteCounter += 4;
                     blockIndex += 4;

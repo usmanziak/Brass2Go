@@ -8,6 +8,7 @@
 
 
 #define SD_CS_PIN LATC7
+#define SD_CD_PIN PORTC0 //TODO: CD Card Detect
 
 /* ------------------ #define based Function Declarations ------------------- */
 
@@ -43,6 +44,8 @@ char GLBL_Resp40[5] = {0xFF,0xFF,0xFF,0xFF,0xFF};
 //char GLBL_WriteBuffer[512];
 //char GLBL_ReadBuffer[512];
 
+bool SD_Ready = false;
+
 typedef struct {
     unsigned char a0;
     unsigned char a1;
@@ -69,7 +72,7 @@ typedef enum {
 //          4a.Send CMD55 with argument 0x00000000 until response ix 0x00
 //          4b.Send Send CMD41 with argument 0x40000000, if response isn't 0x00
 //             go back to step 4a.
-void SD_Init(void);
+bool SD_Init(void);
 
 //REQUIRES: SPI interface initialized using SPI_Init.
 //          Argument CMD_6bit is the command code from 0 to 64.

@@ -1,6 +1,7 @@
 #include "SD.h"
 
 //REQUIRES: SPI interface initialized using SPI_Init.
+//          SD card is present
 //PROMISES: Performs the SD Card initialization process over SPI:
 //          1. Sets CS high and writes 0xFF for 80 cycles.
 //          2. Send CMD0 with argument 0x00000000 until response is 0x01
@@ -8,21 +9,21 @@
 //          4a.Send CMD55 with argument 0x00000000 until response ix 0x00
 //          4b.Send Send CMD41 with argument 0x40000000, if response isn't 0x00
 //             go back to step 4a.
-void SD_Init(void) {
+bool SD_Init(void) {
     //Step 1:
     //Set Chip Select high, and write 0xFF for at least 74 cycles.
     SD_DESELECT();
     
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
-    SPI_Write(0xFF);
+    SPI_POKE();
+    SPI_POKE();
+    SPI_POKE();
+    SPI_POKE();
+    SPI_POKE();
+    SPI_POKE();
+    SPI_POKE();
+    SPI_POKE();
+    SPI_POKE();
+    SPI_POKE();
     
     SD_SELECT();
         
@@ -68,6 +69,10 @@ void SD_Init(void) {
     } while (SD_Check8bitResponse(0x00) == false);
     
     SD_DESELECT();
+    
+    SD_Ready = true;
+    
+    return true;
 }
 
 //REQUIRES: SPI interface initialized using SPI_Init.
@@ -259,9 +264,9 @@ bool SD_OpenBlock(long address) {
     
     //Send the block read command (CMD17) to the SD card.
     //The 32 bit argument is which 512-byte sector to read.
-    BlockAddress a = *((BlockAddress*)(&address));
+    BlockAddress *a = (BlockAddress*)(&address);
     
-    SD_SendCommand(17, a.a3, a.a2, a.a1, a.a0);
+    SD_SendCommand(17, a->a3, a->a2, a->a1, a->a0);
     
     //Wait for the SD card to respond to the command.
     SD_Read8bitResponse();
@@ -276,10 +281,10 @@ bool SD_OpenBlock(long address) {
 
 bool SD_CloseBlock() {
     //The next two bytes are the block's 16-bit CRC. We won't worry about it.
-    SPI_Read();
-    SPI_Read();
+    SPI_POKE();
+    SPI_POKE();
         
-    SPI_Read();
+    SPI_POKE();
     return true;
 }
 
@@ -287,9 +292,9 @@ bool SD_OpenStream(long address) {
     
     //Send the block read command (CMD17) to the SD card.
     //The 32 bit argument is which 512-byte sector to read.
-    BlockAddress a = *((BlockAddress*)(&address));
+    BlockAddress *a = (BlockAddress*)(&address);
     
-    SD_SendCommand(18, a.a3, a.a2, a.a1, a.a0);
+    SD_SendCommand(18, a->a3, a->a2, a->a1, a->a0);
     
     //Wait for the SD card to respond to the command.
     SD_Read8bitResponse();

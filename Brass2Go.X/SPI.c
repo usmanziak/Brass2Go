@@ -32,6 +32,7 @@ void SPI_Init(void) {
     SSP1ADD = 0x00;
 }
 
+/*
 // REQUIRES: SPI interface initialized using SPI_Init.
 //           Argument Data_8bit is one byte of data to send over SPI.
 // PROMISES: Transmits Data_8bit on the MOSI line.
@@ -49,3 +50,4 @@ inline char SPI_Read(void) {
     while(SSP1STATbits.BF == 0);
     return SSP1BUF;
 }
+*/

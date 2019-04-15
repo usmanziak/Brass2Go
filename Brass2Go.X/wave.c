@@ -31,9 +31,9 @@ bool fourCCeq(FourCC a, FourCC b) {
     return true;
 }
 
-inline void readBytes(char* dest, int len) {
+void readBytes(char* dest, int len) {
     for (int i=0; i<len; i++) {
-        dest[i] = SPI_Read();
+         SPI_READ(dest[i]);
         ++blockIndex;
         if (blockIndex >= 512) { // end of block condition // format specific
             SD_CloseBlock();
@@ -47,7 +47,7 @@ inline void readBytes(char* dest, int len) {
 void openFile(long a) {
     SD_OpenStream(a);
     char response = 0xFF;
-    while (response == 0xFF) response = SPI_Read();
+    while (response == 0xFF) SPI_READ(response);
     if (response != 0xFE) error(OPEN_BLOCK);
     
     {
