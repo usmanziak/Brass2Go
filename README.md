@@ -1,37 +1,135 @@
-## Welcome to GitHub Pages
+# Brass2Go
 
-You can use the [editor on GitHub](https://github.com/usmanziak/Brass2Go/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Brass2Go is a engineering design project for the second-year course ENEL 300, Electrical and Computer Engineering Professional Skills, at the University of Calgary.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Brass2Go is a portable device that allows brass musicians to practice their instruments and compositions on-the-go. The device, powered by a PIC16F1778 microcontroller, plays an audio (.wav) file from a microSD card and the user plays the finger sequence along with the song. If the user plays the note incorrectly (i.e. the wrong note and/or at the wrong time) a red LED will light up. Contrastly, a green LED will light up if the note is played correctly. Once the file is finished playing, an LCD screen will display the number of notes played incorrectly, and the percent of notes played correctly (e.g. 5/26 wrong -- 80.7% correct). During playback, the user can pause and play
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+The audio file must have the button/valve press data encoded, which can be done with the Python 3 script [formatter.py](https://github.com/usmanziak/Brass2Go/blob/master/audio/formatter.py).
 
-```markdown
-Syntax highlighted code block
+For correct operation, the following must be satisfied due to system constraints with the PIC16 microcontroller:
 
-# Header 1
-## Header 2
-### Header 3
+* The audio file must be a 16-bit PCM .wav file with a sample rate of 44100 Hz.
 
-- Bulleted
-- List
+* A MIDI (.mid) and its corresponding audio (.wav) file must be supplied to formatter.py
 
-1. Numbered
-2. List
+* The formatted .wav file must be added to the SD card without the use of a file system. (Use HxD to load the file onto the SD card)
 
-**Bold** and _Italic_ and `Code` text
+* All [software prerequisites](#software-prerequisites) must be correctly installed.
+  - MPLAB X
+  - XC8 Compiler
+  - Python 3
+  - Mido (pip package)
+  - HxD
+  - MuseScore (optional)
+  - Audacity (optional)
 
-[Link](url) and ![Image](src)
+
+## Hardware Used
+
+The hardware used for this device is:
+* PIC16F1778 Microcontroller
+* 2-line LCD Display (Midas MC21605G12W‐VNMLWS)
+* SPI SD Card Reader (AT25SF321)
+* ENEL 343, Circuits II, Audio Amplifier and Filter (TLV4112 Op Amp)
+* Red and Green 20mA LEDs
+* Switches (MJTP Series)
+* 3.5 mm Headphone Adapter
+* Resistors (10kΩ for switches, 22Ω for LEDs,  10kΩ potentiometer and 960Ω for volume knob)
+
+The following is an image of the breadboard prototype:
+
+
+<img src="https://i.imgur.com/lbkdtMU.jpg" alt="Breadboard Prototype" width="500"/>
+
+
+
+
+## Software Prerequisites
+The following software must be installed on your Windows, MacOS, or Linux machine:
+- MPLAB X
+- XC8 Compiler
+- Python 3
+- Mido (pip package)
+- HxD
+- MuseScore (optional)
+- Audacity (optional)
+
+### MPLAB X and XC8 Compiler
+  Click [here](https://www.microchip.com/mplab/mplab-x-ide) to install MPLAB X and the XC8 Compiler on your device. Once installed, you can then compile and program the PIC16F1778 microcontroller with the  Brass2Go.X project. This only needs to be done once.  
+
+### Python 3
+  Click [here](https://www.python.org/downloads/) to download the latest release of Python 3. While installing, ensure you select the "Add Python 3.x to PATH" option in the install wizard.
+
+  <img src="https://files.realpython.com/media/win-install-dialog.40e3ded144b0.png" alt="Add to PATH" width="500"/>
+
+  To check if Python 3 is installed correctly, run ```python --version``` in your machine's command prompt / terminal, and ensure it outputs the following:
+```
+            python --version
+            Python 3.x
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+  If you are running a MacOS or Linux machine, or you already have Python 2 installed, postfix all ```python``` commands to ```python3```. E.g. ```python3 --version```
 
-### Jekyll Themes
+### Mido
+  Mido is a python  package that is used by formatter.py to parse MIDI files. Most installations of Python 3 include pip (the Python package installer), but in the event ```pip``` is not a recognized command, click [here](https://pip.pypa.io/en/stable/installing/) to install it. To install mido, run the following command.
+```
+pip install mido
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/usmanziak/Brass2Go/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
+### HxD
+   Click [here](https://mh-nexus.de/en/downloads.php) to install HxD onto your machine. HxD is used to load the formatted .wav file to the SD card.
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+### MuseScore and Audacity
+
+   Click [here](https://musescore.org/en/download) to download MuseScore and [here](https://www.audacityteam.org/download/) to download Audacity. These programs are used to generate the required audio files for formatter.py. If you already have MIDI and .wav files for your composition, these programs are not needed.
+
+   MuseScore is a convenient open-source platform to convert sheet music and MusicXML files to MIDI and audio (.wav) files. Ensure you are using the correct key, and instrument type in MuseScore when you are generating the MIDI and audio files.
+
+   Audacity is an open-source platform to edit and mix audio files. Use Audacity to ensure that the audio (.wav) files that you are using are:
+
+  * Mono
+  * 16-bit PCM
+  * Sample Rate (Project Rate) = 44100 Hz
+
+
+
+
+
+## Formatting and loading files
+  Assuming all prerequisite software is installed on your machine, and that you have correctly created your MIDI (.mid) and audio (.wav) files, follow the following steps to add it to the SD card. As an example, we will format and upload  ```chromatic.mid ``` and ```chromatic.wav``` (located in the ```~\Desktop\Brass2Go\audio``` folder) on a Windows 10 machine.
+
+  1. Add the .mid and .wav files to the ```\Brass2Go\audio``` folder, and navigate to that directory using the command ```cd 'PATH TO Brass2Go\audio' ```
+
+  2. Run the Python 3 script using the command ```python formatter.py audio_file.wav MIDI_file.mid```
+
+    <img src="https://i.imgur.com/DdmZWhn.jpg" alt="Step 2" width="400"/>
+
+  3. Open HxD **'As Administrator'** and open the 'Tools' menu, and press 'Open Disk' (Windows Keyboard Shortcut ```Ctrl-Shift-D```), and open the SD card. Make sure you de-select the 'Open as Readonly' option.
+
+    <img src="https://i.imgur.com/J78QUwx.jpg" alt="Step 2" width="400"/>
+
+  4. Open the file that was formatted by the Python script (```formatted-chromatic.wav ``` in this example). Copy all the data to the clipboard by using the shortcuts ```Ctrl-A``` then ```Ctrl-C```.
+
+  <img src="https://i.imgur.com/IoFoLSR.jpg" alt="Step 2" width="400"/>
+
+  5. Copy all the data into the SD card by using the shortcut ```Ctrl-B```, then save it to the card by using the shortcut ```Ctrl-S```.
+
+  <img src="https://i.imgur.com/2psOK2N.jpg" alt="Step 2" width="400"/>
+
+
+  The file is now successfully on the SD card. Place the card into the card reader on the device. Then, power on the device, and it should function correctly.
+
+## Authors
+* **Luke Garland** - [Github](https://github.com/lukegarland) - [Email](mailto:luke.garland1@ucalgary.ca)
+
+* **Toshiro Taperek** - [Github](https://github.com/robotoshi)
+
+* **Usman Zia** - [Github](https://github.com/usmanziak)
+
+See also the list of [contributors](https://github.com/usmanziak/Brass2Go/graphs/contributors) who participated and the project's [commit history](https://github.com/usmanziak/Brass2Go/commits/master).
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details

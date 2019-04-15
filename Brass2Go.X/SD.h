@@ -128,7 +128,7 @@ bool SD_OpenBlock(long address);
 
 bool SD_OpenStream(long address);
 
-bool SD_CloseStream();
+bool SD_CloseStream(void);
 
 /* -------------------------------------------------------------------------- */
 

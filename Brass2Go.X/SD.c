@@ -258,7 +258,7 @@ bool SD_ReadBlock(char ADDR3, char ADDR2, char ADDR1, char ADDR0) {
     
     //Read was a success, so return true.
     return true;
-}*/
+}
     
 bool SD_OpenBlock(long address) {
     
@@ -278,6 +278,7 @@ bool SD_OpenBlock(long address) {
     //Setup was a success, so return true.
     return true;
 }
+*/
 
 bool SD_CloseBlock() {
     //The next two bytes are the block's 16-bit CRC. We won't worry about it.
