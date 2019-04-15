@@ -103,12 +103,13 @@ pip install mido
   1. Add the .mid and .wav files to the ```\Brass2Go\audio``` folder, and navigate to that directory using the ```cd 'PATH TO Brass2Go\audio' ```
 
   2. Run the Python 3 script using the command ```python formatter.py audio_file.wav MIDI_file.mid```
+  
 
-    <img src="https://i.imgur.com/DdmZWhn.jpg" alt="Step 2" width="400"/>
+   <img src="https://i.imgur.com/DdmZWhn.jpg" alt="Step 2" width="400"/>
 
   3. Open HxD **'As Administrator'** and open the 'Tools' menu, and press 'Open Disk' (Windows Keyboard Shortcut ```Ctrl-Shift-D```), and open the SD card. Make sure you de-select the 'Open as Readonly' option.
 
-    <img src="https://i.imgur.com/J78QUwx.jpg" alt="Step 2" width="400"/>
+   <img src="https://i.imgur.com/J78QUwx.jpg" alt="Step 2" width="400"/>
 
   4. Open the file that was formatted by the Python script (```formatted-chromatic.wav ``` in this example). Copy all the data to the clipboard by using the shortcuts ```Ctrl-A``` then ```Ctrl-C```.
 
