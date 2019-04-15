@@ -23,7 +23,7 @@
 #define TIME_CC "time"
 #define TONE_CC "tone"
 #define READINTO(s) readBytes((char*)&s, sizeof(s));
-#define BUFFER_SIZE 12
+#define BUFFER_SIZE 30
 
 unsigned short channels;
 unsigned long  sampRate;
