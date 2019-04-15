@@ -50,6 +50,7 @@ void init() {
 }
 
 void __interrupt() isr(void) {          // modifies buffer_read_index
+    // AUDIO INTERRUPT 
     PIR1bits.TMR2IF = 0;
     if (blockIndex == 510) {
         __nop();
@@ -88,28 +89,27 @@ void main(void) {
     
     task = &task_playing;
 
-    while(1) {      // main loop
+    while(1) {      // main super loop, will execute the function that is pointed to
+                    // by task
         (*task)();
     }
 }
 
-void task_analysis() {
-    LCD_SELECT();
-    LCD_CMD_MODE();
-    LCD_Write(LCD_CLS);
-    delay(1);
+
+//============================================================================//
+//============================SUPERLOOP TASKS=================================//
+
+void task_startScreen()
+{
+    LCD_Print("Brass2Go! Press\nstart to play");
+    while(PORTBbits.RB1 == 0);
+    delay(500);
+    return;
     
-    LCD_DATA_MODE();
-    char message[34];
-    sprintf(message, "%d/%d wrong\n%.2f%% correct", number_of_errors, total_presses, 100*(float)(total_presses-number_of_errors)/total_presses);
-    LCD_Print(message);
-    
-    while(!PORTBbits.RB1);
-    delay(1000);
-    RESET();
 }
 
-void task_playing() {
+void task_playing() 
+{
 
     while(1)
     {
@@ -206,81 +206,37 @@ void task_playing() {
 
                         }
                     }
-                } else {
-//                    if (samplePending) {
-////                            samplePending = false;
-//                        SSP1BUF = 0xFF;
-//
-//                        LATA6 = 1;
-//                        while(SSP1STATbits.BF == 0);
-//                        unsigned char sdata_lo = SSP1BUF;
-//
-//                        SSP1BUF = 0xFF;
-//                        while(SSP1STATbits.BF == 0);
-//                        unsigned char sdata_hi = SSP1BUF;
-//
-//
-//                        lbuffer[ buffer_write_index ] =  ((sdata_hi << 8) | sdata_lo) - 0x8000;
-//
-//                                                    while(SSP1STATbits.BF == 0);
-//                        unsigned char sdata_lo = SSP1BUF;
-//
-//                        SSP1BUF = 0xFF;
-//                        while(SSP1STATbits.BF == 0);
-//                        unsigned char sdata_hi = SSP1BUF;
-//                        lbuffer[ buffer_write_index ] =  ((sdata_hi << 8) | sdata_lo) - 0x8000;
-//
-//
-//                                                    LATA6 = 0;
-//                        byteCounter += 2;
-//                        ++buffer_write_index;
-//                    } else {
-//                        samplePending = true;
-//                        sdata[0] = SPI_Read();
-//                        sdata[1] = SPI_Read();
-//                        lbuffer[ buffer_write_index ] = *((short*)sdata) - 0x8000;
-//                    }
+                } else{ // channels !=  1 e.g. file is stereo
+                            DAC_INT(0);
+                            SD_DESELECT();
 
+                            LCD_SELECT();
+                            LCD_CMD_MODE();
 
+                            LCD_Write(LCD_CLS); //Clear display
+                            
+                            delay(5);
+                            LCD_DATA_MODE();
+                            LCD_Print("File is not mono");
+                            while(1)
+                            {
+                                // RESET
+                                if(PORTBbits.RB1 == 1)
+                                {
+                                    delay(250);
+                                    LCD_CMD_MODE();
 
-                    SSP1BUF = 0xFF;
-                    while(SSP1STATbits.BF == 0);
-                    sdata_lo = SSP1BUF;
-
-                    SSP1BUF = 0xFF;
-                    while(SSP1STATbits.BF == 0);
-                    sdata_hi = SSP1BUF;
-
-                    lbuffer[ buffer_write_index ] =  ((sdata_hi << 8) | sdata_lo) - 0x8000;
-
-                    SSP1BUF = 0xFF;
-                    while(SSP1STATbits.BF == 0);
-                    sdata_lo = SSP1BUF;
-
-                    SSP1BUF = 0xFF;
-                    while(SSP1STATbits.BF == 0);
-                    sdata_hi = SSP1BUF;
-
-                    rbuffer[ buffer_write_index ] =  ((sdata_hi << 8) | sdata_lo) - 0x8000;
-
-
-
-                    byteCounter += 4;
-                    blockIndex += 4;
-                }
+                                    LCD_Write(LCD_CLS); //Clear display
+                                    delay(5);
+                                    RESET();
+                                }   
+                            }
+                    }// end if(channels == 1) -- else
                 if (++buffer_write_index >= BUFFER_SIZE) buffer_write_index = 0;
             } else DAC_INT(1);
         }
     }
 
-}
-void task_startScreen()
-{
-    LCD_Print("Brass2Go! Press\nStart to play");
-    while(PORTBbits.RB1 == 0);
-    delay(500);
-    return;
-    
 }
 
 void task_paused()
@@ -301,6 +257,18 @@ void task_paused()
     do {
         previous_pause = current_pause;
         current_pause = PAUSEBUTTON;
+        
+        //RESET 
+        
+        if(PORTBbits.RB1 == 1)
+        {
+            delay(250);
+            LCD_CMD_MODE();
+
+            LCD_Write(LCD_CLS); //Clear display
+            delay(5);
+            RESET();
+        }
     } while(!(!previous_pause && current_pause));
     previous_pause = true;
     
@@ -323,4 +291,26 @@ void task_paused()
     task = &task_playing;
     delay(750);// Delay playback so user can get ready to play the next note
     
+}
+
+void task_analysis() 
+{
+    LCD_SELECT();
+    LCD_CMD_MODE();
+    LCD_Write(LCD_CLS);
+    delay(1);
+    
+    LCD_DATA_MODE();
+    char message[34];
+    sprintf(message, "%d/%d wrong\n%.2f%% correct", number_of_errors, total_presses, 100*(float)(total_presses-number_of_errors)/total_presses);
+    LCD_Print(message);
+    
+    while(!PORTBbits.RB1);
+    
+    // Reset
+    delay(250);
+    LCD_CMD_MODE();
+    LCD_Write(LCD_CLS); //Clear display
+    delay(5);
+    RESET();
 }
