@@ -2,7 +2,7 @@
 
 Brass2Go is a engineering design project for the second-year course ENEL 300, Electrical and Computer Engineering Professional Skills, at the University of Calgary.
 
-Brass2Go is a portable device that allows brass musicians to practice their instruments and compositions on-the-go. The device, powered by a PIC16F1778 microcontroller, plays an audio (.wav) file from a microSD card and the user plays the finger sequence along with the song. If the user plays the note incorrectly (i.e. the wrong note and/or at the wrong time) a red LED will light up. Contrastly, a green LED will light up if the note is played correctly. Once the file is finished playing, an LCD screen will display the number of notes played incorrectly, and the percent of notes played correctly (e.g. 5/26 wrong -- 80.7% correct). During playback, the user can pause and play 
+Brass2Go is a portable device that allows brass musicians to practice their instruments and compositions on-the-go. The device, powered by a PIC16F1778 microcontroller, plays an audio (.wav) file from a microSD card and the user plays the finger sequence along with the song. If the user plays the note incorrectly (i.e. the wrong note and/or at the wrong time) a red LED will light up. Contrastly, a green LED will light up if the note is played correctly. Once the file is finished playing, an LCD screen will display the number of notes played incorrectly, and the percent of notes played correctly (e.g. 5/26 wrong -- 80.7% correct). During playback, the user can pause and play
 
 
 The audio file must have the button/valve press data encoded, which can be done with the Python 3 script [formatter.py](https://github.com/usmanziak/Brass2Go/blob/master/audio/formatter.py).
@@ -103,13 +103,12 @@ pip install mido
   1. Add the .mid and .wav files to the ```\Brass2Go\audio``` folder, and navigate to that directory using the command ```cd 'PATH TO Brass2Go\audio' ```
 
   2. Run the Python 3 script using the command ```python formatter.py audio_file.wav MIDI_file.mid```
-  
 
-   <img src="https://i.imgur.com/DdmZWhn.jpg" alt="Step 2" width="400"/>
+    <img src="https://i.imgur.com/DdmZWhn.jpg" alt="Step 2" width="400"/>
 
   3. Open HxD **'As Administrator'** and open the 'Tools' menu, and press 'Open Disk' (Windows Keyboard Shortcut ```Ctrl-Shift-D```), and open the SD card. Make sure you de-select the 'Open as Readonly' option.
 
-   <img src="https://i.imgur.com/J78QUwx.jpg" alt="Step 2" width="400"/>
+    <img src="https://i.imgur.com/J78QUwx.jpg" alt="Step 2" width="400"/>
 
   4. Open the file that was formatted by the Python script (```formatted-chromatic.wav ``` in this example). Copy all the data to the clipboard by using the shortcuts ```Ctrl-A``` then ```Ctrl-C```.
 

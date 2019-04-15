@@ -10,7 +10,14 @@
 #include "config.h"
 #include "DAC.h"
 
-
+/*
+ * Unused functions
+ * 
+ * These were initially used, but are  now copied directly into the
+ * write DAC interrupt in order to improve code efficiency
+ * 
+ * 
+ * 
 void DAC_Write_16( SampleFrame *sample, unsigned short chans) {
     short level = sample->mono16;
     level -= 0x8000; // add offset to make unsigned
@@ -26,7 +33,7 @@ void DAC_Write_8(unsigned char level) {
     DAC5REFL = 0;
     DAC5LD = 1;
 }
-
+*/
 void DAC_Init() {
     TRISA = 0xFB;
     DAC5CON0 = 0xE0; // left justified
