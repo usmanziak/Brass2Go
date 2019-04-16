@@ -25,6 +25,8 @@ bool current_pause;
 
 bool wasPaused = false;
 
+//FATFS filesys;
+
 void error(Error e) {
     // tell someone something went wrong
     global_error = e;
@@ -36,7 +38,7 @@ void init() {
     OSCCON = 0xF4;
     while(OSCSTATbits.HFIOFR == 0); // wait for clock to settle
     
-    ANSB1 = 0;
+    ANSB1  = 0;
     TRISB4 = 0; //GREEN LED
     TRISB5 = 0; //RED LED
     TRISC0 = 0;
@@ -49,43 +51,54 @@ void init() {
 //    LATCbits.LATC6 = 1;
     
     //Initialize all required peripherals.
-
+    LCD_DESELECT();
+    SD_DESELECT();
     SPI_Init();
     BrassButtons_Init();
-    SD_Init();
-    LCD_Init();    
+    LCD_Init();
     DAC_Init();
+    
+
+    TRISA7 = 1; //CD interrupt pin
+    IOCAN7 = 1; //detect a falling edge on RA7
+    IOCIF = 0;
+    IOCAF = 0;
+    IOCIE = 1;
+    INTCONbits.GIE = 1;
+    
+    SD_Init(); // TODO: change to fatfs stuff
+    
+//    while(pf_mount(&filesys) != FR_OK);
 }
 
 void __interrupt() isr(void) {          // modifies buffer_read_index
-    // AUDIO INTERRUPT 
-    PIR1bits.TMR2IF = 0;
-    if (blockIndex == 510) {
-        __nop();
+    if (IOCAF7) {
+        // CD INTERRUPT
+        INTCONbits.GIE = 0; // disable all further interrupts
+        card_removed();
+    } else {
+        // AUDIO INTERRUPT 
+        TMR2IF = 0;
+        unsigned short level = lbuffer[buffer_read_index++];
+        DAC5REFH = (level & 0xff00) >> 8;
+        DAC5REFL = (level & 0x00C0) << 8;
+        DAC5LD = 1;
+        if (buffer_read_index >= BUFFER_SIZE) buffer_read_index = 0;
     }
-    LATA7 = 1;
-    unsigned short level = lbuffer[buffer_read_index++];
-    DAC5REFH = (level & 0xff00) >> 8;
-    DAC5REFL = (level & 0x00C0) << 8;
-    DAC5LD = 1;
-    if (buffer_read_index >= BUFFER_SIZE) buffer_read_index = 0;
-    LATA7 = 0;
 }
 
 void main(void) {
+    INTCONbits.GIE = 0;
     init();
     address = 0;
     
     TRISA6 = 0;
-    TRISA7 = 0;
+//    TRISA7 = 0;
     
     LCD_SELECT();
     LCD_DATA_MODE();
     task_startScreen();
-    LCD_CMD_MODE();
-    
-    LCD_Write(LCD_CLS); //Clear display
-    __delay_ms(15);
+    LCD_Cmd(LCD_CLS);
     LCD_DATA_MODE();
     LCD_Print("Playing!");
     LCD_DESELECT();
@@ -96,7 +109,6 @@ void main(void) {
     timer_Init(sampRate);
     
     task = task_playing;
-
     while(1) {      // main super loop, will execute the function that is pointed to
                     // by task
         task();
@@ -109,11 +121,10 @@ void main(void) {
 
 void task_startScreen()
 {
-    LCD_Print("Brass2Go! Press\nstart to play");
-    while(PORTBbits.RB1 == 0);
-    delay(500);
-    return;
     
+    LCD_Print("Brass2Go! Press\nstart to play");
+    while(VALVE1 == 0);
+    delay(500);
 }
 
 void task_playing() 
@@ -210,13 +221,7 @@ void task_playing()
                             DAC_INT(0);
                             SD_DESELECT();
 
-                            LCD_SELECT();
-                            LCD_CMD_MODE();
-
-                            LCD_Write(LCD_CLS); //Clear display
-                            
-                            delay(5);
-                            LCD_DATA_MODE();
+                            LCD_Cmd(LCD_CLS);
                             LCD_Print("File is not mono");
                             while(1)
                             {
@@ -224,10 +229,7 @@ void task_playing()
                                 if(PORTBbits.RB1 == 1)
                                 {
                                     delay(250);
-                                    LCD_CMD_MODE();
-
-                                    LCD_Write(LCD_CLS); //Clear display
-                                    delay(5);
+                                    LCD_Cmd(LCD_CLS);
                                     RESET();
                                 }   
                             }
@@ -241,20 +243,15 @@ void task_playing()
 
 void task_paused()
 { 
+    
     //Disable SD Card SPI interface and enable LCD
     DAC_INT(0);
     SD_CloseStream();
     
     SD_DESELECT();
 
-    LCD_SELECT();
-    LCD_CMD_MODE();
-    
-    LCD_Write(LCD_CLS); //Clear display
-    delay(5);
-    LCD_DATA_MODE();
+    LCD_Cmd(LCD_CLS);
     LCD_Print("Paused");
-    
     do {
         previous_pause = current_pause;
         current_pause = PAUSEBUTTON;
@@ -264,19 +261,13 @@ void task_paused()
         if(VALVE1)
         {
             delay(250);
-            LCD_CMD_MODE();
-
-            LCD_Write(LCD_CLS); //Clear display
-            delay(5);
+            LCD_Cmd(LCD_CLS);
             RESET();
         }
     } while(!(!previous_pause && current_pause));
     previous_pause = true;  // prevent a new pause from being triggered
     
-    LCD_CMD_MODE();
-    LCD_Write(LCD_CLS); //Clear display
-    delay(5);
-    LCD_DATA_MODE();
+    LCD_Cmd(LCD_CLS); //Clear display
     LCD_Print("Playing!");
     LCD_DESELECT();
     
@@ -295,12 +286,7 @@ void task_paused()
 
 void task_analysis() 
 {
-    LCD_SELECT();
-    LCD_CMD_MODE();
-    LCD_Write(LCD_CLS);
-    delay(1);
-    
-    LCD_DATA_MODE();
+    LCD_Cmd(LCD_CLS);
     char message[34];
     sprintf(message, "%d/%d wrong\n%.2f%% correct", number_of_errors, total_presses, 100*(float)(total_presses-number_of_errors)/total_presses);
     LCD_Print(message);
@@ -309,8 +295,23 @@ void task_analysis()
     
     // Reset
     delay(250);
-    LCD_CMD_MODE();
-    LCD_Write(LCD_CLS); //Clear display
+    LCD_Cmd(LCD_CLS);
+    RESET();
+}
+
+void card_removed() {
+    INTCONbits.GIE = 0;     // disable all interrupts
+    
+    DAC5REFH = 0;   //set the DAC to zero to avoid a weird whine
+    DAC5REFL = 0;
+    DAC5LD = 1;
+    
     delay(5);
+    SD_DESELECT();
+    LCD_Cmd(LCD_CLS);
+    LCD_Print("NO CARD DETECTED\nPlease insert SD");
+
+    delay(500);
+    while(!SD_CD_PIN);
     RESET();
 }

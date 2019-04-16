@@ -8,7 +8,7 @@
 
 
 #define SD_CS_PIN LATC7
-#define SD_CD_PIN PORTC0 //TODO: CD Card Detect
+#define SD_CD_PIN PORTAbits.RA7
 
 /* ------------------ #define based Function Declarations ------------------- */
 

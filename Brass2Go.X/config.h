@@ -21,7 +21,8 @@ typedef enum {
     CODEC,
     BIT_DEPTH,
     DATA_HEADER,
-    CHANNELS
+    CHANNELS, 
+    CARD_OUT
 } Error;
 
 Error global_error;

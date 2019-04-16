@@ -20,5 +20,7 @@ void task_startScreen(void);
 void task_paused(void);
 void (*task)(void);
 
+void card_removed(void);    // method called when the SD card is removed
+
 #endif	/* MAIN_H */
 

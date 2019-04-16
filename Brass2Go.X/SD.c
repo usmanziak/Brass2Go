@@ -11,6 +11,7 @@
 //          4b.Send Send CMD41 with argument 0x40000000, if response isn't 0x00
 //             go back to step 4a.
 bool SD_Init(void) {
+    
     //Step 1:
     //Set Chip Select high, and write 0xFF for at least 74 cycles.
     SD_DESELECT();

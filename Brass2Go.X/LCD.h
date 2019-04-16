@@ -7,14 +7,17 @@
 #define LCD_CMD_MODE() LCD_RS_PIN = 0
 #define LCD_DATA_MODE() LCD_RS_PIN = 1
 
-#define LCD_CLS 0x01
-#define LCD_HOME 0x02
-#define LCD_SHL 0x10
-#define LCD_SHR 0x14
+#define LCD_CLS     0x01
+#define LCD_NEWLINE 0xC0
+#define LCD_HOME    0x02
+#define LCD_SHL     0x10
+#define LCD_SHR     0x14
 
+#define LCD_CURSOR(addr) (0x80 | (addr))
 
 void LCD_Init(void);
 void LCD_Write(char c);
+void LCD_Cmd(char c);
 void LCD_Print(char* str);
 
 #define LCD_DESELECT(){           \

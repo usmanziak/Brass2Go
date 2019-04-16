@@ -7,7 +7,7 @@ void LCD_Init(void) {
     
     LCD_SELECT();
     TRISC5 = 0; //Set RC5 to digital output
-    __delay_ms(50);
+    delay(50);
     
     LCD_CMD_MODE();
     LCD_Write(0b00111000);//Function set
@@ -15,7 +15,7 @@ void LCD_Init(void) {
     LCD_Write(0b00001111);//Display ON
 
     LCD_Write(0b00000001); //Clear display
-    __delay_ms(15);
+    delay(15);
     
     LCD_Write(0b00000110);//Entry mode
     
@@ -79,26 +79,29 @@ void LCD_Init(void) {
 
 void LCD_Write(char c) {
     SSP1BUF = c;
-    __delay_ms(1);
+    delay(1);
+}
+
+void LCD_Cmd(char c) {
+    LCD_DESELECT();     // turns out you gotta cycle the CS
+    LCD_SELECT();
+    LCD_CMD_MODE();
+    SSP1BUF = c;
+    delay(2);
+    LCD_DATA_MODE();
 }
 
 void LCD_Print(char* str) {
     while (*str) {
         switch(*str) {
             case '\n':
-                LCD_CMD_MODE();
-                LCD_Write(0x80 | 0x40);
-                LCD_DATA_MODE();
+                LCD_Cmd(LCD_NEWLINE);
                 break;
             case '\r':
-                LCD_CMD_MODE();
-                LCD_Write(LCD_HOME);
-                LCD_DATA_MODE();
+                LCD_Cmd(LCD_HOME);
                 break;
             case '\b':
-                LCD_CMD_MODE();
-                LCD_Write(LCD_SHL);
-                LCD_DATA_MODE();
+                LCD_Cmd(LCD_SHL);
                 break;
             default:
                 LCD_Write(*str);
