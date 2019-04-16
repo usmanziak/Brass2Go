@@ -4,26 +4,6 @@
 #include "SPI.h"
 #include "main.h"
 
-// Error defs
-typedef enum {
-    OPEN_BLOCK,
-    RIFF_HEADER,
-    WAVE_HEADER,
-    FMT_HEADER,
-    CODEC,
-    BIT_DEPTH,
-    DATA_HEADER,
-    CHANNELS
-} Error;
-
-Error global_error;
-
-void error(Error e) {
-    // tell someone something went wrong
-    global_error = e;
-    __nop();
-}
-
 bool fourCCeq(FourCC a, FourCC b) {
     for (char i=0; i<4; i++) {
         if (a[i] != b[i]) return false;
@@ -46,9 +26,6 @@ void readBytes(char* dest, int len) {
 
 void openFile(long a) {
     SD_OpenStream(a);
-    char response = 0xFF;
-    while (response == 0xFF) SPI_READ(response);
-    if (response != 0xFE) error(OPEN_BLOCK);
     
     {
         RiffTag riff;

@@ -18,6 +18,11 @@ unsigned char Check_Buttons(unsigned char encoded_byte);
 #define OFFGREEN LATBbits.LATB4 = 0;
 
 #define PAUSEBUTTON    PORTBbits.RB0
+
+#define VALVE1    PORTBbits.RB1
+#define VALVE2    PORTBbits.RB2
+#define VALVE3    PORTBbits.RB3
+
 #endif
 
 

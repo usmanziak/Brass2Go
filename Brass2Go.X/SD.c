@@ -1,3 +1,4 @@
+#include "config.h"
 #include "SD.h"
 
 //REQUIRES: SPI interface initialized using SPI_Init.
@@ -291,7 +292,7 @@ bool SD_CloseBlock() {
 
 bool SD_OpenStream(long address) {
     
-    //Send the block read command (CMD17) to the SD card.
+    //Send the multiple block read command (CMD18) to the SD card.
     //The 32 bit argument is which 512-byte sector to read.
     BlockAddress *a = (BlockAddress*)(&address);
     
@@ -303,6 +304,9 @@ bool SD_OpenStream(long address) {
     //If the response is anything but 0x00, we cannot read.
     if(SD_Check8bitResponse(0x00) == false) return false;
     
+    char response = 0xFF;
+    while (response == 0xFF) SPI_READ(response);
+    if (response != 0xFE) error(OPEN_BLOCK);
     
     //Setup was a success, so return true.
     return true;

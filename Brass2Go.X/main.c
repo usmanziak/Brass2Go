@@ -23,6 +23,14 @@ short total_presses = 0;
 bool previous_pause;
 bool current_pause;
 
+bool wasPaused = false;
+
+void error(Error e) {
+    // tell someone something went wrong
+    global_error = e;
+    __nop();
+}
+
 void init() {
     // Set the system clock speed to 32MHz and wait for the ready flag.
     OSCCON = 0xF4;
@@ -87,11 +95,11 @@ void main(void) {
     if(channels != 2) samplePending = false;
     timer_Init(sampRate);
     
-    task = &task_playing;
+    task = task_playing;
 
     while(1) {      // main super loop, will execute the function that is pointed to
                     // by task
-        (*task)();
+        task();
     }
 }
 
@@ -125,7 +133,7 @@ void task_playing()
                 PIE1bits.TMR2IE = 0;
                 SD_CloseStream();
                 SD_DESELECT();
-                task = &task_analysis;
+                task = task_analysis;
                 return;
             }
 
@@ -146,7 +154,7 @@ void task_playing()
             // Check for 0 -> 1 transition of the pause button
             current_pause = PAUSEBUTTON;
             if(current_pause && !previous_pause) {
-                task = &task_paused;
+                task = task_paused;
                 return;
             }
             previous_pause = current_pause;
@@ -198,7 +206,7 @@ void task_playing()
 
                         }
                     }
-                } else{ // channels !=  1 e.g. file is stereo
+                } else { // channels !=  1 e.g. file is stereo
                             DAC_INT(0);
                             SD_DESELECT();
 
@@ -236,6 +244,7 @@ void task_paused()
     //Disable SD Card SPI interface and enable LCD
     DAC_INT(0);
     SD_CloseStream();
+    
     SD_DESELECT();
 
     LCD_SELECT();
@@ -252,7 +261,7 @@ void task_paused()
         
         //RESET 
         
-        if(PORTBbits.RB1 == 1)
+        if(VALVE1)
         {
             delay(250);
             LCD_CMD_MODE();
@@ -262,7 +271,7 @@ void task_paused()
             RESET();
         }
     } while(!(!previous_pause && current_pause));
-    previous_pause = true;
+    previous_pause = true;  // prevent a new pause from being triggered
     
     LCD_CMD_MODE();
     LCD_Write(LCD_CLS); //Clear display
@@ -272,17 +281,16 @@ void task_paused()
     LCD_DESELECT();
     
     SD_SELECT();
-    // Re-open SD card at the last address
+    
+//     Re-open SD card at the last address
     SD_OpenStream(address);
     //Reset buffer
     buffer_read_index = 0;
     buffer_write_index = 1;
-     
-    blockIndex = -2; // Adjust blockIndex so we do not read CRC bytes into the buffer
     
-    task = &task_playing;
-    delay(750);// Delay playback so user can get ready to play the next note
-    
+    task = task_playing;
+//    delay(750);// Delay playback so user can get ready to play the next note
+    wasPaused = true;
 }
 
 void task_analysis() 

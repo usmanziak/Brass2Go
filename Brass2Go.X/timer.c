@@ -35,11 +35,13 @@ int timer_Init(long rate) {
             T2PR = 100;
             T2CLKCON = 0x03;
             T2CON = 0x84; // prescaler 1:1 postscaler 1:5
+            return 0;
         break;
         case 22050:
             T2PR = 65;
             T2CLKCON = 0x03;
             T2CON = 0x8A; // prescaler 1:1 postscaler 1:11
+            return 0;
         default:
             return 1;
     }

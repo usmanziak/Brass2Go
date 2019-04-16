@@ -12,5 +12,21 @@
 
 #define delay(ms) __delay_ms(ms)
 
+// Error defs
+typedef enum {
+    OPEN_BLOCK,
+    RIFF_HEADER,
+    WAVE_HEADER,
+    FMT_HEADER,
+    CODEC,
+    BIT_DEPTH,
+    DATA_HEADER,
+    CHANNELS
+} Error;
+
+Error global_error;
+
+void error(Error e);
+
 #endif	/* CONFIGURATION_H */
 
