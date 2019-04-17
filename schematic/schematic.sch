@@ -171,22 +171,11 @@ L schematic-rescue:SD-pic U?
 U 1 1 5CB9CD22
 P 2800 7000
 F 0 "U?" H 2422 7046 50  0001 R CNN
-F 1 "SD" H 2422 7000 50  0000 R CNN
+F 1 "SD READER" H 2422 7000 50  0000 R CNN
 F 2 "" H 2800 7050 50  0001 C CNN
 F 3 "" H 2800 7050 50  0001 C CNN
 	1    2800 7000
 	1    0    0    -1  
-$EndComp
-$Comp
-L schematic-rescue:LCD-pic U?
-U 1 1 5CB9D4F7
-P 9550 5900
-F 0 "U?" H 9550 5477 50  0001 C CNN
-F 1 "LCD" H 9550 5477 50  0000 C CNN
-F 2 "" H 9550 5900 50  0001 C CNN
-F 3 "" H 9550 5900 50  0001 C CNN
-	1    9550 5900
-	-1   0    0    -1  
 $EndComp
 Wire Notes Line
 	5000 1000 5000 1450
@@ -688,13 +677,13 @@ Wire Wire Line
 	2550 5000 2550 6650
 Text Notes 1900 5550 0    47   ~ 0
 VOLUME
-Text Label 9400 5450 0    47   ~ 0
+Text Label 9250 5450 0    47   ~ 0
 RC3
-Text Label 8750 6050 0    47   ~ 0
+Text Label 8750 5650 0    47   ~ 0
 RC6
 Text Label 8650 5850 0    47   ~ 0
 RC5
-Text Label 8550 5650 0    47   ~ 0
+Text Label 8550 6050 0    47   ~ 0
 RC4
 Text Label 2700 6300 1    47   ~ 0
 RC3
@@ -842,26 +831,21 @@ Wire Wire Line
 Wire Wire Line
 	2700 5150 2700 5450
 Wire Wire Line
-	6600 5150 6600 5650
-Wire Wire Line
-	6600 5650 9000 5650
-Connection ~ 6600 5650
-Wire Wire Line
-	6600 5650 6600 6850
+	6600 6050 9000 6050
 Wire Wire Line
 	7200 5000 7200 5850
 Wire Wire Line
-	7600 4850 7600 6050
+	7600 4850 7600 5650
 Wire Wire Line
 	7200 5850 9000 5850
 Wire Wire Line
-	7600 6050 9000 6050
+	7600 5650 9000 5650
 Wire Wire Line
 	6600 4850 7600 4850
 Wire Wire Line
 	6600 5000 7200 5000
 Wire Wire Line
-	2700 5450 9850 5450
+	2700 5450 9550 5450
 Connection ~ 2700 5450
 Wire Wire Line
 	2700 5450 2700 6650
@@ -988,4 +972,20 @@ NoConn ~ 4800 4550
 NoConn ~ 4800 4850
 Text Notes 10600 7650 0    47   ~ 0
 1.0
+$Comp
+L schematic-rescue:LCD U?
+U 1 1 5CB87C63
+P 9550 5900
+F 0 "U?" H 9550 5477 50  0001 C CNN
+F 1 "LCD" H 9550 5477 50  0000 C CNN
+F 2 "" H 9550 5900 50  0001 C CNN
+F 3 "" H 9550 5900 50  0001 C CNN
+	1    9550 5900
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	6600 5150 6600 6050
+Connection ~ 6600 6050
+Wire Wire Line
+	6600 6050 6600 6850
 $EndSCHEMATC

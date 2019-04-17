@@ -25,7 +25,7 @@ Wire Wire Line
 Text Notes 1050 850  0    50   ~ 0
 GREATER THAN
 $Comp
-L device:C C1
+L schematic-rescue:C-device C1
 U 1 1 5CB7CE1A
 P 1550 1700
 F 0 "C1" H 1665 1746 50  0001 L CNN
@@ -39,7 +39,7 @@ Connection ~ 1550 1450
 Wire Wire Line
 	1550 1450 1750 1450
 $Comp
-L device:C C2
+L schematic-rescue:C-device C2
 U 1 1 5CB809A2
 P 2900 1700
 F 0 "C2" H 3015 1746 50  0001 L CNN
@@ -55,7 +55,7 @@ Wire Wire Line
 Text Notes 1900 650  0    79   ~ 0
 Voltage Regulator
 $Comp
-L device:LED_ALT D?
+L schematic-rescue:LED_ALT-device D?
 U 1 1 5CB84533
 P 8800 1050
 F 0 "D?" H 8793 1266 50  0001 C CNN
@@ -66,7 +66,7 @@ F 3 "~" H 8800 1050 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L device:LED_ALT D?
+L schematic-rescue:LED_ALT-device D?
 U 1 1 5CB8509C
 P 8800 1550
 F 0 "D?" H 8793 1766 50  0001 C CNN
@@ -77,7 +77,7 @@ F 3 "~" H 8800 1550 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 $Comp
-L pic:PIC16F1778 U?
+L schematic-rescue:PIC16F1778-pic U?
 U 1 1 5CB9536D
 P 5700 2900
 F 0 "U?" H 5700 2915 50  0001 C CNN
@@ -88,7 +88,7 @@ F 3 "" H 5700 2900 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L pic:L7805C-V U?
+L schematic-rescue:L7805C-V-pic U?
 U 1 1 5CB97E22
 P 2250 1350
 F 0 "U?" H 2225 1615 50  0001 C CNN
@@ -99,7 +99,7 @@ F 3 "" H 2250 1350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L pic:7V U?
+L schematic-rescue:7V-pic U?
 U 1 1 5CB981DE
 P 1300 850
 F 0 "U?" H 1428 663 50  0001 L CNN
@@ -110,7 +110,7 @@ F 3 "" H 1300 850 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L pic:GND U?
+L schematic-rescue:GND-pic U?
 U 1 1 5CB996D0
 P 1550 2150
 F 0 "U?" H 1372 1896 50  0001 R CNN
@@ -121,7 +121,7 @@ F 3 "" H 1550 2150 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L pic:GND U?
+L schematic-rescue:GND-pic U?
 U 1 1 5CB9A00B
 P 2900 2150
 F 0 "U?" H 2722 1896 50  0001 R CNN
@@ -132,7 +132,7 @@ F 3 "" H 2900 2150 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L pic:VDD U?
+L schematic-rescue:VDD-pic U?
 U 1 1 5CB9A5B2
 P 3250 900
 F 0 "U?" H 3378 663 50  0001 L CNN
@@ -143,7 +143,7 @@ F 3 "" H 3250 900 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L pic:343-AMP-FILTER U?
+L schematic-rescue:343-AMP-FILTER-pic U?
 U 1 1 5CB9B190
 P 950 3850
 F 0 "U?" H 1008 3865 50  0001 C CNN
@@ -154,7 +154,7 @@ F 3 "" H 950 3150 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L pic:3.5mm-JACK U?
+L schematic-rescue:3.5mm-JACK-pic U?
 U 1 1 5CB9B944
 P 900 6200
 F 0 "U?" H 523 6159 50  0001 R CNN
@@ -167,7 +167,7 @@ $EndComp
 Wire Wire Line
 	1550 1450 1550 1550
 $Comp
-L pic:SD U?
+L schematic-rescue:SD-pic U?
 U 1 1 5CB9CD22
 P 2800 7000
 F 0 "U?" H 2422 7046 50  0001 R CNN
@@ -178,7 +178,7 @@ F 3 "" H 2800 7050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L pic:LCD U?
+L schematic-rescue:LCD-pic U?
 U 1 1 5CB9D4F7
 P 9550 5900
 F 0 "U?" H 9550 5477 50  0001 C CNN
@@ -201,7 +201,7 @@ Wire Wire Line
 Wire Wire Line
 	5250 1750 5250 1350
 $Comp
-L pic:MCLR U?
+L schematic-rescue:MCLR-pic U?
 U 1 1 5CB9F017
 P 5250 1050
 F 0 "U?" H 5250 1050 79  0001 C CNN
@@ -212,7 +212,7 @@ F 3 "" H 5250 1050 79  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L pic:MCLR U?
+L schematic-rescue:MCLR-pic U?
 U 1 1 5CB9F41D
 P 5550 1050
 F 0 "U?" H 5550 1050 79  0001 C CNN
@@ -223,7 +223,7 @@ F 3 "" H 5550 1050 79  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L pic:MCLR U?
+L schematic-rescue:MCLR-pic U?
 U 1 1 5CB9F817
 P 5850 1050
 F 0 "U?" H 5850 1050 79  0001 C CNN
@@ -234,7 +234,7 @@ F 3 "" H 5850 1050 79  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L pic:MCLR U?
+L schematic-rescue:MCLR-pic U?
 U 1 1 5CBA005E
 P 6150 1050
 F 0 "U?" H 6150 1050 79  0001 C CNN
@@ -245,7 +245,7 @@ F 3 "" H 6150 1050 79  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L pic:MCLR U?
+L schematic-rescue:MCLR-pic U?
 U 1 1 5CBA048C
 P 6450 1050
 F 0 "U?" H 6450 1050 79  0001 C CNN
@@ -256,7 +256,7 @@ F 3 "" H 6450 1050 79  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L pic:MCLR U?
+L schematic-rescue:MCLR-pic U?
 U 1 1 5CBA088E
 P 6750 1050
 F 0 "U?" H 6750 1050 79  0001 C CNN
@@ -277,7 +277,7 @@ NC
 Wire Wire Line
 	5550 1350 5550 1550
 $Comp
-L pic:VDD U?
+L schematic-rescue:VDD-pic U?
 U 1 1 5CBAA23D
 P 5550 1950
 F 0 "U?" H 5423 1621 50  0001 R CNN
@@ -288,7 +288,7 @@ F 3 "" H 5550 1950 50  0001 C CNN
 	1    0    0    1   
 $EndComp
 $Comp
-L pic:GND U?
+L schematic-rescue:GND-pic U?
 U 1 1 5CBAAE05
 P 5850 2000
 F 0 "U?" H 5672 1746 50  0001 R CNN
@@ -331,7 +331,7 @@ Wire Wire Line
 Wire Wire Line
 	8350 1550 8650 1550
 $Comp
-L device:R_US R?
+L schematic-rescue:R_US-device R?
 U 1 1 5CBBD80E
 P 9650 1300
 F 0 "R?" V 9855 1300 50  0001 C CNN
@@ -342,7 +342,7 @@ F 3 "~" H 9650 1300 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L pic:GND U?
+L schematic-rescue:GND-pic U?
 U 1 1 5CBBE098
 P 10250 1300
 F 0 "U?" H 10072 1046 50  0001 R CNN
@@ -361,7 +361,7 @@ RB4
 Wire Wire Line
 	6600 4100 10400 4100
 $Comp
-L pic:VDD U?
+L schematic-rescue:VDD-pic U?
 U 1 1 5CBC7980
 P 7000 4400
 F 0 "U?" V 7046 4278 50  0001 L CNN
@@ -372,7 +372,7 @@ F 3 "" H 7000 4400 50  0001 C CNN
 	0    1    -1   0   
 $EndComp
 $Comp
-L pic:GND U?
+L schematic-rescue:GND-pic U?
 U 1 1 5CBC9404
 P 7300 4550
 F 0 "U?" V 7254 4478 50  0001 L CNN
@@ -387,7 +387,7 @@ Wire Wire Line
 Wire Wire Line
 	6600 4250 7850 4250
 $Comp
-L device:C_Small C?
+L schematic-rescue:C_Small-device C?
 U 1 1 5CBCCD94
 P 8700 4700
 F 0 "C?" H 8792 4746 50  0001 L CNN
@@ -398,7 +398,7 @@ F 3 "~" H 8700 4700 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Switch:SW_Push SW4
+L schematic-rescue:SW_Push-Switch SW4
 U 1 1 5CBCD874
 P 8900 4700
 F 0 "SW4" V 8900 4850 50  0001 L CNN
@@ -418,7 +418,7 @@ Connection ~ 8700 4900
 Wire Wire Line
 	8700 4900 8900 4900
 $Comp
-L pic:GND U?
+L schematic-rescue:GND-pic U?
 U 1 1 5CBD257D
 P 11250 4500
 F 0 "U?" V 11250 4428 50  0001 L CNN
@@ -429,7 +429,7 @@ F 3 "" H 11250 4500 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L device:R_US R?
+L schematic-rescue:R_US-device R?
 U 1 1 5CBD36AE
 P 10700 4500
 F 0 "R?" V 10495 4500 50  0001 C CNN
@@ -444,7 +444,7 @@ Wire Wire Line
 Wire Wire Line
 	10850 4500 10950 4500
 $Comp
-L Switch:SW_Push SW1
+L schematic-rescue:SW_Push-Switch SW1
 U 1 1 5CBE4209
 P 10200 4500
 F 0 "SW1" H 10200 4785 50  0001 C CNN
@@ -456,7 +456,7 @@ F 3 "~" H 10200 4700 50  0001 C CNN
 $EndComp
 Connection ~ 10400 4500
 $Comp
-L pic:VDD U?
+L schematic-rescue:VDD-pic U?
 U 1 1 5CBEA521
 P 9300 4100
 F 0 "U?" V 9254 3978 50  0001 L CNN
@@ -467,7 +467,7 @@ F 3 "" H 9300 4100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L pic:VDD U?
+L schematic-rescue:VDD-pic U?
 U 1 1 5CBEC49B
 P 9750 4100
 F 0 "U?" H 9878 3863 50  0001 L CNN
@@ -478,7 +478,7 @@ F 3 "" H 9750 4100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L pic:GND U?
+L schematic-rescue:GND-pic U?
 U 1 1 5CBF29C2
 P 10000 2250
 F 0 "U?" V 10000 2178 50  0001 L CNN
@@ -489,7 +489,7 @@ F 3 "" H 10000 2250 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L device:R_US R?
+L schematic-rescue:R_US-device R?
 U 1 1 5CBF29C8
 P 9450 2250
 F 0 "R?" V 9245 2250 50  0001 C CNN
@@ -510,7 +510,7 @@ Wire Wire Line
 Wire Wire Line
 	9150 2250 9200 2250
 $Comp
-L Switch:SW_Push SW?
+L schematic-rescue:SW_Push-Switch SW?
 U 1 1 5CC0EF0F
 P 8950 2250
 F 0 "SW?" H 8950 2535 50  0001 C CNN
@@ -521,7 +521,7 @@ F 3 "~" H 8950 2450 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L pic:VDD U?
+L schematic-rescue:VDD-pic U?
 U 1 1 5CC0F8E9
 P 8700 2650
 F 0 "U?" H 8573 2321 50  0001 R CNN
@@ -543,7 +543,7 @@ Wire Wire Line
 Wire Wire Line
 	7850 4900 8700 4900
 $Comp
-L pic:GND u
+L schematic-rescue:GND-pic u
 U 1 1 5CC41F5D
 P 1700 3600
 F 0 "u" H 1878 3438 50  0001 L CNN
@@ -554,7 +554,7 @@ F 3 "" H 1700 3600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L pic:VDD U?
+L schematic-rescue:VDD-pic U?
 U 1 1 5CC42479
 P 1900 4250
 F 0 "U?" V 1946 4128 50  0001 L CNN
@@ -577,7 +577,7 @@ Wire Wire Line
 Wire Wire Line
 	1700 4100 1700 3900
 $Comp
-L device:R_US R?
+L schematic-rescue:R_US-device R?
 U 1 1 5CC4C368
 P 1650 5100
 F 0 "R?" H 1718 5146 50  0001 L CNN
@@ -588,7 +588,7 @@ F 3 "~" H 1650 5100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L device:R_Variable_US R?
+L schematic-rescue:R_Variable_US-device R?
 U 1 1 5CC4CC5B
 P 1650 5600
 F 0 "R?" H 1778 5646 50  0001 L CNN
@@ -614,7 +614,7 @@ Connection ~ 1650 6050
 Wire Wire Line
 	1650 6050 1650 6150
 $Comp
-L pic:GND U?
+L schematic-rescue:GND-pic U?
 U 1 1 5CC5CF66
 P 1650 7000
 F 0 "U?" H 1472 6746 50  0001 R CNN
@@ -629,7 +629,7 @@ Wire Wire Line
 Wire Wire Line
 	1450 6350 1650 6350
 $Comp
-L pic:GND U?
+L schematic-rescue:GND-pic U?
 U 1 1 5CC66DD6
 P 4350 4250
 F 0 "U?" V 4127 4042 50  0001 C CNN
@@ -647,7 +647,7 @@ NoConn ~ 4800 3650
 NoConn ~ 4800 3500
 NoConn ~ 4800 3350
 $Comp
-L pic:VDD U?
+L schematic-rescue:VDD-pic U?
 U 1 1 5CC7C910
 P 2550 7750
 F 0 "U?" H 2423 7421 50  0001 R CNN
@@ -658,7 +658,7 @@ F 3 "" H 2550 7750 50  0001 C CNN
 	1    0    0    1   
 $EndComp
 $Comp
-L pic:GND U?
+L schematic-rescue:GND-pic U?
 U 1 1 5CC7D6CE
 P 3200 7500
 F 0 "U?" V 3200 7428 50  0001 L CNN
@@ -709,7 +709,7 @@ BRASS2GO
 Text Notes 8200 7650 0    47   ~ 0
 2019-04-16
 $Comp
-L pic:GND U?
+L schematic-rescue:GND-pic U?
 U 1 1 5CD2DC73
 P 10950 2850
 F 0 "U?" V 10950 2778 50  0001 L CNN
@@ -720,7 +720,7 @@ F 3 "" H 10950 2850 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L device:R_US R?
+L schematic-rescue:R_US-device R?
 U 1 1 5CD2DC79
 P 10400 2850
 F 0 "R?" V 10195 2850 50  0001 C CNN
@@ -733,7 +733,7 @@ $EndComp
 Wire Wire Line
 	10550 2850 10650 2850
 $Comp
-L Switch:SW_Push SW?
+L schematic-rescue:SW_Push-Switch SW?
 U 1 1 5CD2DC82
 P 9900 2850
 F 0 "SW?" H 9900 3135 50  0001 C CNN
@@ -744,7 +744,7 @@ F 3 "~" H 9900 3050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L pic:VDD U?
+L schematic-rescue:VDD-pic U?
 U 1 1 5CD2DC88
 P 9650 3250
 F 0 "U?" H 9523 2921 50  0001 R CNN
@@ -770,7 +770,7 @@ Wire Wire Line
 Wire Wire Line
 	7850 4250 7850 4900
 $Comp
-L pic:VDD U?
+L schematic-rescue:VDD-pic U?
 U 1 1 5CD5635D
 P 6150 7400
 F 0 "U?" V 6104 7278 50  0001 L CNN
@@ -781,7 +781,7 @@ F 3 "" H 6150 7400 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L pic:GND U?
+L schematic-rescue:GND-pic U?
 U 1 1 5CD5733B
 P 4200 7850
 F 0 "U?" H 4022 7596 50  0001 R CNN
@@ -792,7 +792,7 @@ F 3 "" H 4200 7850 50  0001 C CNN
 	1    0    0    1   
 $EndComp
 $Comp
-L device:R_US R?
+L schematic-rescue:R_US-device R?
 U 1 1 5CD57F88
 P 5200 7400
 F 0 "R?" V 5405 7400 50  0001 C CNN
@@ -803,7 +803,7 @@ F 3 "~" H 5200 7400 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L device:C_Small C?
+L schematic-rescue:C_Small-device C?
 U 1 1 5CD58A72
 P 4550 7400
 F 0 "C?" V 4779 7400 50  0001 C CNN
@@ -866,7 +866,7 @@ Connection ~ 2700 5450
 Wire Wire Line
 	2700 5450 2700 6650
 $Comp
-L pic:VDD U?
+L schematic-rescue:VDD-pic U?
 U 1 1 5CE15511
 P 10900 4950
 F 0 "U?" H 11028 4713 50  0001 L CNN
@@ -877,7 +877,7 @@ F 3 "" H 10900 4950 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L device:R_Variable_US R?
+L schematic-rescue:R_Variable_US-device R?
 U 1 1 5CE16A45
 P 10900 5500
 F 0 "R?" H 11028 5546 50  0001 L CNN
@@ -892,7 +892,7 @@ Wire Wire Line
 Wire Wire Line
 	10900 5700 10100 5700
 $Comp
-L pic:GND U?
+L schematic-rescue:GND-pic U?
 U 1 1 5CE20B4E
 P 10850 6500
 F 0 "U?" H 10672 6292 50  0001 R CNN
@@ -910,7 +910,7 @@ Wire Wire Line
 	10100 6200 10850 6200
 Connection ~ 10850 6200
 $Comp
-L pic:VDD U?
+L schematic-rescue:VDD-pic U?
 U 1 1 5CE2CDA6
 P 10500 6050
 F 0 "U?" V 10546 5928 50  0001 L CNN
@@ -948,7 +948,7 @@ RB1
 Text Label 8250 4900 0    47   ~ 0
 RB0
 $Comp
-L pic:VDD U?
+L schematic-rescue:VDD-pic U?
 U 1 1 5CEA2AB6
 P 3000 2800
 F 0 "U?" H 3128 2563 50  0001 L CNN
@@ -959,7 +959,7 @@ F 3 "" H 3000 2800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L device:R_US R?
+L schematic-rescue:R_US-device R?
 U 1 1 5CEA3AA6
 P 3800 3200
 F 0 "R?" V 3595 3200 50  0001 C CNN
