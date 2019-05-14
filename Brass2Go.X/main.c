@@ -1,6 +1,7 @@
 #include <pic.h>
 #include <xc.h>
 #include <stdio.h>
+#include "LCD.h"
 #include "main.h"
 #include "config.h"
 #include "timer.h"
@@ -10,7 +11,7 @@
 #include "wave.h"
 #include "error.h"
 #include "buttons.h"
-#include "LCD.h"
+
 
 unsigned char sdata_lo;
 unsigned char sdata_hi;
