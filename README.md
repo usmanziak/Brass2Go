@@ -130,6 +130,8 @@ pip install mido
 
 See also the list of [contributors](https://github.com/usmanziak/Brass2Go/graphs/contributors) who participated and the project's [commit history](https://github.com/usmanziak/Brass2Go/commits/master).
 
+Note: To view full product documentation please access the [Product Documentation](https://github.com/usmanziak/Brass2Go/blob/master/BRASS2GO-Documentation.docx)
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
