@@ -126,7 +126,7 @@ pip install mido
 
 * **Toshiro Taperek** - [Github](https://github.com/robotoshi)
 
-* **Usman Zia** - [Github](https://github.com/usmanziak)
+* **Usman Zia** - [Github](https://github.com/usmanziak) - [Email](mailto:muhammadusman.zia@ucalgary.ca)
 
 See also the list of [contributors](https://github.com/usmanziak/Brass2Go/graphs/contributors) who participated and the project's [commit history](https://github.com/usmanziak/Brass2Go/commits/master).
 
