@@ -130,7 +130,7 @@ pip install mido
 
 See also the list of [contributors](https://github.com/usmanziak/Brass2Go/graphs/contributors) who participated and the project's [commit history](https://github.com/usmanziak/Brass2Go/commits/master).
 
-Note: To view full product documentation please access the [Product Documentation](https://github.com/usmanziak/Brass2Go/blob/master/BRASS2GO-Documentation.docx)
+Note: To view full product documentation please access the [Product Documentation](https://github.com/usmanziak/Brass2Go/blob/master/BRASS2GO-Documentation-updated.pdf)
 
 Moreover, check out the final product demonstration slides which includes Product Background and Project Management techniques used throughout product development. [Demonstration](https://github.com/usmanziak/Brass2Go/blob/master/Brass2Go_Final_Presentation.pptx)
 
